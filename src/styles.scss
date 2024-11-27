@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Colors
+$woodsmoke-black: #0E1111; // (Black)
+$shark-gray: #1A1F1F; // (Dark Gray)
+$anti-flash-white: #F2F6F8; // (White)
+$iron-gray: #dadddf; // (Light Gray)
+$cloud-blue: #1E90FF; // (Blue)
+
+$colors: (
+    light: (
+        primary: $anti-flash-white,
+        secondary: $iron-gray,
+        text: $woodsmoke-black,
+        accent: $cloud-blue,
+    ),
+    dark: (
+        primary: $woodsmoke-black,
+        secondary: $shark-gray,
+        text: $anti-flash-white,
+        accent: $cloud-blue,
+    )
+);
+
+// Function to get the color based on mode
+@function color($key, $theme: light) {
+    @return map-get(map-get($colors, $theme), $key);
+}
+
+body {
+    background-color: color(primary, dark);
+    color: color(text, dark);
+    font-size: 100px;
+    font-family: 'Hanken Grotesk', sans-serif;
+    min-height: 100vh;
+}
