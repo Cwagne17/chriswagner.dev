@@ -15,6 +15,7 @@ jobs:
       with:
         github_access_token: ${{ secrets.GITHUB_TOKEN }} # see the Configuration section for how you can create secrets
         base_href: /chriswagner.dev/   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
+        angular_dist_build_folder: dist/chriswagner.dev/browser/
 
 permissions:
   contents: write # Allow write permission to GITHUB_TOKEN to commit to deploy branch.
