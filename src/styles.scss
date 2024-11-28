@@ -1,3 +1,4 @@
+@use "sass:map";
 /* You can add global styles to this file, and also import other style files */
 
 // Colors
@@ -24,13 +25,17 @@ $colors: (
 
 // Function to get the color based on mode
 @function color($key, $theme: light) {
-    @return map-get(map-get($colors, $theme), $key);
+    @return map.get(map.get($colors, $theme), $key);
 }
 
 body {
-    background-color: color(primary, dark);
-    color: color(text, dark);
-    font-size: 100px;
-    font-family: 'Hanken Grotesk', sans-serif;
     min-height: 100vh;
+
+    background-color: color(primary, dark);
+    
+    // Set text related styles
+    font-size: 48px;
+    font-family: 'Hanken Grotesk', sans-serif;
+    color: color(text, dark);
+    text-align: center;
 }
