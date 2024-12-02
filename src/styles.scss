@@ -2,14 +2,25 @@
 @use 'vars' as v;
 
 body {
-    min-height: 100vh;
-    margin: 0;
-
-    background-color: v.get-color(primary, dark);
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: v.get-color(primary);
     
     // Set default text related styles
     font-family: 'Hanken Grotesk', sans-serif;
     font-size: v.get-font-size();
     font-weight: normal;
-    color: v.get-color(text, dark);
+    color: v.get-color(text);
+}
+
+h1 {
+    font-size: 64px;
+    font-weight: 400;
+    // margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 48px;
+    font-weight: lighter;
+    margin: 0;
 }

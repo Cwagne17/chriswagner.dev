@@ -1,0 +1,22 @@
+.header {
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    align-items: center;
+    text-align: center;
+
+    h2 {
+        padding-bottom: 10px;
+    }
+}
+
+.projects {
+    height: 80vh;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
