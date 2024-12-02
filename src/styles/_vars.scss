@@ -30,9 +30,9 @@ $colors: (
 // Text styles
 $font-size: (
     small: 1rem,
-    medium: 1.25rem,
-    large: 1.5rem,
-    x-large: 2rem,
+    medium: 1.5rem,
+    large: 3rem,
+    x-large: 4rem,
 );
 
 @function get-font-size($key: medium) {

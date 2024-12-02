@@ -1,7 +1,7 @@
 @use 'vars' as v;
 
 // Variables for consistency
-$header-padding-x: 50px;
+$header-padding-x: 30px;
 
 // Header container
 .header {
@@ -13,7 +13,7 @@ $header-padding-x: 50px;
   
     // Left section
     &__left {
-        font-size: v.get-font-size(large);
+        font-size: v.get-font-size(medium);
         font-weight: medium;
     }
   
@@ -39,9 +39,33 @@ $header-padding-x: 50px;
     justify-content: flex-end;
   
     &__content {
+      margin: 200px 0 500px 0;
       z-index: 2; /* Ensure content is above the background image */
       color: white; /* Adjust text color */
-      padding: 20px; /* Optional padding */
+      padding: 0 $header-padding-x; /* Optional padding */
+
+      h1 {
+        font-size: 64px;
+        font-weight: 400;
+        margin-bottom: 20px;
+    }
+
+      h2 {
+        font-size: 48px;
+        font-weight: lighter;
+        margin: auto;
+      }
+
+      button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        border: none;
+        background-color: v.get-color(accent);
+        color: v.get-color(text);
+        font-size: v.get-font-size(medium);
+        border-radius: 10px;
+        cursor: pointer;
+      }
     }
   
     &__image {
@@ -52,9 +76,9 @@ $header-padding-x: 50px;
         img {
             width: 100%; /* Ensures the image spans the full width */
             object-fit: cover; /* Ensures the image covers the container without distortion */
-            opacity: .1;
+            opacity: .05;
             bottom: 0; /* Aligns the image to the bottom */
-          }
+        }
 
         /* Blur effect for the top border */
         &::before {
