@@ -1,0 +1,18 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: All things angular
+      uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.4.0 ## replace by latest version without it you will see Expected format {org}/{repo}[/path]@ref. Actual 'AhsanAyaz/angular-deploy-gh-pages-actions',Input string was not in a correct format.
+      with:
+        github_access_token: ${{ secrets.GITHUB_TOKEN }} # see the Configuration section for how you can create secrets
+        base_href: /chriswagner.dev/   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
+        angular_dist_build_folder: dist/chriswagner.dev/browser/
+permissions:
+  contents: write # Allow write permission to GITHUB_TOKEN to commit to deploy branch.
