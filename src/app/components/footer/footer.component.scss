@@ -1,0 +1,23 @@
+@use 'vars' as v;
+
+$footer-padding-x: 40px;
+
+.content {
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $footer-padding-x;
+
+    background-color: v.get-color(secondary);
+
+    .icons {
+        display: flex;
+        gap: $footer-padding-x;
+        font-size: 2rem;
+        
+        a {
+            color: v.get-color(text);
+        }
+    }
+}

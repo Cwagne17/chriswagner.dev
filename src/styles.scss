@@ -1,41 +1,26 @@
-@use "sass:map";
 /* You can add global styles to this file, and also import other style files */
-
-// Colors
-$woodsmoke-black: #0E1111; // (Black)
-$shark-gray: #1A1F1F; // (Dark Gray)
-$anti-flash-white: #F2F6F8; // (White)
-$iron-gray: #dadddf; // (Light Gray)
-$cloud-blue: #1E90FF; // (Blue)
-
-$colors: (
-    light: (
-        primary: $anti-flash-white,
-        secondary: $iron-gray,
-        text: $woodsmoke-black,
-        accent: $cloud-blue,
-    ),
-    dark: (
-        primary: $woodsmoke-black,
-        secondary: $shark-gray,
-        text: $anti-flash-white,
-        accent: $cloud-blue,
-    )
-);
-
-// Function to get the color based on mode
-@function color($key, $theme: light) {
-    @return map.get(map.get($colors, $theme), $key);
-}
+@use 'vars' as v;
 
 body {
-    min-height: 100vh;
-
-    background-color: color(primary, dark);
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: v.get-color(primary);
     
-    // Set text related styles
-    font-size: 48px;
+    // Set default text related styles
     font-family: 'Hanken Grotesk', sans-serif;
-    color: color(text, dark);
-    text-align: center;
+    font-size: v.get-font-size();
+    font-weight: normal;
+    color: v.get-color(text);
+}
+
+h1 {
+    font-size: 64px;
+    font-weight: 400;
+    // margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 48px;
+    font-weight: lighter;
+    margin: 0;
 }

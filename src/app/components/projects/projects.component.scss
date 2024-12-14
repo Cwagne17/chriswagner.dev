@@ -1,0 +1,43 @@
+@use 'vars' as v;
+
+.header {
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    align-items: center;
+    text-align: center;
+
+    h2 {
+        padding-bottom: 10px;
+    }
+}
+
+.projects {
+    height: 85vh;
+    padding: 0 100px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.curve {
+    height: 10vh;
+    position: relative;
+    overflow: hidden;
+
+    background-color: v.get-color(secondary);
+}
+.curve::before {
+    border-radius: 100%;
+    position: absolute;
+    background: v.get-color(primary);
+    right: -200px;
+    left: -200px;
+    top: -200px;
+    content: '';
+    bottom: 0;
+}
