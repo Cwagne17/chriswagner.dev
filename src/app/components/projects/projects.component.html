@@ -4,7 +4,9 @@
 </div>
 
 <div class="projects">
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
+    <div class="cards" *ngFor="let project of projects">
+        <app-project-card/>
+    </div>
 </div>
+
+<div class="curve"></div>
