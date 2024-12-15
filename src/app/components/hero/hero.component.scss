@@ -3,34 +3,6 @@
 // Variables for consistency
 $header-padding-x: 30px;
 
-// Header container
-.header {
-    height: 10vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 $header-padding-x;
-  
-    // Left section
-    &__left {
-        font-size: v.get-font-size(medium);
-        font-weight: medium;
-    }
-  
-    // Right section
-    &__right {
-        width: 25%;
-        display: flex; // Flex layout for evenly spaced elements
-        gap: auto; // Spacing between items automatically adjusted
-  
-        // Individual items in the right section
-        &-item {
-            flex: 1; // Optional: Make items grow/shrink evenly
-            text-align: center; // Optional: Center align content within each item
-        }
-    }
-}
-
 .hero {
     position: relative;
     height: 90vh; /* Full viewport height */
@@ -38,53 +10,26 @@ $header-padding-x: 30px;
     flex-direction: column;
     justify-content: flex-end;
   
-    &__content {
-      margin: 0px 0 300px 0;
-      z-index: 2; /* Ensure content is above the background image */
-      color: white; /* Adjust text color */
+    .content {
+      position: absolute;
+      margin-bottom: 300px;
+      z-index: 10; /* Ensure content is above the background image */
       padding: 0 $header-padding-x; /* Optional padding */
-
-      h1 {
-        font-size: 64px;
-        font-weight: 400;
-        margin-bottom: 20px;
-      }
-
-      h2 {
-        font-size: 48px;
-        font-weight: lighter;
-        margin: auto;
-      }
 
       button {
         margin-top: 20px;
-        padding: 10px 20px;
-        border: none;
-        background-color: v.get-color(accent);
-        color: v.get-color(text);
-        font-size: v.get-font-size(medium);
-        border-radius: 10px;
-        cursor: pointer;
       }
     }
   
-    &__image {
+    .image {
         width: 100%;
         position: absolute;
 
         img {
-            width: 100%; /* Ensures the image spans the full width */
-            opacity: .04;
-        }
-
-        &::before {
-            background: linear-gradient(
-                to bottom,
-                v.get-color(primary),
-                #121616
-            );
-
-            filter: blur(10px);
+            width: 100%; 
+            opacity: .07;
+            object-fit: cover;
+            display: block;
         }
     }
 
@@ -109,5 +54,15 @@ $header-padding-x: 30px;
             transform: translate3d(0, -15px, 0);
         }
       }
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .hero {
+        height: 40vh;
+
+        .content {
+            margin: 0 0 100px 0 !important;
+        }
     }
 }

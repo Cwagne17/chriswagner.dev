@@ -1,0 +1,19 @@
+<header class="header">
+    <!-- Left section -->
+    <div class="header__left">
+        {{ title}}
+    </div>
+
+    <!-- Right section -->
+    <div *ngIf="isMobile(); then mobile else desktop"></div>
+    <ng-template #desktop>
+        <div class="header__right">
+            <div class="header__right-item">Projects</div>
+            <div class="header__right-item">Resume</div>
+            <div class="header__right-item">Blogs</div>
+        </div>
+    </ng-template>
+    <ng-template #mobile>
+        <fa-icon [icon]="faBars"></fa-icon>
+    </ng-template>
+</header>

@@ -1,19 +1,5 @@
-<header class="header">
-    <!-- Left section -->
-    <div class="header__left">
-        Chris Wagner
-    </div>
-
-    <!-- Right section -->
-    <div class="header__right">
-        <div class="header__right-item">Projects</div>
-        <div class="header__right-item">Resume</div>
-        <div class="header__right-item">Blogs</div>
-    </div>
-</header>
-
 <div class="hero">
-    <div class="hero__content">
+    <div class="content">
         <h1>Cloud Architect</h1>
         <h2>developing automated solutions</h2>
         <h2>spcializing in DevSecOps</h2>
@@ -21,9 +7,10 @@
         <button>Lets Connect</button>
     </div>
 
-    <fa-icon [icon]="faChevronDown"></fa-icon>
+    <fa-icon [icon]="faChevronDown" *ngIf="!isMobile()"></fa-icon>
 
-    <div class="hero__image">
+    <div class="image">
+        <div class="gradient"></div>
         <img src="hero-background.jpeg" alt="cloud computing background">
     </div>
 </div>
