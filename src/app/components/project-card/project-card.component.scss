@@ -57,3 +57,21 @@ $card-spacing: 20px;
         }
     }
 }
+
+@media only screen and (max-width: 500px) {
+    .card {
+        width: 300px !important;
+    }
+
+    .image {
+        height: 150px !important;
+    }
+
+    .info {
+        height: 285px !important;
+    }
+
+    .description {
+        font-size: v.get-font-size(small) !important;
+    }
+}

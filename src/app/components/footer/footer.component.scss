@@ -14,10 +14,23 @@ $footer-padding-x: 40px;
     .icons {
         display: flex;
         gap: $footer-padding-x;
-        font-size: 2rem;
+        font-size: v.get-font-size(medium);
         
         a {
             color: v.get-color(text);
+        }
+    }
+}
+
+// Update for mobile view
+@media only screen and (max-width: 375px) {
+    .content {
+        height: 10vh;
+        padding: 0 20px;
+        font-size: v.get-font-size(x-small);
+
+        .icons {
+            gap: 20px;
         }
     }
 }

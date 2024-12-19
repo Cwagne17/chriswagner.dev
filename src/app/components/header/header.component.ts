@@ -1,22 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, HostListener } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-hero',
-  templateUrl: './hero.component.html',
+  selector: 'app-header',
   imports: [
-    FontAwesomeModule,
     CommonModule,
+    FontAwesomeModule,
   ],
   schemas: [
-    CUSTOM_ELEMENTS_SCHEMA,
+      CUSTOM_ELEMENTS_SCHEMA,
   ],
-  styleUrl: './hero.component.scss',
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.scss'
 })
-export class HeroComponent {
-  faChevronDown = faChevronDown;
+export class HeaderComponent {
+  faBars = faBars;
 
   screenWidth: number = window.innerWidth;
   screenHeight: number = window.innerHeight;
@@ -33,5 +33,9 @@ export class HeroComponent {
 
   isMobile(): boolean {
     return this.screenWidth <= 768;
+  }
+
+  get title(): string {
+    return this.isMobile() ? "Chris W." : "Chris Wagner";
   }
 }

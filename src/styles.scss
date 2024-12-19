@@ -1,4 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
 @use 'vars' as v;
 
 body {
@@ -9,18 +8,41 @@ body {
     // Set default text related styles
     font-family: 'Hanken Grotesk', sans-serif;
     font-size: v.get-font-size();
-    font-weight: normal;
+    font-weight: v.get-font-weight();
     color: v.get-color(text);
 }
 
-h1 {
-    font-size: 64px;
-    font-weight: 400;
-    // margin-bottom: 20px;
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: v.get-color(accent);
+    color: v.get-color(text);
+    font-size: v.get-font-size(medium);
+    border-radius: 10px;
+    cursor: pointer;
 }
 
+h1 {
+    font-size: v.get-font-size(x-large);
+    font-weight: v.get-font-weight(medium);
+}
 h2 {
-    font-size: 48px;
-    font-weight: lighter;
-    margin: 0;
+    font-size: v.get-font-size(large);
+    font-weight: v.get-font-weight(normal);
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@media only screen and (max-width: 375px) {
+    h1 {
+        font-size: v.get-font-size(large);
+    }
+    h2 {
+        font-size: v.get-font-size(normal);
+    }
+
+    button {
+        font-size: v.get-font-size(small);
+    }
 }

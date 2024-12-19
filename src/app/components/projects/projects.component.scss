@@ -8,10 +8,6 @@
 
     align-items: center;
     text-align: center;
-
-    h2 {
-        padding-bottom: 10px;
-    }
 }
 
 .projects {
@@ -19,7 +15,6 @@
     padding: 0 100px;
 
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
 }
@@ -40,4 +35,33 @@
     top: -200px;
     content: '';
     bottom: 0;
+}
+
+
+// Horizontal Tablet
+@media only screen and (max-width: 1024px) {
+    .projects {
+        margin-top: 50px;
+        height: 225vh;
+        flex-direction: column !important;
+    }
+}
+
+// Vertical Tablet
+@media only screen and (max-width: 768px) {
+    .projects {
+        height: 175vh;
+    }
+}
+
+// Mobile Vertical
+@media only screen and (max-width: 500px) {
+    h2 {
+        font-size: v.get-font-size(medium) !important;
+    }
+
+    .projects {
+        height: 250vh;
+        // gap: 50px;
+    }
 }

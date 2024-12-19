@@ -1,0 +1,49 @@
+@use 'vars' as v;
+
+// Header container
+.header {
+    height: 10vh;
+    padding: 0 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    // Left section
+    &__left {
+        font-size: v.get-font-size(medium);
+        font-weight: v.get-font-weight(medium);
+    }
+  
+    // Right section
+    &__right {
+        width: 25%;
+        display: flex;
+        gap: auto;
+  
+        // Individual items in the right section
+        &-item {
+            flex: 1;
+            text-align: center;
+
+            // Add underline on hover for the item
+            &:hover {
+                font-size: v.get-font-size(normal) + 1px;
+                text-decoration: underline;
+                text-underline-offset: 10px;
+            }
+        }
+    }
+
+    fa-icon {
+        font-size: v.get-font-size(medium);
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .header {
+        &__right {
+            width: 30% !important;
+        }
+    }
+}

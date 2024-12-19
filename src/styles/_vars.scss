@@ -29,12 +29,32 @@ $colors: (
 
 // Text styles
 $font-size: (
-    small: 1rem,
-    medium: 1.5rem,
-    large: 3rem,
-    x-large: 4rem,
+    x-small: 14px,
+    small: 18px,
+    normal: 20px,
+    medium: 24px,
+    large: 32px,
+    x-large: 48px,
+    xx-large: 64px,
 );
 
-@function get-font-size($key: medium) {
+@function get-font-size($key: normal) {
     @return map.get($font-size, $key);
+}
+
+// Font weights
+$font-weight: (
+    thin: 100,
+    extra-light: 200,
+    light: 300,
+    normal: 400,
+    medium: 500,
+    semi-bold: 600,
+    bold: 700,
+    extra-bold: 800,
+    ultra-bold: 900,
+);
+
+@function get-font-weight($key: normal) {
+    @return map.get($font-weight, $key);
 }
