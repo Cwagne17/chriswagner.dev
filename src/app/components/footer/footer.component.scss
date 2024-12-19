@@ -23,11 +23,11 @@ $footer-padding-x: 40px;
 }
 
 // Update for mobile view
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 400px) {
     .content {
         height: 10vh;
         padding: 0 20px;
-        font-size: v.get-font-size(x-small);
+        font-size: v.get-font-size(small);
 
         .icons {
             gap: 20px;
