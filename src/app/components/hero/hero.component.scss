@@ -59,10 +59,8 @@ $header-padding-x: 30px;
 
 @media only screen and (max-width: 375px) {
     .hero {
-        height: 40vh;
-
         .content {
-            margin: 0 0 100px 0 !important;
+            margin: 0 0 200px 0 !important;
         }
     }
 }

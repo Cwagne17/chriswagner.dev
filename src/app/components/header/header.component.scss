@@ -33,6 +33,17 @@
                 text-underline-offset: 10px;
             }
         }
-        
+    }
+
+    fa-icon {
+        font-size: v.get-font-size(medium);
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .header {
+        &__right {
+            width: 30% !important;
+        }
     }
 }
