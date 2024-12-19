@@ -57,10 +57,19 @@ $header-padding-x: 30px;
     }
 }
 
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 400px) {
     .hero {
+        height: 80vh;
+
         .content {
-            margin: 0 0 200px 0 !important;
+            margin: 0 0 300px 0 !important;
         }
+    }
+
+    h1 {
+      // font-size: v.get-font-size(large) !important;
+    }
+    h2 {
+      font-size: v.get-font-size() !important;
     }
 }
