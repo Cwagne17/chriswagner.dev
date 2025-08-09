@@ -1,10 +1,22 @@
 "use client";
 
+import {
+  Award,
+  Briefcase,
+  Code2,
+  ExternalLink,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+  User,
+} from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
 import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
-import { Mail, MapPin, Phone, Github, Linkedin, ExternalLink, Award, Briefcase, Code2, Send, User } from "lucide-react";
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -12,27 +24,27 @@ export default function Home() {
     email: "",
     message: "",
   });
-  const [errors, setErrors] = useState<{[key: string]: string}>({});
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const validateForm = () => {
-    const newErrors: {[key: string]: string} = {};
-    
+    const newErrors: { [key: string]: string } = {};
+
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Email is invalid";
     }
-    
+
     if (!formData.message.trim()) {
       newErrors.message = "Message is required";
     } else if (formData.message.trim().length < 10) {
       newErrors.message = "Message must be at least 10 characters";
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -46,11 +58,13 @@ export default function Home() {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: "" }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
@@ -59,47 +73,65 @@ export default function Home() {
       title: "AWS Solutions Architect - Professional",
       issuer: "Amazon Web Services",
       date: "2023",
-      badge: "https://images.credly.com/size/110x110/images/2d84e428-9078-49b6-a804-13c15383d0de/image.png"
+      badge:
+        "https://images.credly.com/size/110x110/images/2d84e428-9078-49b6-a804-13c15383d0de/image.png",
     },
     {
       title: "AWS DevOps Engineer - Professional",
-      issuer: "Amazon Web Services", 
+      issuer: "Amazon Web Services",
       date: "2023",
-      badge: "https://images.credly.com/size/110x110/images/bd31ef42-d460-493e-8503-39592aaf0458/image.png"
+      badge:
+        "https://images.credly.com/size/110x110/images/bd31ef42-d460-493e-8503-39592aaf0458/image.png",
     },
     {
       title: "HashiCorp Terraform Associate",
       issuer: "HashiCorp",
       date: "2022",
-      badge: "https://images.credly.com/size/110x110/images/99289602-861e-4929-8277-773e63a2fa6f/image.png"
-    }
+      badge:
+        "https://images.credly.com/size/110x110/images/99289602-861e-4929-8277-773e63a2fa6f/image.png",
+    },
   ];
 
   const projects = [
     {
       title: "Multi-Region AWS Infrastructure",
-      description: "Designed and implemented a highly available, multi-region AWS infrastructure using Terraform, supporting 99.99% uptime for critical applications.",
-      technologies: ["AWS", "Terraform", "CloudFormation", "Docker", "Kubernetes"],
+      description:
+        "Designed and implemented a highly available, multi-region AWS infrastructure using Terraform, supporting 99.99% uptime for critical applications.",
+      technologies: [
+        "AWS",
+        "Terraform",
+        "CloudFormation",
+        "Docker",
+        "Kubernetes",
+      ],
       link: "https://github.com",
       metrics: "99.99% uptime, 50% cost reduction",
-      gradient: "from-blue-500 to-cyan-500"
+      gradient: "from-blue-500 to-cyan-500",
     },
     {
       title: "CI/CD Pipeline Automation",
-      description: "Built comprehensive CI/CD pipelines using GitHub Actions and AWS CodePipeline, reducing deployment time by 80% and eliminating manual errors.",
-      technologies: ["GitHub Actions", "AWS CodePipeline", "Docker", "ECS", "Lambda"],
+      description:
+        "Built comprehensive CI/CD pipelines using GitHub Actions and AWS CodePipeline, reducing deployment time by 80% and eliminating manual errors.",
+      technologies: [
+        "GitHub Actions",
+        "AWS CodePipeline",
+        "Docker",
+        "ECS",
+        "Lambda",
+      ],
       link: "https://github.com",
       metrics: "80% faster deployments, 100% automation",
-      gradient: "from-purple-500 to-pink-500"
+      gradient: "from-purple-500 to-pink-500",
     },
     {
       title: "Serverless Monitoring Platform",
-      description: "Developed a serverless monitoring and alerting system using AWS Lambda, CloudWatch, and SNS for real-time infrastructure monitoring.",
+      description:
+        "Developed a serverless monitoring and alerting system using AWS Lambda, CloudWatch, and SNS for real-time infrastructure monitoring.",
       technologies: ["AWS Lambda", "CloudWatch", "SNS", "Python", "DynamoDB"],
       link: "https://github.com",
       metrics: "Real-time alerting, 60% cost savings",
-      gradient: "from-blue-500 to-purple-500"
-    }
+      gradient: "from-blue-500 to-purple-500",
+    },
   ];
 
   const experience = [
@@ -107,30 +139,32 @@ export default function Home() {
       company: "Senior Cloud Engineer",
       role: "TechCorp Solutions",
       period: "2022 - Present",
-      description: "Leading cloud infrastructure design and implementation for enterprise clients. Managing AWS environments serving 10M+ users daily.",
+      description:
+        "Leading cloud infrastructure design and implementation for enterprise clients. Managing AWS environments serving 10M+ users daily.",
       achievements: [
         "Reduced infrastructure costs by 40% through optimization",
         "Implemented disaster recovery reducing RTO from 4 hours to 15 minutes",
-        "Led team of 5 engineers in microservices migration"
-      ]
+        "Led team of 5 engineers in microservices migration",
+      ],
     },
     {
       company: "DevOps Engineer",
       role: "StartupInc",
       period: "2020 - 2022",
-      description: "Built and maintained CI/CD pipelines and cloud infrastructure. Established DevOps practices and security standards.",
+      description:
+        "Built and maintained CI/CD pipelines and cloud infrastructure. Established DevOps practices and security standards.",
       achievements: [
         "Implemented automated testing reducing bugs by 65%",
         "Designed scalable architecture supporting 500% growth",
-        "Established security compliance meeting SOC 2 standards"
-      ]
-    }
+        "Established security compliance meeting SOC 2 standards",
+      ],
+    },
   ];
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
+
       <main>
         {/* Hero Section */}
         <Hero />
@@ -139,7 +173,7 @@ export default function Home() {
         <section id="about" className="py-20 px-6 relative">
           {/* Subtle background accent */}
           <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-bl from-blue-500/5 to-transparent rounded-full blur-3xl"></div>
-          
+
           <div className="max-w-4xl mx-auto relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -148,10 +182,8 @@ export default function Home() {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                About Me
-              </h2>
-              
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
+
               {/* Profile Picture Placeholder */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -167,20 +199,26 @@ export default function Home() {
                 <div className="absolute inset-0 rounded-full border-2 border-blue-500/30 animate-pulse"></div>
                 <div className="absolute -inset-2 rounded-full border border-purple-500/20 animate-pulse delay-1000"></div>
               </motion.div>
-              
+
               <div className="prose prose-lg mx-auto text-muted-foreground">
                 <p className="mb-6">
-                  I'm a passionate cloud engineer with expertise in AWS, infrastructure as code, and DevOps practices. 
-                  With over 4 years of experience, I specialize in building scalable, secure, and cost-effective cloud solutions.
+                  I am a passionate cloud engineer with expertise in AWS,
+                  infrastructure as code, and DevOps practices. With over 4
+                  years of experience, I specialize in building scalable,
+                  secure, and cost-effective cloud solutions.
                 </p>
                 <p className="mb-6">
-                  My approach combines deep technical knowledge with business acumen, ensuring that every solution I deliver 
-                  not only meets technical requirements but also drives business value. I'm particularly passionate about 
-                  automation, security, and helping teams adopt modern cloud-native practices.
+                  My approach combines deep technical knowledge with business
+                  acumen, ensuring that every solution I deliver not only meets
+                  technical requirements but also drives business value. I am
+                  particularly passionate about automation, security, and
+                  helping teams adopt modern cloud-native practices.
                 </p>
                 <p>
-                  When I'm not architecting cloud solutions, you can find me contributing to open-source projects, 
-                  staying current with the latest cloud technologies, and mentoring aspiring cloud engineers.
+                  When I am not architecting cloud solutions, you can find me
+                  contributing to open-source projects, staying current with the
+                  latest cloud technologies, and mentoring aspiring cloud
+                  engineers.
                 </p>
               </div>
             </motion.div>
@@ -191,7 +229,7 @@ export default function Home() {
         <section id="projects" className="py-20 px-6 bg-secondary/20 relative">
           {/* Background accent */}
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-500/5 to-transparent rounded-full blur-3xl"></div>
-          
+
           <div className="max-w-6xl mx-auto relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -203,7 +241,9 @@ export default function Home() {
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Featured Projects
               </h2>
-              <p className="text-muted-foreground text-lg">Showcasing cloud architecture and infrastructure solutions</p>
+              <p className="text-muted-foreground text-lg">
+                Showcasing cloud architecture and infrastructure solutions
+              </p>
             </motion.div>
 
             <div className="grid lg:grid-cols-3 gap-8">
@@ -217,7 +257,9 @@ export default function Home() {
                   className="bg-card rounded-lg p-6 border border-border hover:border-border/60 transition-all hover:shadow-lg group"
                 >
                   <div className="flex items-start justify-between mb-4">
-                    <div className={`w-12 h-12 bg-gradient-to-br ${project.gradient} rounded-lg flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity`}>
+                    <div
+                      className={`w-12 h-12 bg-gradient-to-br ${project.gradient} rounded-lg flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity`}
+                    >
                       <Code2 className="w-6 h-6 text-white" />
                     </div>
                     <a
@@ -228,10 +270,14 @@ export default function Home() {
                       <ExternalLink className="w-5 h-5" />
                     </a>
                   </div>
-                  
-                  <h3 className="font-semibold text-xl mb-3">{project.title}</h3>
-                  <p className="text-muted-foreground mb-4">{project.description}</p>
-                  
+
+                  <h3 className="font-semibold text-xl mb-3">
+                    {project.title}
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    {project.description}
+                  </p>
+
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.technologies.map((tech, techIndex) => (
                       <span
@@ -242,8 +288,10 @@ export default function Home() {
                       </span>
                     ))}
                   </div>
-                  
-                  <p className={`text-sm font-medium bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent`}>
+
+                  <p
+                    className={`text-sm font-medium bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent`}
+                  >
                     {project.metrics}
                   </p>
                 </motion.div>
@@ -256,7 +304,7 @@ export default function Home() {
         <section id="certifications" className="py-20 px-6 relative">
           {/* Background accent */}
           <div className="absolute top-1/2 right-0 w-64 h-64 bg-gradient-to-bl from-cyan-500/5 to-transparent rounded-full blur-3xl"></div>
-          
+
           <div className="max-w-6xl mx-auto relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -268,7 +316,10 @@ export default function Home() {
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Certifications
               </h2>
-              <p className="text-muted-foreground text-lg">Professional certifications demonstrating expertise in cloud technologies</p>
+              <p className="text-muted-foreground text-lg">
+                Professional certifications demonstrating expertise in cloud
+                technologies
+              </p>
             </motion.div>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -286,7 +337,9 @@ export default function Home() {
                   </div>
                   <h3 className="font-semibold text-lg mb-2">{cert.title}</h3>
                   <p className="text-muted-foreground mb-2">{cert.issuer}</p>
-                  <p className="text-sm text-blue-500 font-medium">{cert.date}</p>
+                  <p className="text-sm text-blue-500 font-medium">
+                    {cert.date}
+                  </p>
                 </motion.div>
               ))}
             </div>
@@ -294,10 +347,13 @@ export default function Home() {
         </section>
 
         {/* Experience Section */}
-        <section id="experience" className="py-20 px-6 bg-secondary/20 relative">
+        <section
+          id="experience"
+          className="py-20 px-6 bg-secondary/20 relative"
+        >
           {/* Background accent */}
           <div className="absolute top-0 left-1/4 w-80 h-80 bg-gradient-to-br from-blue-500/5 to-transparent rounded-full blur-3xl"></div>
-          
+
           <div className="max-w-4xl mx-auto relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -309,7 +365,9 @@ export default function Home() {
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Experience
               </h2>
-              <p className="text-muted-foreground text-lg">Professional journey in cloud engineering and DevOps</p>
+              <p className="text-muted-foreground text-lg">
+                Professional journey in cloud engineering and DevOps
+              </p>
             </motion.div>
 
             <div className="space-y-12">
@@ -329,21 +387,29 @@ export default function Home() {
                     <div className="flex-1">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                         <div>
-                          <h3 className="font-semibold text-xl">{exp.company}</h3>
-                          <p className="text-blue-500 font-medium">{exp.role}</p>
+                          <h3 className="font-semibold text-xl">
+                            {exp.company}
+                          </h3>
+                          <p className="text-blue-500 font-medium">
+                            {exp.role}
+                          </p>
                         </div>
                         <span className="text-muted-foreground font-medium bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-3 py-1 rounded-full text-sm">
                           {exp.period}
                         </span>
                       </div>
-                      
-                      <p className="text-muted-foreground mb-4">{exp.description}</p>
-                      
+
+                      <p className="text-muted-foreground mb-4">
+                        {exp.description}
+                      </p>
+
                       <ul className="space-y-2">
                         {exp.achievements.map((achievement, achIndex) => (
                           <li key={achIndex} className="flex items-start gap-2">
                             <div className="w-1.5 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-                            <span className="text-muted-foreground">{achievement}</span>
+                            <span className="text-muted-foreground">
+                              {achievement}
+                            </span>
                           </li>
                         ))}
                       </ul>
@@ -359,7 +425,7 @@ export default function Home() {
         <section id="contact" className="py-20 px-6 relative">
           {/* Background accent */}
           <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-gradient-to-tl from-purple-500/5 to-transparent rounded-full blur-3xl"></div>
-          
+
           <div className="max-w-4xl mx-auto relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -371,7 +437,9 @@ export default function Home() {
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Get In Touch
               </h2>
-              <p className="text-muted-foreground text-lg">Let's discuss your cloud infrastructure needs</p>
+              <p className="text-muted-foreground text-lg">
+                Let&apos;s discuss your cloud infrastructure needs
+              </p>
             </motion.div>
 
             <div className="grid md:grid-cols-2 gap-12">
@@ -383,7 +451,9 @@ export default function Home() {
                 className="space-y-8"
               >
                 <div>
-                  <h3 className="font-semibold text-xl mb-6">Contact Information</h3>
+                  <h3 className="font-semibold text-xl mb-6">
+                    Contact Information
+                  </h3>
                   <div className="space-y-4">
                     <div className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-blue-500/5 to-transparent border border-blue-500/10">
                       <Mail className="w-5 h-5 text-blue-500" />
@@ -430,7 +500,10 @@ export default function Home() {
                 className="space-y-6"
               >
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Name *
                   </label>
                   <input
@@ -440,15 +513,22 @@ export default function Home() {
                     value={formData.name}
                     onChange={handleInputChange}
                     className={`w-full px-4 py-3 rounded-lg border bg-background transition-colors ${
-                      errors.name ? "border-red-500" : "border-border focus:border-blue-500"
+                      errors.name
+                        ? "border-red-500"
+                        : "border-border focus:border-blue-500"
                     } focus:outline-none`}
                     placeholder="Your name"
                   />
-                  {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                  )}
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Email *
                   </label>
                   <input
@@ -458,15 +538,22 @@ export default function Home() {
                     value={formData.email}
                     onChange={handleInputChange}
                     className={`w-full px-4 py-3 rounded-lg border bg-background transition-colors ${
-                      errors.email ? "border-red-500" : "border-border focus:border-blue-500"
+                      errors.email
+                        ? "border-red-500"
+                        : "border-border focus:border-blue-500"
                     } focus:outline-none`}
                     placeholder="your.email@example.com"
                   />
-                  {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Message *
                   </label>
                   <textarea
@@ -476,11 +563,17 @@ export default function Home() {
                     onChange={handleInputChange}
                     rows={5}
                     className={`w-full px-4 py-3 rounded-lg border bg-background transition-colors resize-none ${
-                      errors.message ? "border-red-500" : "border-border focus:border-blue-500"
+                      errors.message
+                        ? "border-red-500"
+                        : "border-border focus:border-blue-500"
                     } focus:outline-none`}
                     placeholder="Tell me about your project or how I can help..."
                   />
-                  {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+                  {errors.message && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.message}
+                    </p>
+                  )}
                 </div>
 
                 <button
