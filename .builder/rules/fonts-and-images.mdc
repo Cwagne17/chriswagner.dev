@@ -6,7 +6,7 @@ alwaysApply: true
 
 Fonts:
 - Use `next/font` to load fonts. Apply the font class to `<body>` in `app/layout.tsx`.
-- Keep font config in `src/styles/fonts.ts`.
+- Keep font config in `styles/fonts.ts`.
 
 Images:
 - Use `next/image` for all images with `alt` text.

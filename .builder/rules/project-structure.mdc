@@ -1,18 +1,17 @@
 # .builder/rules/project-structure.mdc
 ---
 description: Project layout & naming
-globs:
 alwaysApply: true
 ---
 
-Use the App Router and the `src/` directory.
+Use the App Router.
 
 Required top-level structure:
-- `src/app/**` — routes, layouts, special files (page.tsx, layout.tsx, error.tsx, loading.tsx, not-found.tsx, route.ts)
-- `src/components/**` — reusable UI, organized by feature
-- `src/types/**` — shared types and interfaces (files prefixed with `i`)
-- `src/lib/**` — utilities (fetchers, formatters, hooks that aren’t UI)
-- `src/styles/**` — global.css and font setup
+- `app/**` — routes, layouts, special files (page.tsx, layout.tsx, error.tsx, loading.tsx, not-found.tsx, route.ts)
+- `components/**` — reusable UI, organized by feature
+- `types/**` — shared types and interfaces (files prefixed with `i`)
+- `lib/**` — utilities (fetchers, formatters, hooks that aren’t UI)
+- `styles/**` — global.css and font setup
 - `tests/**` — tests and **mockData/** (reusable mocks for tests and dev)
 
 Naming:
@@ -20,4 +19,4 @@ Naming:
 - Components: `PascalCase.tsx` and exported via `index.ts` at the folder level
 - Route segments: folder names are kebab-case
 
-Do **not** place reusable components in `src/app/**`. Keep `app` for pages/layouts/route handlers only.
+Do **not** place reusable components in `app/**`. Keep `app` for pages/layouts/route handlers only.

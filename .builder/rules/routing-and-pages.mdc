@@ -2,13 +2,13 @@
 ---
 description: App Router pages, layouts, and special files
 globs:
-  - src/app/**
+  - app/**
 alwaysApply: true
 ---
 
 Pages & layouts:
 - Every routable segment needs a `page.tsx`. Shared UI belongs in `layout.tsx`.
-- Root layout (`src/app/layout.tsx`) must include `<html>` and `<body>`.
+- Root layout (`app/layout.tsx`) must include `<html>` and `<body>`.
 
 Special files:
 - Provide `loading.tsx` for slow segments.
@@ -20,4 +20,4 @@ Route groups:
 
 Avoid:
 - Do **not** create a `/pages` directory.
-- Do **not** put business logic in `page.tsx`; move to `src/lib/**` or hooks.
+- Do **not** put business logic in `page.tsx`; move to `lib/**` or hooks.

@@ -15,4 +15,4 @@ React:
 
 Formatting:
 - Follow project Prettier settings (quotes, semicolons, trailing commas).
-- Keep components small and focused; extract helpers to `src/lib/**`.
+- Keep components small and focused; extract helpers to `lib/**`.
