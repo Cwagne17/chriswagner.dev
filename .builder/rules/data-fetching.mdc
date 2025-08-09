@@ -11,8 +11,8 @@ Server vs client:
 
 Config:
 
-- Centralize API base URL and endpoints in `src/lib/config.ts`.
-- All fetchers live in `src/lib/api/*.ts` with typed inputs/outputs.
+- Centralize API base URL and endpoints in `lib/config.ts`.
+- All fetchers live in `lib/api/*.ts` with typed inputs/outputs.
 
 Error/loading:
 

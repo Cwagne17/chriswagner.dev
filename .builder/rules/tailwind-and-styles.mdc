@@ -5,7 +5,7 @@ alwaysApply: true
 ---
 
 Tailwind:
-- Import `src/styles/globals.css` in `app/layout.tsx` and include `@tailwind base; @tailwind components; @tailwind utilities;`.
+- Import `styles/globals.css` in `app/layout.tsx` and include `@tailwind base; @tailwind components; @tailwind utilities;`.
 - Use Tailwind utility classes for spacing, layout, color, typography.
 - Avoid inline `style` and global CSS for component-specific styling.
 

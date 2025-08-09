@@ -1,8 +1,6 @@
 # .builder/rules/route-handlers.mdc
 ---
 description: Route handlers (app/api) and typing
-globs:
-  - src/app/**/route.ts
 alwaysApply: true
 ---
 
@@ -11,13 +9,13 @@ For each `route.ts`:
 - Use `NextRequest`/`NextResponse` (or standard `Request`/`Response`) and **typed bodies**.
 
 Typing:
-- Create/Update interfaces in `src/types/`:
+- Create/Update interfaces in `types/`:
   - `i{Entity}Request.ts` — request body (if applicable)
   - `i{Entity}Response.ts` — response JSON
 
 Example:
 ```ts
-// src/app/api/products/route.ts
+// app/api/products/route.ts
 import { NextResponse } from 'next/server';
 import type { ProductListResponse } from '@/types/iProduct';
 

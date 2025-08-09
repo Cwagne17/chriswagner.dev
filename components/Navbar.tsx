@@ -24,11 +24,12 @@ function Navbar() {
   };
 
   const navLinks = [
-    { href: "#about", label: "About" },
-    { href: "#projects", label: "Projects" },
-    { href: "#certifications", label: "Certifications" },
-    { href: "#experience", label: "Experience" },
-    { href: "#contact", label: "Contact" },
+    { href: "/#about", label: "About" },
+    { href: "/projects", label: "Projects" },
+    { href: "/services", label: "Services" },
+    { href: "/#certifications", label: "Certifications" },
+    { href: "/#experience", label: "Experience" },
+    { href: "/#contact", label: "Contact" },
   ];
 
   const handleLinkClick = () => {
@@ -38,9 +39,9 @@ function Navbar() {
   return (
     <header className="fixed top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <div className="text-xl font-bold">
+        <Link href="/" className="text-xl font-bold hover:text-blue-500 transition-colors">
           Chris Wagner
-        </div>
+        </Link>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-8 text-sm font-medium">

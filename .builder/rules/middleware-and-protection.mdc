@@ -2,13 +2,13 @@
 ---
 description: Middleware and route protection
 globs:
-  - src/middleware.ts
-  - src/app/**
+  - middleware.ts
+  - app/**
 alwaysApply: true
 ---
 
 Middleware:
-- Use `src/middleware.ts` to guard protected segments (e.g., `/dashboard/**`).
+- Use `middleware.ts` to guard protected segments (e.g., `/dashboard/**`).
 - Read auth signals (cookie/header) and `NextResponse.redirect()` if missing.
 
 Server-only code:

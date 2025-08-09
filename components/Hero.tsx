@@ -42,19 +42,23 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <motion.h1
-            className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-foreground via-blue-500 to-purple-500 bg-clip-text text-transparent"
+            className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-foreground via-blue-500 to-purple-500 bg-clip-text text-transparent leading-tight pb-2"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
             Chris Wagner
           </motion.h1>
-          <motion.p
-            className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto"
+          <motion.div
+            className="relative"
             whileHover={{ y: -2 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
           >
-            Cloud Engineer & Infrastructure Architect
-          </motion.p>
+            <motion.p
+              className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto"
+            >
+              Cloud Engineer & Infrastructure Architect
+            </motion.p>
+          </motion.div>
           <motion.p 
             className="text-lg text-muted-foreground/80 max-w-xl mx-auto leading-relaxed"
             whileHover={{ y: -2 }}
