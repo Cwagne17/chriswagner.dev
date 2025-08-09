@@ -1,73 +1,81 @@
 "use client";
 
-import { motion } from "motion/react";
-import { 
-  Cloud, 
-  Code, 
-  GitBranch, 
-  MessageCircle, 
-  FileText, 
-  Settings, 
+import {
+  ArrowRight,
   CheckCircle,
-  ArrowRight
+  Cloud,
+  Code,
+  FileText,
+  GitBranch,
+  MessageCircle,
+  Settings,
 } from "lucide-react";
+import { motion } from "motion/react";
 import Link from "next/link";
-import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import Navbar from "../../components/Navbar";
 
 export default function ServicesPage() {
   const services = [
     {
       title: "Cloud Architecture Consulting",
-      description: "Design scalable, secure, and cost-effective cloud solutions tailored to your business needs.",
+      description:
+        "Design scalable, secure, and cost-effective cloud solutions tailored to your business needs.",
       icon: Cloud,
-      gradient: "from-blue-500 to-cyan-500"
+      gradient: "from-blue-500 to-cyan-500",
     },
     {
       title: "Infrastructure as Code (IaC) Development",
-      description: "Terraform, CDK, and automated deployments for consistent, repeatable infrastructure.",
+      description:
+        "Terraform, CDK, and automated deployments for consistent, repeatable infrastructure.",
       icon: Code,
-      gradient: "from-purple-500 to-pink-500"
+      gradient: "from-purple-500 to-pink-500",
     },
     {
       title: "DevOps and CI/CD",
-      description: "Streamline your development workflow with automated testing, deployment, and monitoring.",
+      description:
+        "Streamline your development workflow with automated testing, deployment, and monitoring.",
       icon: GitBranch,
-      gradient: "from-orange-500 to-red-500"
+      gradient: "from-orange-500 to-red-500",
     },
     {
       title: "Automation",
-      description: "Implement intelligent automation solutions to reduce manual tasks and improve operational efficiency.",
+      description:
+        "Implement intelligent automation solutions to reduce manual tasks and improve operational efficiency.",
       icon: Settings,
-      gradient: "from-cyan-500 to-blue-500"
-    }
+      gradient: "from-cyan-500 to-blue-500",
+    },
   ];
 
   const processSteps = [
     {
       step: 1,
       title: "Consultation",
-      description: "We start by understanding your requirements, current infrastructure, and business goals.",
-      icon: MessageCircle
+      description:
+        "We start by understanding your requirements, current infrastructure, and business goals.",
+      icon: MessageCircle,
     },
     {
       step: 2,
       title: "Design & Proposal",
-      description: "I create detailed architecture diagrams and provide comprehensive cost estimates for your project.",
-      icon: FileText
+      description:
+        "I create detailed architecture diagrams and provide comprehensive cost estimates for your project.",
+      icon: FileText,
     },
     {
       step: 3,
       title: "Implementation",
-      description: "Build and configure your infrastructure using industry best practices and modern tools.",
-      icon: Settings
+      description:
+        "Build and configure your infrastructure using industry best practices and modern tools.",
+      icon: Settings,
     },
     {
       step: 4,
       title: "Handover & Documentation",
-      description: "Complete knowledge transfer with training sessions and comprehensive documentation delivery.",
-      icon: CheckCircle
-    }
+      description:
+        "Complete knowledge transfer with training sessions and comprehensive documentation delivery.",
+      icon: CheckCircle,
+    },
   ];
 
   return (
@@ -90,8 +98,10 @@ export default function ServicesPage() {
                   </span>
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-                  I help clients build robust, scalable cloud solutions with modern automation practices.
-                  From architecture design to full implementation, I deliver professional results that drive business value.
+                  I help clients build robust, scalable cloud solutions with
+                  modern automation practices. From architecture design to full
+                  implementation, I deliver professional results that drive
+                  business value.
                 </p>
               </motion.div>
 
@@ -109,7 +119,9 @@ export default function ServicesPage() {
                     </div>
                     <div className="bg-card rounded-lg p-4 border border-border/50">
                       <Code className="w-8 h-8 text-purple-500 mb-2" />
-                      <p className="text-sm font-medium">Infrastructure as Code</p>
+                      <p className="text-sm font-medium">
+                        Infrastructure as Code
+                      </p>
                     </div>
                     <div className="bg-card rounded-lg p-4 border border-border/50">
                       <GitBranch className="w-8 h-8 text-orange-500 mb-2" />
@@ -131,7 +143,6 @@ export default function ServicesPage() {
           <div className="absolute top-0 left-1/3 w-80 h-80 bg-gradient-to-br from-cyan-500/5 to-transparent rounded-full blur-3xl"></div>
 
           <div className="max-w-6xl mx-auto relative">
-
             <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
               {services.map((service, index) => (
                 <motion.div
@@ -142,12 +153,16 @@ export default function ServicesPage() {
                   viewport={{ once: true }}
                   className="bg-card rounded-lg p-8 border border-border hover:border-border/60 transition-all hover:shadow-lg group text-center h-full flex flex-col"
                 >
-                  <div className={`w-20 h-20 mx-auto mb-6 bg-gradient-to-br ${service.gradient} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                  <div
+                    className={`w-20 h-20 mx-auto mb-6 bg-gradient-to-br ${service.gradient} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
+                  >
                     <service.icon className="w-10 h-10 text-white" />
                   </div>
 
                   <div className="flex-1">
-                    <h3 className="font-semibold text-2xl mb-4">{service.title}</h3>
+                    <h3 className="font-semibold text-2xl mb-4">
+                      {service.title}
+                    </h3>
                     <p className="text-muted-foreground mb-8 leading-relaxed">
                       {service.description}
                     </p>
@@ -177,9 +192,12 @@ export default function ServicesPage() {
               viewport={{ once: true }}
               className="text-center mb-20"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-8">How We Work Together</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-8">
+                How We Work Together
+              </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                A proven process that ensures successful project delivery from concept to completion
+                A proven process that ensures successful project delivery from
+                concept to completion
               </p>
             </motion.div>
 
@@ -204,7 +222,9 @@ export default function ServicesPage() {
                           </div>
 
                           <div className="flex-1">
-                            <h3 className="font-semibold text-2xl mb-4">{step.title}</h3>
+                            <h3 className="font-semibold text-2xl mb-4">
+                              {step.title}
+                            </h3>
                             <p className="text-muted-foreground leading-relaxed text-lg">
                               {step.description}
                             </p>
@@ -219,7 +239,10 @@ export default function ServicesPage() {
                         <motion.div
                           initial={{ scale: 0 }}
                           whileInView={{ scale: 1 }}
-                          transition={{ duration: 0.5, delay: index * 0.2 + 0.3 }}
+                          transition={{
+                            duration: 0.5,
+                            delay: index * 0.2 + 0.3,
+                          }}
                           viewport={{ once: true }}
                           className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xl"
                         >
@@ -232,7 +255,10 @@ export default function ServicesPage() {
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5, delay: index * 0.2 + 0.6 }}
+                          transition={{
+                            duration: 0.5,
+                            delay: index * 0.2 + 0.6,
+                          }}
                           viewport={{ once: true }}
                           className="absolute -bottom-20 left-1/2 transform -translate-x-1/2"
                         >
@@ -253,7 +279,7 @@ export default function ServicesPage() {
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5">
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
           </div>
-          
+
           <div className="max-w-4xl mx-auto relative text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -265,10 +291,11 @@ export default function ServicesPage() {
                 Ready to Transform Your Infrastructure?
               </h2>
               <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
-                Let's discuss your project requirements and explore how we can build a scalable, 
-                secure solution that drives your business forward.
+                Let&apos;s discuss your project requirements and explore how we
+                can build a scalable, secure solution that drives your business
+                forward.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/#contact"
@@ -277,7 +304,7 @@ export default function ServicesPage() {
                   Start a Conversation
                   <ArrowRight className="w-5 h-5" />
                 </Link>
-                
+
                 <Link
                   href="/projects"
                   className="inline-flex items-center gap-2 bg-transparent border-2 border-blue-500/30 text-foreground px-8 py-4 rounded-lg font-medium hover:border-blue-500/60 hover:bg-blue-500/5 transition-all text-lg"

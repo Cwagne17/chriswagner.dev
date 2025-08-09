@@ -1,13 +1,12 @@
 "use client";
 
-import { motion } from "motion/react";
 import { ArrowLeft, Download, ExternalLink, Github } from "lucide-react";
+import { motion } from "motion/react";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { use } from "react";
-import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
+import Navbar from "../../../components/Navbar";
 import { allProjects } from "../../../data/projects";
 
 interface ProjectPageProps {
@@ -16,7 +15,7 @@ interface ProjectPageProps {
 
 export default function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = use(params);
-  const project = allProjects.find(p => p.slug === slug);
+  const project = allProjects.find((p) => p.slug === slug);
 
   if (!project) {
     notFound();
@@ -47,7 +46,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 <ArrowLeft className="w-4 h-4" />
                 Back to Projects
               </Link>
-              
+
               <div className="flex items-center gap-4 mb-6">
                 <div
                   className={`w-16 h-16 bg-gradient-to-br ${project.gradient} rounded-lg flex items-center justify-center`}
@@ -105,7 +104,9 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 )}
               </div>
 
-              <div className={`p-4 bg-gradient-to-r ${project.gradient} bg-opacity-10 rounded-lg border border-border/50`}>
+              <div
+                className={`p-4 bg-gradient-to-r ${project.gradient} bg-opacity-10 rounded-lg border border-border/50`}
+              >
                 <p className="font-semibold text-lg">{project.metrics}</p>
               </div>
             </motion.div>
@@ -121,7 +122,9 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-2xl md:text-3xl font-bold mb-6">The Challenge</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-6">
+                The Challenge
+              </h2>
               <p className="text-muted-foreground text-lg leading-relaxed">
                 {project.caseStudy.challenge}
               </p>
@@ -138,7 +141,9 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-2xl md:text-3xl font-bold mb-6">The Solution</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-6">
+                The Solution
+              </h2>
               <p className="text-muted-foreground text-lg leading-relaxed">
                 {project.caseStudy.solution}
               </p>
@@ -155,7 +160,9 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Architecture</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+                Architecture
+              </h2>
               <div className="bg-card rounded-lg p-8 border border-border">
                 <div className="relative w-full h-96 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-lg flex items-center justify-center">
                   {/* Placeholder for architecture diagram */}
@@ -185,7 +192,9 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-2xl md:text-3xl font-bold mb-8">Implementation Process</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-8">
+                Implementation Process
+              </h2>
               <div className="space-y-6">
                 {project.caseStudy.process.map((step, index) => (
                   <motion.div
@@ -218,7 +227,9 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-2xl md:text-3xl font-bold mb-8">Results & Impact</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-8">
+                Results & Impact
+              </h2>
               <div className="grid md:grid-cols-2 gap-6">
                 {project.caseStudy.results.map((result, index) => (
                   <motion.div
@@ -252,7 +263,9 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-2xl md:text-3xl font-bold mb-8">Additional Resources</h2>
+                <h2 className="text-2xl md:text-3xl font-bold mb-8">
+                  Additional Resources
+                </h2>
                 <div className="bg-card rounded-lg p-8 border border-border">
                   <div className="flex items-start gap-6">
                     <div className="w-16 h-16 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
