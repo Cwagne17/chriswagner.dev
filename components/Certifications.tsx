@@ -33,21 +33,32 @@ const Certifications = ({ certifications }: CertificationsProps) => {
 
         <div className="grid md:grid-cols-3 gap-8">
           {certifications.map((cert, index) => (
-            <motion.div
-              key={index}
+            <motion.a
+              key={cert.title}
+              href={cert.link}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-card rounded-lg p-6 text-center border border-border hover:border-blue-500/20 transition-all group"
+              className="bg-card rounded-lg p-6 text-center border border-border hover:border-blue-500/20 transition-all group cursor-pointer block"
             >
-              <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-full flex items-center justify-center group-hover:from-blue-500/20 group-hover:to-cyan-500/20 transition-all">
-                <Award className="w-10 h-10 text-blue-500" />
+              <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-full flex items-center justify-center group-hover:from-blue-500/20 group-hover:to-cyan-500/20 transition-all overflow-hidden">
+                {cert.badge ? (
+                  <img
+                    src={cert.badge}
+                    alt={`${cert.title} badge`}
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <Award className="w-10 h-10 text-blue-500" />
+                )}
               </div>
               <h3 className="font-semibold text-lg mb-2">{cert.title}</h3>
               <p className="text-muted-foreground mb-2">{cert.issuer}</p>
               <p className="text-sm text-blue-500 font-medium">{cert.date}</p>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>

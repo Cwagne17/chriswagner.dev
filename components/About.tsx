@@ -1,6 +1,5 @@
 "use client";
 
-import { User } from "lucide-react";
 import { motion } from "motion/react";
 
 const About = () => {
@@ -19,7 +18,7 @@ const About = () => {
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
 
-          {/* Profile Picture Placeholder */}
+          {/* Profile Picture */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -28,7 +27,11 @@ const About = () => {
             className="w-32 h-32 mx-auto mb-8 relative"
           >
             <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 border-2 border-gradient-to-r from-blue-500/30 to-purple-500/30 flex items-center justify-center overflow-hidden">
-              <User className="w-16 h-16 text-muted-foreground/50" />
+              <img
+                src="/portrait.jpeg"
+                alt="Christopher Wagner"
+                className="w-full h-full object-cover rounded-full"
+              />
             </div>
             {/* Animated ring */}
             <div className="absolute inset-0 rounded-full border-2 border-blue-500/30 animate-pulse"></div>
