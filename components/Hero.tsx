@@ -1,11 +1,11 @@
 "use client";
 
-import { motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
+import { motion } from "motion/react";
 
 const Hero = () => {
   const scrollToAbout = () => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -17,7 +17,7 @@ const Hero = () => {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
       </div>
-      
+
       {/* Floating elements */}
       <motion.div
         className="absolute top-20 left-10 w-2 h-2 bg-blue-500/30 rounded-full"
@@ -27,14 +27,24 @@ const Hero = () => {
       <motion.div
         className="absolute top-1/3 right-20 w-1 h-1 bg-purple-500/40 rounded-full"
         animate={{ y: [0, -15, 0], opacity: [0.4, 0.9, 0.4] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1,
+        }}
       />
       <motion.div
         className="absolute bottom-1/3 left-1/4 w-1.5 h-1.5 bg-cyan-500/35 rounded-full"
         animate={{ y: [0, -25, 0], opacity: [0.35, 0.7, 0.35] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2,
+        }}
       />
-      
+
       <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -53,21 +63,20 @@ const Hero = () => {
             whileHover={{ y: -2 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
           >
-            <motion.p
-              className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto"
-            >
-              Cloud Engineer & Infrastructure Architect
+            <motion.p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Cloud Engineer & Solutions Architect
             </motion.p>
           </motion.div>
-          <motion.p 
+          <motion.p
             className="text-lg text-muted-foreground/80 max-w-xl mx-auto leading-relaxed"
             whileHover={{ y: -2 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
           >
-            Building scalable, secure cloud solutions with modern DevOps practices
+            Building scalable, secure cloud solutions with modern DevOps
+            practices
           </motion.p>
         </motion.div>
-        
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

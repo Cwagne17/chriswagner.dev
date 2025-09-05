@@ -1,9 +1,9 @@
 "use client";
 
-import { motion } from "motion/react";
 import { Code2, ExternalLink } from "lucide-react";
+import { motion } from "motion/react";
 import Link from "next/link";
-import type { Project } from "../types/iPortfolio";
+import type { Project } from "../types/contact-form";
 
 interface FeaturedProjectsProps {
   projects: Project[];
@@ -41,40 +41,38 @@ const FeaturedProjects = ({ projects }: FeaturedProjectsProps) => {
                 viewport={{ once: true }}
                 className="bg-card rounded-lg p-6 border border-border hover:border-border/60 transition-all hover:shadow-lg group cursor-pointer"
               >
-              <div className="flex items-start justify-between mb-4">
-                <div
-                  className={`w-12 h-12 bg-gradient-to-br ${project.gradient} rounded-lg flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity`}
-                >
-                  <Code2 className="w-6 h-6 text-white" />
-                </div>
-                <div className="text-muted-foreground group-hover:text-foreground transition-colors">
-                  <ExternalLink className="w-5 h-5" />
-                </div>
-              </div>
-
-              <h3 className="font-semibold text-xl mb-3">
-                {project.title}
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                {project.description}
-              </p>
-
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.technologies.map((tech, techIndex) => (
-                  <span
-                    key={techIndex}
-                    className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded border border-border/50"
+                <div className="flex items-start justify-between mb-4">
+                  <div
+                    className={`w-12 h-12 bg-gradient-to-br ${project.gradient} rounded-lg flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity`}
                   >
-                    {tech}
-                  </span>
-                ))}
-              </div>
+                    <Code2 className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-muted-foreground group-hover:text-foreground transition-colors">
+                    <ExternalLink className="w-5 h-5" />
+                  </div>
+                </div>
 
-              <p
-                className={`text-sm font-medium bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent`}
-              >
-                {project.metrics}
-              </p>
+                <h3 className="font-semibold text-xl mb-3">{project.title}</h3>
+                <p className="text-muted-foreground mb-4">
+                  {project.description}
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.technologies.map((tech, techIndex) => (
+                    <span
+                      key={techIndex}
+                      className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded border border-border/50"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <p
+                  className={`text-sm font-medium bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent`}
+                >
+                  {project.metrics}
+                </p>
               </motion.div>
             </Link>
           ))}

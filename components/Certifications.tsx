@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "motion/react";
+import { Certification } from "@/types/certification";
 import { Award } from "lucide-react";
-import type { Certification } from "../types/iPortfolio";
+import { motion } from "motion/react";
 
 interface CertificationsProps {
   certifications: Certification[];
@@ -46,9 +46,7 @@ const Certifications = ({ certifications }: CertificationsProps) => {
               </div>
               <h3 className="font-semibold text-lg mb-2">{cert.title}</h3>
               <p className="text-muted-foreground mb-2">{cert.issuer}</p>
-              <p className="text-sm text-blue-500 font-medium">
-                {cert.date}
-              </p>
+              <p className="text-sm text-blue-500 font-medium">{cert.date}</p>
             </motion.div>
           ))}
         </div>

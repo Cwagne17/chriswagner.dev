@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "motion/react";
 import { User } from "lucide-react";
+import { motion } from "motion/react";
 
 const About = () => {
   return (
@@ -37,23 +37,34 @@ const About = () => {
 
           <div className="prose prose-lg mx-auto text-muted-foreground">
             <p className="mb-6">
-              I am a passionate cloud engineer with expertise in AWS,
-              infrastructure as code, and DevOps practices. With over 4
-              years of experience, I specialize in building scalable,
-              secure, and cost-effective cloud solutions.
+              I am a passionate Cloud Engineer and Infrastructure Architect with
+              five years of experience designing, deploying, and optimizing
+              systems on Amazon Web Services (AWS). I currently work at the
+              Naval Supply Systems Command (NAVSUP) and with SecurEd Inc., where
+              I focus on building secure, scalable, and cost-effective cloud
+              solutions.
             </p>
             <p className="mb-6">
-              My approach combines deep technical knowledge with business
-              acumen, ensuring that every solution I deliver not only meets
-              technical requirements but also drives business value. I am
-              particularly passionate about automation, security, and
-              helping teams adopt modern cloud-native practices.
+              My expertise lies in Infrastructure as Code, DevOps practices, and
+              containerized architectures. I help development teams modernize
+              their applications by designing, deploying, and optimizing systems
+              that leverage containers and cloud-native services. Whether
+              re-platforming legacy workloads or implementing new cloud-native
+              solutions, I ensure that the architectures I deliver are
+              efficient, resilient, and aligned with business goals. I also hold
+              multiple certifications, including CCSP, AWS certifications, and
+              Kubernetes certifications.
             </p>
             <p>
-              When I am not architecting cloud solutions, you can find me
-              contributing to open-source projects, staying current with the
-              latest cloud technologies, and mentoring aspiring cloud
-              engineers.
+              I’m particularly passionate about automation, security, and
+              building architectures that are grounded in performance,
+              standardization, and best practices. I take pride in creating
+              solutions that not only work but work well — reliably,
+              efficiently, and in ways that can be repeated and scaled. Outside
+              of work, I love exploring open-source projects and keeping up with
+              the latest in technology. Beyond tech, I enjoy playing music,
+              challenging myself with CrossFit, and traveling to national parks
+              to recharge and find inspiration.
             </p>
           </div>
         </motion.div>

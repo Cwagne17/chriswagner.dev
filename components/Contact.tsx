@@ -1,9 +1,9 @@
 "use client";
 
-import { motion } from "motion/react";
 import { Github, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
+import { motion } from "motion/react";
 import { useState } from "react";
-import type { ContactFormData, ContactFormErrors } from "../types/iPortfolio";
+import type { ContactFormData, ContactFormErrors } from "../types/contact-form";
 
 const Contact = () => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -68,9 +68,7 @@ const Contact = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Get In Touch
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Get In Touch</h2>
           <p className="text-muted-foreground text-lg">
             Let&apos;s discuss your cloud infrastructure needs
           </p>
@@ -134,10 +132,7 @@ const Contact = () => {
             className="space-y-6"
           >
             <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium mb-2"
-              >
+              <label htmlFor="name" className="block text-sm font-medium mb-2">
                 Name *
               </label>
               <input
@@ -159,10 +154,7 @@ const Contact = () => {
             </div>
 
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium mb-2"
-              >
+              <label htmlFor="email" className="block text-sm font-medium mb-2">
                 Email *
               </label>
               <input
@@ -204,9 +196,7 @@ const Contact = () => {
                 placeholder="Tell me about your project or how I can help..."
               />
               {errors.message && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.message}
-                </p>
+                <p className="text-red-500 text-sm mt-1">{errors.message}</p>
               )}
             </div>
 

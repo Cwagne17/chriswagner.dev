@@ -1,19 +1,16 @@
 "use client";
 
-import { motion } from "motion/react";
 import { Briefcase } from "lucide-react";
-import type { Experience } from "../types/iPortfolio";
+import { motion } from "motion/react";
+import type { Experience as ExperienceType } from "../types/experience";
 
 interface ExperienceProps {
-  experience: Experience[];
+  experience: ExperienceType[];
 }
 
 const Experience = ({ experience }: ExperienceProps) => {
   return (
-    <section
-      id="experience"
-      className="py-20 px-6 bg-secondary/20 relative"
-    >
+    <section id="experience" className="py-20 px-6 bg-secondary/20 relative">
       {/* Background accent */}
       <div className="absolute top-0 left-1/4 w-80 h-80 bg-gradient-to-br from-blue-500/5 to-transparent rounded-full blur-3xl"></div>
 
@@ -25,9 +22,7 @@ const Experience = ({ experience }: ExperienceProps) => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Experience
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Experience</h2>
           <p className="text-muted-foreground text-lg">
             Professional journey in cloud engineering and DevOps
           </p>
@@ -50,12 +45,8 @@ const Experience = ({ experience }: ExperienceProps) => {
                 <div className="flex-1">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                     <div>
-                      <h3 className="font-semibold text-xl">
-                        {exp.company}
-                      </h3>
-                      <p className="text-blue-500 font-medium">
-                        {exp.role}
-                      </p>
+                      <h3 className="font-semibold text-xl">{exp.company}</h3>
+                      <p className="text-blue-500 font-medium">{exp.role}</p>
                     </div>
                     <span className="text-muted-foreground font-medium bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-3 py-1 rounded-full text-sm">
                       {exp.period}
