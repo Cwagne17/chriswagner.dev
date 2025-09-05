@@ -1,0 +1,341 @@
+<mxfile host="app.diagrams.net" modified="2025-01-01T12:00:00.000Z" agent="5.0" etag="" version="24.7.17">
+  <diagram name="STIG Compliance AWS Architecture" id="stig-aws-arch">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title -->
+        <mxCell id="title" value="Enterprise Kubernetes STIG Compliance Automation" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="600" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- AWS Cloud -->
+        <mxCell id="aws-cloud" value="AWS GovCloud (US)" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=14;fontStyle=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_aws_cloud_alt;strokeColor=#232F3E;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#232F3E;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="70" width="1300" height="730" as="geometry" />
+        </mxCell>
+        
+        <!-- Region -->
+        <mxCell id="region" value="AWS GovCloud Region (us-gov-west-1)" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_region;strokeColor=#147EBA;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#147EBA;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="110" width="1240" height="660" as="geometry" />
+        </mxCell>
+        
+        <!-- EKS VPC -->
+        <mxCell id="eks-vpc" value="EKS Production VPC (10.0.0.0/16)" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_vpc;strokeColor=#248814;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#AAB7B8;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="120" y="160" width="700" height="580" as="geometry" />
+        </mxCell>
+        
+        <!-- Management VPC -->
+        <mxCell id="mgmt-vpc" value="Management VPC (10.1.0.0/16)" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_vpc;strokeColor=#BD7000;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#AAB7B8;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="860" y="160" width="420" height="300" as="geometry" />
+        </mxCell>
+        
+        <!-- AZ1 - EKS -->
+        <mxCell id="az1-eks" value="Availability Zone 1a" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_availability_zone;strokeColor=#147EBA;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#147EBA;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="210" width="300" height="500" as="geometry" />
+        </mxCell>
+        
+        <!-- AZ2 - EKS -->
+        <mxCell id="az2-eks" value="Availability Zone 1b" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_availability_zone;strokeColor=#147EBA;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#147EBA;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="210" width="300" height="500" as="geometry" />
+        </mxCell>
+        
+        <!-- Private Subnet 1 -->
+        <mxCell id="private-subnet-1" value="Private Subnet 1&#xa;(10.0.1.0/24)&#xa;Worker Nodes" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=#248814;fillColor=#E9F3E6;verticalAlign=top;align=left;spacingLeft=30;fontColor=#248814;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="250" width="140" height="200" as="geometry" />
+        </mxCell>
+        
+        <!-- Private Subnet 2 -->
+        <mxCell id="private-subnet-2" value="Private Subnet 2&#xa;(10.0.2.0/24)&#xa;Worker Nodes" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=#248814;fillColor=#E9F3E6;verticalAlign=top;align=left;spacingLeft=30;fontColor=#248814;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="500" y="250" width="140" height="200" as="geometry" />
+        </mxCell>
+        
+        <!-- Control Plane Subnets -->
+        <mxCell id="cp-subnet-1" value="Control Plane Subnet 1&#xa;(10.0.3.0/24)" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=#BD7000;fillColor=#FFF2CC;verticalAlign=top;align=left;spacingLeft=30;fontColor=#BD7000;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="480" width="140" height="150" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="cp-subnet-2" value="Control Plane Subnet 2&#xa;(10.0.4.0/24)" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=#BD7000;fillColor=#FFF2CC;verticalAlign=top;align=left;spacingLeft=30;fontColor=#BD7000;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="500" y="480" width="140" height="150" as="geometry" />
+        </mxCell>
+        
+        <!-- Management Subnets -->
+        <mxCell id="mgmt-subnet-1" value="Management Subnet 1&#xa;(10.1.1.0/24)" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=#BD7000;fillColor=#FFF2CC;verticalAlign=top;align=left;spacingLeft=30;fontColor=#BD7000;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="880" y="200" width="160" height="120" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="mgmt-subnet-2" value="Management Subnet 2&#xa;(10.1.2.0/24)" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=#BD7000;fillColor=#FFF2CC;verticalAlign=top;align=left;spacingLeft=30;fontColor=#BD7000;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="200" width="160" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- EKS Cluster -->
+        <mxCell id="eks-cluster" value="Amazon EKS&#xa;Kubernetes Cluster" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.eks_cloud;" vertex="1" parent="1">
+          <mxGeometry x="370" y="180" width="50" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Worker Nodes -->
+        <mxCell id="worker-node-1a" value="Worker&#xa;Node" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=8;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.instance;" vertex="1" parent="1">
+          <mxGeometry x="210" y="310" width="28" height="28" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="worker-node-1b" value="Worker&#xa;Node" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=8;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.instance;" vertex="1" parent="1">
+          <mxGeometry x="270" y="310" width="28" height="28" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="worker-node-2a" value="Worker&#xa;Node" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=8;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.instance;" vertex="1" parent="1">
+          <mxGeometry x="530" y="310" width="28" height="28" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="worker-node-2b" value="Worker&#xa;Node" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=8;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.instance;" vertex="1" parent="1">
+          <mxGeometry x="590" y="310" width="28" height="28" as="geometry" />
+        </mxCell>
+        
+        <!-- Control Plane Nodes -->
+        <mxCell id="cp-node-1" value="Control&#xa;Plane" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#BD7000;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=8;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.instance;" vertex="1" parent="1">
+          <mxGeometry x="235" y="540" width="28" height="28" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="cp-node-2" value="Control&#xa;Plane" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#BD7000;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=8;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.instance;" vertex="1" parent="1">
+          <mxGeometry x="555" y="540" width="28" height="28" as="geometry" />
+        </mxCell>
+        
+        <!-- Ansible Control Node -->
+        <mxCell id="ansible-control" value="Ansible Control Node&#xa;STIG Automation" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#C925D1;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.instance;" vertex="1" parent="1">
+          <mxGeometry x="940" y="240" width="48" height="48" as="geometry" />
+        </mxCell>
+        
+        <!-- STIG Scanning Node -->
+        <mxCell id="stig-scanner" value="STIG Scanner&#xa;Compliance Engine" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#C925D1;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.instance;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="240" width="48" height="48" as="geometry" />
+        </mxCell>
+        
+        <!-- AWS Services (Below Management VPC) -->
+        <!-- S3 Bucket -->
+        <mxCell id="s3-reports" value="S3 Bucket&#xa;STIG Reports &amp;&#xa;Evidence Store" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3F48CC;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.s3;" vertex="1" parent="1">
+          <mxGeometry x="880" y="500" width="60" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Systems Manager -->
+        <mxCell id="systems-manager" value="AWS Systems&#xa;Manager" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.systems_manager;" vertex="1" parent="1">
+          <mxGeometry x="980" y="500" width="60" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- CodeCommit -->
+        <mxCell id="codecommit" value="AWS CodeCommit&#xa;Ansible Playbooks&#xa;&amp; STIG Rules" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.codecommit;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="500" width="60" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- CodePipeline -->
+        <mxCell id="codepipeline" value="AWS CodePipeline&#xa;Compliance CI/CD" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.codepipeline;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="500" width="60" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- CloudWatch -->
+        <mxCell id="cloudwatch" value="Amazon CloudWatch&#xa;Compliance Metrics&#xa;&amp; Drift Detection" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.cloudwatch;" vertex="1" parent="1">
+          <mxGeometry x="880" y="600" width="60" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- SNS -->
+        <mxCell id="sns" value="Amazon SNS&#xa;Compliance Alerts" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.sns;" vertex="1" parent="1">
+          <mxGeometry x="980" y="600" width="60" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- EventBridge -->
+        <mxCell id="eventbridge" value="Amazon EventBridge&#xa;Compliance Events" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.eventbridge;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="600" width="60" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- IAM -->
+        <mxCell id="iam" value="AWS IAM&#xa;RBAC &amp; Policies" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#C925D1;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.iam;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="600" width="60" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- External Components -->
+        <!-- STIG Viewer -->
+        <mxCell id="stig-viewer" value="STIG Viewer&#xa;Compatible Reports" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="710" width="120" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Security Teams -->
+        <mxCell id="security-team" value="Security &amp; Audit&#xa;Teams" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.users;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="710" width="50" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- ATO Authority -->
+        <mxCell id="ato-authority" value="ATO Authority&#xa;&amp; Auditors" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.user;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="710" width="40" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Connection Lines -->
+        <!-- Ansible to all nodes -->
+        <mxCell id="conn-ansible-worker1" style="endArrow=classic;html=1;rounded=0;strokeColor=#C925D1;strokeWidth=2;" edge="1" parent="1" source="ansible-control" target="worker-node-1a">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="940" y="264" as="sourcePoint" />
+            <mxPoint x="240" y="324" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="800" y="264" />
+              <mxPoint x="800" y="324" />
+              <mxPoint x="224" y="324" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="conn-ansible-worker2" style="endArrow=classic;html=1;rounded=0;strokeColor=#C925D1;strokeWidth=2;" edge="1" parent="1" source="ansible-control" target="worker-node-2a">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="940" y="264" as="sourcePoint" />
+            <mxPoint x="544" y="324" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="800" y="264" />
+              <mxPoint x="800" y="324" />
+              <mxPoint x="544" y="324" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Ansible to Control Planes -->
+        <mxCell id="conn-ansible-cp1" style="endArrow=classic;html=1;rounded=0;strokeColor=#C925D1;strokeWidth=2;" edge="1" parent="1" source="ansible-control" target="cp-node-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="940" y="280" as="sourcePoint" />
+            <mxPoint x="249" y="554" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="800" y="280" />
+              <mxPoint x="800" y="554" />
+              <mxPoint x="249" y="554" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Scanner to Nodes -->
+        <mxCell id="conn-scanner-worker1" style="endArrow=classic;html=1;rounded=0;strokeColor=#C925D1;strokeWidth=2;dashed=1;" edge="1" parent="1" source="stig-scanner" target="worker-node-1b">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1140" y="264" as="sourcePoint" />
+            <mxPoint x="284" y="324" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="750" y="264" />
+              <mxPoint x="750" y="324" />
+              <mxPoint x="284" y="324" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Ansible to S3 -->
+        <mxCell id="conn-ansible-s3" style="endArrow=classic;html=1;rounded=0;strokeColor=#3F48CC;strokeWidth=2;" edge="1" parent="1" source="ansible-control" target="s3-reports">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="964" y="290" as="sourcePoint" />
+            <mxPoint x="910" y="500" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="964" y="400" />
+              <mxPoint x="910" y="400" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Scanner to S3 -->
+        <mxCell id="conn-scanner-s3" style="endArrow=classic;html=1;rounded=0;strokeColor=#3F48CC;strokeWidth=2;" edge="1" parent="1" source="stig-scanner" target="s3-reports">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1164" y="290" as="sourcePoint" />
+            <mxPoint x="940" y="500" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1164" y="380" />
+              <mxPoint x="940" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- CodeCommit to CodePipeline -->
+        <mxCell id="conn-codecommit-pipeline" style="endArrow=classic;html=1;rounded=0;strokeColor=#F58534;strokeWidth=2;" edge="1" parent="1" source="codecommit" target="codepipeline">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1150" y="530" as="sourcePoint" />
+            <mxPoint x="1170" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- CodePipeline to Ansible -->
+        <mxCell id="conn-pipeline-ansible" style="endArrow=classic;html=1;rounded=0;strokeColor=#F58534;strokeWidth=2;" edge="1" parent="1" source="codepipeline" target="ansible-control">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1180" y="500" as="sourcePoint" />
+            <mxPoint x="988" y="280" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1210" y="360" />
+              <mxPoint x="988" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- S3 to STIG Viewer -->
+        <mxCell id="conn-s3-stig" style="endArrow=classic;html=1;rounded=0;strokeColor=#3F48CC;strokeWidth=2;" edge="1" parent="1" source="s3-reports" target="stig-viewer">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="910" y="570" as="sourcePoint" />
+            <mxPoint x="910" y="710" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- STIG Viewer to Security Team -->
+        <mxCell id="conn-stig-security" style="endArrow=classic;html=1;rounded=0;strokeColor=#b85450;strokeWidth=2;" edge="1" parent="1" source="stig-viewer" target="security-team">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="980" y="735" as="sourcePoint" />
+            <mxPoint x="1040" y="735" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Security Team to ATO -->
+        <mxCell id="conn-security-ato" style="endArrow=classic;html=1;rounded=0;strokeColor=#232F3D;strokeWidth=2;" edge="1" parent="1" source="security-team" target="ato-authority">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1110" y="735" as="sourcePoint" />
+            <mxPoint x="1190" y="730" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- CloudWatch monitoring (from nodes) -->
+        <mxCell id="conn-nodes-cw" style="endArrow=classic;html=1;rounded=0;strokeColor=#F58534;strokeWidth=1;dashed=1;" edge="1" parent="1" source="worker-node-1a" target="cloudwatch">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="224" y="340" as="sourcePoint" />
+            <mxPoint x="880" y="630" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="224" y="400" />
+              <mxPoint x="700" y="400" />
+              <mxPoint x="700" y="630" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- CloudWatch to EventBridge -->
+        <mxCell id="conn-cw-eb" style="endArrow=classic;html=1;rounded=0;strokeColor=#F58534;strokeWidth=2;" edge="1" parent="1" source="cloudwatch" target="eventbridge">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="950" y="630" as="sourcePoint" />
+            <mxPoint x="1070" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- EventBridge to SNS -->
+        <mxCell id="conn-eb-sns" style="endArrow=classic;html=1;rounded=0;strokeColor=#F58534;strokeWidth=2;" edge="1" parent="1" source="eventbridge" target="sns">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1080" y="630" as="sourcePoint" />
+            <mxPoint x="1050" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Labels -->
+        <mxCell id="label-91-controls" value="91 STIG Controls&#xa;Automated" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#C925D1;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="720" y="300" width="80" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="label-continuous" value="Continuous&#xa;Compliance" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#F58534;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="530" width="70" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="label-evidence" value="Auditor-Ready&#xa;Evidence" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#3F48CC;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="860" y="440" width="80" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="label-drift" value="Drift Detection&#xa;&amp; Auto-Remediation" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#F58534;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="640" width="90" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="label-scan" value="Real-time&#xa;STIG Scanning" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#C925D1;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="300" width="80" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

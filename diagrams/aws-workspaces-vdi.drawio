@@ -1,0 +1,268 @@
+<mxfile host="app.diagrams.net" modified="2025-01-01T12:00:00.000Z" agent="5.0" etag="" version="24.7.17">
+  <diagram name="AWS WorkSpaces VDI Architecture" id="aws-workspaces-vdi">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title -->
+        <mxCell id="title" value="Self-Service Cloud VDI Platform with Enterprise AD Integration" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="600" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- AWS Cloud -->
+        <mxCell id="aws-cloud" value="AWS Cloud" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=14;fontStyle=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_aws_cloud_alt;strokeColor=#232F3E;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#232F3E;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="70" width="1300" height="730" as="geometry" />
+        </mxCell>
+        
+        <!-- Region -->
+        <mxCell id="region" value="AWS Region (us-east-1)" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_region;strokeColor=#147EBA;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#147EBA;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="110" width="1240" height="660" as="geometry" />
+        </mxCell>
+        
+        <!-- WorkSpaces VPC -->
+        <mxCell id="vpc" value="WorkSpaces VPC (10.0.0.0/16)" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_vpc;strokeColor=#248814;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#AAB7B8;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="120" y="160" width="900" height="580" as="geometry" />
+        </mxCell>
+        
+        <!-- AZ-A -->
+        <mxCell id="az-a" value="Availability Zone us-east-1a" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_availability_zone;strokeColor=#147EBA;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#147EBA;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="210" width="360" height="500" as="geometry" />
+        </mxCell>
+        
+        <!-- AZ-B -->
+        <mxCell id="az-b" value="Availability Zone us-east-1b" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_availability_zone;strokeColor=#147EBA;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#147EBA;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="210" width="360" height="500" as="geometry" />
+        </mxCell>
+        
+        <!-- Public Subnet -->
+        <mxCell id="public-subnet" value="Public Subnet&#xa;(10.0.0.0/24)" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=#D2691E;fillColor=#FFE6CC;verticalAlign=top;align=left;spacingLeft=30;fontColor=#D2691E;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="380" y="170" width="140" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Private Subnet A -->
+        <mxCell id="private-subnet-a" value="Private Subnet A&#xa;(10.0.1.0/24)&#xa;WorkSpaces ENIs" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=#248814;fillColor=#E9F3E6;verticalAlign=top;align=left;spacingLeft=30;fontColor=#248814;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="250" width="160" height="180" as="geometry" />
+        </mxCell>
+        
+        <!-- Private Subnet B -->
+        <mxCell id="private-subnet-b" value="Private Subnet B&#xa;(10.0.2.0/24)&#xa;WorkSpaces ENIs" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=#248814;fillColor=#E9F3E6;verticalAlign=top;align=left;spacingLeft=30;fontColor=#248814;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="560" y="250" width="160" height="180" as="geometry" />
+        </mxCell>
+        
+        <!-- Isolated Subnet A -->
+        <mxCell id="isolated-subnet-a" value="Isolated Subnet A&#xa;(10.0.3.0/24)&#xa;Managed AD" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=#BD7000;fillColor=#FFF2CC;verticalAlign=top;align=left;spacingLeft=30;fontColor=#BD7000;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="460" width="160" height="180" as="geometry" />
+        </mxCell>
+        
+        <!-- Isolated Subnet B -->
+        <mxCell id="isolated-subnet-b" value="Isolated Subnet B&#xa;(10.0.4.0/24)&#xa;Managed AD" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=10;fontStyle=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=#BD7000;fillColor=#FFF2CC;verticalAlign=top;align=left;spacingLeft=30;fontColor=#BD7000;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="560" y="460" width="160" height="180" as="geometry" />
+        </mxCell>
+        
+        <!-- Internet Gateway -->
+        <mxCell id="igw" value="Internet&#xa;Gateway" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#4D27AA;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=8;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.internet_gateway;" vertex="1" parent="1">
+          <mxGeometry x="434" y="120" width="32" height="32" as="geometry" />
+        </mxCell>
+        
+        <!-- NAT Gateway -->
+        <mxCell id="nat-gw" value="NAT&#xa;Gateway" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#4D27AA;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=8;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.nat_gateway;" vertex="1" parent="1">
+          <mxGeometry x="434" y="186" width="32" height="32" as="geometry" />
+        </mxCell>
+        
+        <!-- WorkSpaces ENI A -->
+        <mxCell id="ws-eni-a" value="WorkSpaces&#xa;ENI" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#4D27AA;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=8;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.elastic_network_interface;" vertex="1" parent="1">
+          <mxGeometry x="230" y="310" width="32" height="32" as="geometry" />
+        </mxCell>
+        
+        <!-- WorkSpaces ENI B -->
+        <mxCell id="ws-eni-b" value="WorkSpaces&#xa;ENI" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#4D27AA;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=8;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.elastic_network_interface;" vertex="1" parent="1">
+          <mxGeometry x="610" y="310" width="32" height="32" as="geometry" />
+        </mxCell>
+        
+        <!-- Managed AD A -->
+        <mxCell id="managed-ad-a" value="Managed AD&#xa;DC-A" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#4D27AA;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=8;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.managed_microsoft_ad;" vertex="1" parent="1">
+          <mxGeometry x="230" y="530" width="32" height="32" as="geometry" />
+        </mxCell>
+        
+        <!-- Managed AD B -->
+        <mxCell id="managed-ad-b" value="Managed AD&#xa;DC-B" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#4D27AA;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=8;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.managed_microsoft_ad;" vertex="1" parent="1">
+          <mxGeometry x="610" y="530" width="32" height="32" as="geometry" />
+        </mxCell>
+        
+        <!-- Transit Gateway -->
+        <mxCell id="tgw" value="Transit&#xa;Gateway" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#4D27AA;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=8;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.transit_gateway;" vertex="1" parent="1">
+          <mxGeometry x="400" y="400" width="40" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- AWS Services (Right Panel) -->
+        <!-- WorkSpaces Service -->
+        <mxCell id="workspaces-svc" value="Amazon&#xa;WorkSpaces" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.workspaces;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="200" width="60" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Service Catalog -->
+        <mxCell id="svc-catalog" value="AWS Service&#xa;Catalog" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.service_catalog;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="300" width="60" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- IAM -->
+        <mxCell id="iam" value="AWS IAM" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#C925D1;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.iam;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="400" width="60" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Systems Manager -->
+        <mxCell id="ssm" value="AWS Systems&#xa;Manager" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.systems_manager;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="500" width="60" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- CDK -->
+        <mxCell id="cdk" value="AWS CDK&#xa;(TypeScript)" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.cloud_development_kit;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="300" width="60" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- CloudFormation -->
+        <mxCell id="cfn" value="CloudFormation" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58534;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.cloudformation;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="400" width="60" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- External -->
+        <!-- End Users -->
+        <mxCell id="users" value="End Users&#xa;(Remote Workers)" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=10;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.user;" vertex="1" parent="1">
+          <mxGeometry x="20" y="320" width="40" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- On-Premises -->
+        <mxCell id="on-prem" value="On-Premises&#xa;Corporate Network" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="450" width="100" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Connection Lines -->
+        <!-- User to WorkSpaces -->
+        <mxCell id="conn-user-ws" style="endArrow=classic;html=1;rounded=0;strokeColor=#F58534;strokeWidth=2;" edge="1" parent="1" source="users" target="workspaces-svc">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="70" y="340" as="sourcePoint" />
+            <mxPoint x="1080" y="230" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="40" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Service Catalog to WorkSpaces -->
+        <mxCell id="conn-sc-ws" style="endArrow=classic;html=1;rounded=0;strokeColor=#F58534;strokeWidth=2;" edge="1" parent="1" source="svc-catalog" target="workspaces-svc">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1110" y="300" as="sourcePoint" />
+            <mxPoint x="1110" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- WorkSpaces to ENIs -->
+        <mxCell id="conn-ws-eni-a" style="endArrow=classic;html=1;rounded=0;strokeColor=#4D27AA;strokeWidth=2;" edge="1" parent="1" source="workspaces-svc" target="ws-eni-a">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1080" y="230" as="sourcePoint" />
+            <mxPoint x="270" y="326" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="950" y="230" />
+              <mxPoint x="950" y="326" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="conn-ws-eni-b" style="endArrow=classic;html=1;rounded=0;strokeColor=#4D27AA;strokeWidth=2;" edge="1" parent="1" source="workspaces-svc" target="ws-eni-b">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1080" y="230" as="sourcePoint" />
+            <mxPoint x="650" y="326" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="950" y="230" />
+              <mxPoint x="950" y="326" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- ENIs to Managed AD -->
+        <mxCell id="conn-eni-ad-a" style="endArrow=classic;html=1;rounded=0;strokeColor=#4D27AA;strokeWidth=2;" edge="1" parent="1" source="ws-eni-a" target="managed-ad-a">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="246" y="342" as="sourcePoint" />
+            <mxPoint x="246" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="conn-eni-ad-b" style="endArrow=classic;html=1;rounded=0;strokeColor=#4D27AA;strokeWidth=2;" edge="1" parent="1" source="ws-eni-b" target="managed-ad-b">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="626" y="342" as="sourcePoint" />
+            <mxPoint x="626" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- TGW connections -->
+        <mxCell id="conn-tgw-ad-a" style="endArrow=classic;html=1;rounded=0;strokeColor=#4D27AA;strokeWidth=2;" edge="1" parent="1" source="tgw" target="managed-ad-a">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="420" as="sourcePoint" />
+            <mxPoint x="262" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="conn-tgw-ad-b" style="endArrow=classic;html=1;rounded=0;strokeColor=#4D27AA;strokeWidth=2;" edge="1" parent="1" source="tgw" target="managed-ad-b">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="440" y="420" as="sourcePoint" />
+            <mxPoint x="610" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- TGW to On-Premises -->
+        <mxCell id="conn-tgw-onprem" style="endArrow=classic;html=1;rounded=0;strokeColor=#666666;strokeWidth=2;" edge="1" parent="1" source="on-prem" target="tgw">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="130" y="475" as="sourcePoint" />
+            <mxPoint x="390" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- CDK to Service Catalog -->
+        <mxCell id="conn-cdk-sc" style="endArrow=classic;html=1;rounded=0;strokeColor=#F58534;strokeWidth=2;" edge="1" parent="1" source="cdk" target="svc-catalog">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1200" y="330" as="sourcePoint" />
+            <mxPoint x="1150" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- CDK to CloudFormation -->
+        <mxCell id="conn-cdk-cfn" style="endArrow=classic;html=1;rounded=0;strokeColor=#F58534;strokeWidth=2;" edge="1" parent="1" source="cdk" target="cfn">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1230" y="360" as="sourcePoint" />
+            <mxPoint x="1230" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- IGW to NAT -->
+        <mxCell id="conn-igw-nat" style="endArrow=classic;html=1;rounded=0;strokeColor=#4D27AA;strokeWidth=2;" edge="1" parent="1" source="igw" target="nat-gw">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="450" y="152" as="sourcePoint" />
+            <mxPoint x="450" y="186" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Labels -->
+        <mxCell id="label-self-service" value="Self-Service&#xa;Provisioning" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#F58534;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="330" width="80" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="label-domain" value="Domain Join&#xa;&amp; GPO" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#4D27AA;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="460" y="470" width="70" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="label-iac" value="Infrastructure&#xa;as Code" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#F58534;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="350" width="70" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="label-ha" value="High Availability&#xa;Multi-AZ Design" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#147EBA;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="350" y="680" width="100" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="label-hybrid" value="Hybrid Connectivity&#xa;via Transit Gateway" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#666666;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="150" y="500" width="100" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
