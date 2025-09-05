@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 
 const About = () => {
   return (
@@ -27,10 +28,13 @@ const About = () => {
             className="w-32 h-32 mx-auto mb-8 relative"
           >
             <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 border-2 border-gradient-to-r from-blue-500/30 to-purple-500/30 flex items-center justify-center overflow-hidden">
-              <img
+              <Image
                 src="/portrait.jpeg"
                 alt="Christopher Wagner"
+                width={128}
+                height={128}
                 className="w-full h-full object-cover rounded-full"
+                priority
               />
             </div>
             {/* Animated ring */}

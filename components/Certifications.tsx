@@ -3,6 +3,7 @@
 import { Certification } from "@/types/certification";
 import { Award } from "lucide-react";
 import { motion } from "motion/react";
+import Image from "next/image";
 
 interface CertificationsProps {
   certifications: Certification[];
@@ -46,9 +47,11 @@ const Certifications = ({ certifications }: CertificationsProps) => {
             >
               <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-full flex items-center justify-center group-hover:from-blue-500/20 group-hover:to-cyan-500/20 transition-all overflow-hidden">
                 {cert.badge ? (
-                  <img
+                  <Image
                     src={cert.badge}
                     alt={`${cert.title} badge`}
+                    width={80}
+                    height={80}
                     className="w-full h-full object-contain"
                   />
                 ) : (
