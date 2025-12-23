@@ -1,6 +1,11 @@
 "use client";
 
-import { signIn, signUp, confirmSignUp, resendSignUpCode } from "aws-amplify/auth";
+import {
+  confirmSignUp,
+  resendSignUpCode,
+  signIn,
+  signUp,
+} from "aws-amplify/auth";
 import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
@@ -9,42 +14,43 @@ interface LoginFormProps {
   onAuthSuccess: () => void;
 }
 
-type AuthState = 'signin' | 'signup' | 'confirm';
+type AuthState = "signin" | "signup" | "confirm";
 
 export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
-  const [authState, setAuthState] = useState<AuthState>('signin');
+  const [authState, setAuthState] = useState<AuthState>("signin");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  
+  const [error, setError] = useState("");
+
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    givenName: '',
-    familyName: '',
-    confirmationCode: ''
+    email: "",
+    password: "",
+    confirmPassword: "",
+    givenName: "",
+    familyName: "",
+    confirmationCode: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    setError('');
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setError("");
   };
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
     try {
       await signIn({
         username: formData.email,
-        password: formData.password
+        password: formData.password,
       });
       onAuthSuccess();
-    } catch (error: any) {
-      setError(error.message || 'Sign in failed');
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      setError(message || "Sign in failed");
     } finally {
       setLoading(false);
     }
@@ -53,10 +59,10 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       setLoading(false);
       return;
     }
@@ -69,13 +75,14 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
           userAttributes: {
             email: formData.email,
             given_name: formData.givenName,
-            family_name: formData.familyName
-          }
-        }
+            family_name: formData.familyName,
+          },
+        },
       });
-      setAuthState('confirm');
-    } catch (error: any) {
-      setError(error.message || 'Sign up failed');
+      setAuthState("confirm");
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      setError(message || "Sign up failed");
     } finally {
       setLoading(false);
     }
@@ -84,21 +91,22 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
   const handleConfirmSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
     try {
       await confirmSignUp({
         username: formData.email,
-        confirmationCode: formData.confirmationCode
+        confirmationCode: formData.confirmationCode,
       });
       // Auto sign in after confirmation
       await signIn({
         username: formData.email,
-        password: formData.password
+        password: formData.password,
       });
       onAuthSuccess();
-    } catch (error: any) {
-      setError(error.message || 'Confirmation failed');
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      setError(message || "Confirmation failed");
     } finally {
       setLoading(false);
     }
@@ -107,9 +115,10 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
   const handleResendCode = async () => {
     try {
       await resendSignUpCode({ username: formData.email });
-      setError('Confirmation code resent to your email');
-    } catch (error: any) {
-      setError(error.message || 'Failed to resend code');
+      setError("Confirmation code resent to your email");
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      setError(message || "Failed to resend code");
     }
   };
 
@@ -127,14 +136,15 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
               <Lock className="w-8 h-8 text-white" />
             </div>
             <h2 className="text-2xl font-bold">
-              {authState === 'signin' && 'Welcome Back'}
-              {authState === 'signup' && 'Create Account'}
-              {authState === 'confirm' && 'Confirm Email'}
+              {authState === "signin" && "Welcome Back"}
+              {authState === "signup" && "Create Account"}
+              {authState === "confirm" && "Confirm Email"}
             </h2>
             <p className="text-muted-foreground">
-              {authState === 'signin' && 'Sign in to access the admin panel'}
-              {authState === 'signup' && 'Create your admin account'}
-              {authState === 'confirm' && 'Enter the confirmation code sent to your email'}
+              {authState === "signin" && "Sign in to access the admin panel"}
+              {authState === "signup" && "Create your admin account"}
+              {authState === "confirm" &&
+                "Enter the confirmation code sent to your email"}
             </p>
           </div>
 
@@ -144,7 +154,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
             </div>
           )}
 
-          {authState === 'signin' && (
+          {authState === "signin" && (
             <form onSubmit={handleSignIn} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium mb-2">Email</label>
@@ -163,11 +173,13 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Password</label>
+                <label className="block text-sm font-medium mb-2">
+                  Password
+                </label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                   <input
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
@@ -180,7 +192,11 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-3 text-muted-foreground hover:text-foreground"
                   >
-                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    {showPassword ? (
+                      <EyeOff className="w-5 h-5" />
+                    ) : (
+                      <Eye className="w-5 h-5" />
+                    )}
                   </button>
                 </div>
               </div>
@@ -190,14 +206,14 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                 disabled={loading}
                 className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all disabled:opacity-50"
               >
-                {loading ? 'Signing in...' : 'Sign In'}
+                {loading ? "Signing in..." : "Sign In"}
               </button>
 
               <p className="text-center text-sm text-muted-foreground">
-                Don't have an account?{' '}
+                Don&apos;t have an account?{" "}
                 <button
                   type="button"
-                  onClick={() => setAuthState('signup')}
+                  onClick={() => setAuthState("signup")}
                   className="text-blue-500 hover:underline"
                 >
                   Sign up
@@ -206,11 +222,13 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
             </form>
           )}
 
-          {authState === 'signup' && (
+          {authState === "signup" && (
             <form onSubmit={handleSignUp} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">First Name</label>
+                  <label className="block text-sm font-medium mb-2">
+                    First Name
+                  </label>
                   <div className="relative">
                     <User className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                     <input
@@ -225,7 +243,9 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Last Name</label>
+                  <label className="block text-sm font-medium mb-2">
+                    Last Name
+                  </label>
                   <input
                     type="text"
                     name="familyName"
@@ -255,11 +275,13 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Password</label>
+                <label className="block text-sm font-medium mb-2">
+                  Password
+                </label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                   <input
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
@@ -273,13 +295,19 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-3 text-muted-foreground hover:text-foreground"
                   >
-                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    {showPassword ? (
+                      <EyeOff className="w-5 h-5" />
+                    ) : (
+                      <Eye className="w-5 h-5" />
+                    )}
                   </button>
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Confirm Password</label>
+                <label className="block text-sm font-medium mb-2">
+                  Confirm Password
+                </label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
                   <input
@@ -299,14 +327,14 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                 disabled={loading}
                 className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all disabled:opacity-50"
               >
-                {loading ? 'Creating account...' : 'Create Account'}
+                {loading ? "Creating account..." : "Create Account"}
               </button>
 
               <p className="text-center text-sm text-muted-foreground">
-                Already have an account?{' '}
+                Already have an account?{" "}
                 <button
                   type="button"
-                  onClick={() => setAuthState('signin')}
+                  onClick={() => setAuthState("signin")}
                   className="text-blue-500 hover:underline"
                 >
                   Sign in
@@ -315,10 +343,12 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
             </form>
           )}
 
-          {authState === 'confirm' && (
+          {authState === "confirm" && (
             <form onSubmit={handleConfirmSignUp} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-2">Confirmation Code</label>
+                <label className="block text-sm font-medium mb-2">
+                  Confirmation Code
+                </label>
                 <input
                   type="text"
                   name="confirmationCode"
@@ -336,11 +366,11 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                 disabled={loading}
                 className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all disabled:opacity-50"
               >
-                {loading ? 'Confirming...' : 'Confirm Account'}
+                {loading ? "Confirming..." : "Confirm Account"}
               </button>
 
               <p className="text-center text-sm text-muted-foreground">
-                Didn't receive the code?{' '}
+                Didn&apos;t receive the code?{" "}
                 <button
                   type="button"
                   onClick={handleResendCode}
@@ -353,7 +383,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
               <p className="text-center text-sm text-muted-foreground">
                 <button
                   type="button"
-                  onClick={() => setAuthState('signin')}
+                  onClick={() => setAuthState("signin")}
                   className="text-blue-500 hover:underline"
                 >
                   Back to sign in

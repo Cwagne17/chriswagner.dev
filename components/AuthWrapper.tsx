@@ -10,7 +10,7 @@ interface AuthWrapperProps {
 }
 
 export default function AuthWrapper({ children }: AuthWrapperProps) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<unknown | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
     try {
       const currentUser = await getCurrentUser();
       setUser(currentUser);
-    } catch (error) {
+    } catch {
       setUser(null);
     } finally {
       setLoading(false);
