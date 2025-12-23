@@ -9,10 +9,5 @@ export const auth = defineAuth({
     email: true,
     webAuthn: true,
   },
-  multifactor: {
-    mode: 'OPTIONAL',
-    sms: true,
-    email: true,
-  },
   groups: ["ADMINS"]
 });
