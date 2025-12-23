@@ -47,20 +47,13 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 Back to Projects
               </Link>
 
-              <div className="flex items-center gap-4 mb-6">
-                <div
-                  className={`w-16 h-16 bg-gradient-to-br ${project.gradient} rounded-lg flex items-center justify-center`}
-                >
-                  <ExternalLink className="w-8 h-8 text-white" />
-                </div>
-                <div>
-                  <h1 className="text-3xl md:text-4xl font-bold mb-2">
-                    {project.title}
-                  </h1>
-                  <p className="text-muted-foreground text-lg">
-                    {project.description}
-                  </p>
-                </div>
+              <div className="mb-6">
+                <h1 className="text-3xl md:text-4xl font-bold mb-2">
+                  {project.title}
+                </h1>
+                <p className="text-muted-foreground text-lg">
+                  {project.description}
+                </p>
               </div>
 
               <div className="flex flex-wrap gap-2 mb-8">
@@ -74,35 +67,37 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 ))}
               </div>
 
-              <div className="grid md:grid-cols-3 gap-4 mb-8">
-                {project.caseStudy.resources?.github && (
-                  <a
-                    href={project.caseStudy.resources.github}
-                    className="flex items-center gap-2 p-4 bg-card rounded-lg border border-border hover:border-blue-500/20 transition-all"
-                  >
-                    <Github className="w-5 h-5 text-muted-foreground" />
-                    <span className="font-medium">View Code</span>
-                  </a>
-                )}
-                {project.caseStudy.resources?.demo && (
-                  <a
-                    href={project.caseStudy.resources.demo}
-                    className="flex items-center gap-2 p-4 bg-card rounded-lg border border-border hover:border-blue-500/20 transition-all"
-                  >
-                    <ExternalLink className="w-5 h-5 text-muted-foreground" />
-                    <span className="font-medium">Live Demo</span>
-                  </a>
-                )}
-                {project.caseStudy.resources?.download && (
-                  <a
-                    href={project.caseStudy.resources.download.url}
-                    className="flex items-center gap-2 p-4 bg-card rounded-lg border border-border hover:border-blue-500/20 transition-all"
-                  >
-                    <Download className="w-5 h-5 text-muted-foreground" />
-                    <span className="font-medium">Download</span>
-                  </a>
-                )}
-              </div>
+              {(project.caseStudy.resources?.github || project.caseStudy.resources?.demo || project.caseStudy.resources?.download) && (
+                <div className="grid md:grid-cols-3 gap-4 mb-8">
+                  {project.caseStudy.resources?.github && (
+                    <a
+                      href={project.caseStudy.resources.github}
+                      className="flex items-center gap-2 p-4 bg-card rounded-lg border border-border hover:border-blue-500/20 transition-all"
+                    >
+                      <Github className="w-5 h-5 text-muted-foreground" />
+                      <span className="font-medium">View Code</span>
+                    </a>
+                  )}
+                  {project.caseStudy.resources?.demo && (
+                    <a
+                      href={project.caseStudy.resources.demo}
+                      className="flex items-center gap-2 p-4 bg-card rounded-lg border border-border hover:border-blue-500/20 transition-all"
+                    >
+                      <ExternalLink className="w-5 h-5 text-muted-foreground" />
+                      <span className="font-medium">Live Demo</span>
+                    </a>
+                  )}
+                  {project.caseStudy.resources?.download && (
+                    <a
+                      href={project.caseStudy.resources.download.url}
+                      className="flex items-center gap-2 p-4 bg-card rounded-lg border border-border hover:border-blue-500/20 transition-all"
+                    >
+                      <Download className="w-5 h-5 text-muted-foreground" />
+                      <span className="font-medium">Download</span>
+                    </a>
+                  )}
+                </div>
+              )}
 
               <div
                 className={`p-4 bg-gradient-to-r ${project.gradient} bg-opacity-10 rounded-lg border border-border/50`}
@@ -152,36 +147,38 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         </section>
 
         {/* Architecture Section */}
-        <section className="py-16 px-6">
-          <div className="max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-                Architecture
-              </h2>
-              <div className="bg-card rounded-lg p-8 border border-border">
-                <div className="relative w-full h-96 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-lg flex items-center justify-center">
-                  {/* Placeholder for architecture diagram */}
-                  <div className="text-center">
-                    <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg flex items-center justify-center">
-                      <ExternalLink className="w-12 h-12 text-muted-foreground/50" />
+        {project.caseStudy.architecture?.image && (
+          <section className="py-16 px-6">
+            <div className="max-w-6xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+                  Architecture
+                </h2>
+                <div className="bg-card rounded-lg p-8 border border-border">
+                  <div className="relative w-full h-96 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-lg flex items-center justify-center">
+                    {/* Placeholder for architecture diagram */}
+                    <div className="text-center">
+                      <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg flex items-center justify-center">
+                        <ExternalLink className="w-12 h-12 text-muted-foreground/50" />
+                      </div>
+                      <p className="text-muted-foreground">
+                        {project.caseStudy.architecture.alt}
+                      </p>
+                      <p className="text-sm text-muted-foreground/60 mt-2">
+                        Architecture diagram would be displayed here
+                      </p>
                     </div>
-                    <p className="text-muted-foreground">
-                      {project.caseStudy.architecture.alt}
-                    </p>
-                    <p className="text-sm text-muted-foreground/60 mt-2">
-                      Architecture diagram would be displayed here
-                    </p>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+              </motion.div>
+            </div>
+          </section>
+        )}
 
         {/* Process Section */}
         <section className="py-16 px-6 bg-secondary/20">

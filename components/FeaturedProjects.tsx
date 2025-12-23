@@ -3,7 +3,7 @@
 import { Code2, ExternalLink } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
-import type { Project } from "../types/contact-form";
+import type { Project } from "../types/project";
 
 interface FeaturedProjectsProps {
   projects: Project[];

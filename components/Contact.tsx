@@ -89,11 +89,11 @@ const Contact = () => {
               <div className="space-y-4">
                 <div className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-blue-500/5 to-transparent border border-blue-500/10">
                   <Mail className="w-5 h-5 text-blue-500" />
-                  <span>chris@example.com</span>
+                  <span>christopherwagner0700@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-purple-500/5 to-transparent border border-purple-500/10">
                   <Phone className="w-5 h-5 text-purple-500" />
-                  <span>+1 (555) 123-4567</span>
+                  <span>+1 (443) 204-7483</span>
                 </div>
                 <div className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-cyan-500/5 to-transparent border border-cyan-500/10">
                   <MapPin className="w-5 h-5 text-cyan-500" />

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import { ThemeProvider } from "../components/theme-provider";
 import "./globals.css";
+import "../lib/amplify-client";
 
 const outfit = Outfit({
   subsets: ["latin"],
