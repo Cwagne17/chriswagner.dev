@@ -1,6 +1,6 @@
 "use client";
 
-import outputs from "@/amplify_ouputs.json";
+import outputs from "@/amplify_outputs.json";
 import Experience from "@/components/Experience";
 import { certifications } from "@/data/certifications";
 import { experiences } from "@/data/experiences";
