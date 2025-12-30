@@ -1,36 +1,68 @@
 "use client";
 
-import { getCurrentUser } from "aws-amplify/auth";
+import { AuthUser, fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import LoginForm from "./LoginForm";
 
 interface AuthWrapperProps {
   children: React.ReactNode;
+  requiredGroup?: string | null;
 }
 
-export default function AuthWrapper({ children }: AuthWrapperProps) {
-  const [user, setUser] = useState<unknown | null>(null);
+export default function AuthWrapper({
+  children,
+  requiredGroup = null,
+}: AuthWrapperProps) {
+  const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isAuthorized, setIsAuthorized] = useState(true);
 
-  useEffect(() => {
-    checkAuthState();
-  }, []);
-
-  const checkAuthState = async () => {
+  const checkAuthState = useCallback(async () => {
     try {
-      const currentUser = await getCurrentUser();
-      setUser(currentUser);
-    } catch {
+      console.log("🔍 Checking authentication state...");
+      const currentUser = await getCurrentUser().catch(() => null);
+      console.log("✅ User (if any):", currentUser);
+      setUser((currentUser as AuthUser) ?? null);
+
+      // Prefer using fetchAuthSession to reliably read token payloads
+      let session = await fetchAuthSession().catch(() => null);
+      let groups = (session?.tokens?.accessToken?.payload?.["cognito:groups"] ?? []) as string[];
+
+      console.debug("AuthWrapper: session:", session);
+      console.debug("AuthWrapper: initial groups:", groups);
+
+      // If no groups are present, try forcing a refresh (useful after adding a user to a group)
+      if (requiredGroup && (!groups || groups.length === 0)) {
+        console.debug("AuthWrapper: no groups found — attempting forceRefresh to refresh tokens");
+        session = await fetchAuthSession({ forceRefresh: true }).catch(() => null);
+        groups = (session?.tokens?.accessToken?.payload?.["cognito:groups"] ?? []) as string[];
+        console.debug("AuthWrapper: groups after forceRefresh:", groups);
+      }
+
+      if (requiredGroup) {
+        if (!groups || groups.length === 0) {
+          setIsAuthorized(false);
+        } else {
+          const hasGroup = groups.includes(requiredGroup);
+          setIsAuthorized(hasGroup);
+        }
+      }
+    } catch (error) {
+      console.log("🔒 User not authenticated:", error);
       setUser(null);
     } finally {
       setLoading(false);
     }
-  };
+  }, [requiredGroup]);
 
   const handleAuthSuccess = () => {
-    checkAuthState();
+    void checkAuthState();
   };
+
+  useEffect(() => {
+    void checkAuthState();
+  }, [checkAuthState]);
 
   if (loading) {
     return (
@@ -46,6 +78,19 @@ export default function AuthWrapper({ children }: AuthWrapperProps) {
 
   if (!user) {
     return <LoginForm onAuthSuccess={handleAuthSuccess} />;
+  }
+
+  if (!isAuthorized) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="bg-card p-8 rounded shadow">
+          <h2 className="text-lg font-semibold">Unauthorized</h2>
+          <p className="text-sm text-muted-foreground mt-2">
+            You do not have permission to view this page.
+          </p>
+        </div>
+      </div>
+    );
   }
 
   return <>{children}</>;
