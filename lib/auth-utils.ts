@@ -1,60 +1,27 @@
-import { fetchUserAttributes, getCurrentUser } from 'aws-amplify/auth';
+import { fetchAuthSession } from "aws-amplify/auth";
+import { AuthGroups } from "./auth-groups";
 
-export interface UserWithGroups {
-  username: string;
-  userId: string;
-  signInDetails?: {
-    loginId?: string;
-  };
-  groups: string[];
-}
-
-/**
- * Get current user with their groups
- */
-export async function getCurrentUserWithGroups(): Promise<UserWithGroups | null> {
-  try {
-    const user = await getCurrentUser();
-    const attributes = await fetchUserAttributes();
-    
-    // Extract groups from cognito:groups attribute
-    const groupsString = attributes['cognito:groups'] || '';
-    const groups = groupsString ? groupsString.split(',') : ['USERS']; // Default to USERS group
-    
-    return {
-      username: user.username,
-      userId: user.userId,
-      signInDetails: user.signInDetails,
-      groups
-    };
-  } catch (error) {
-    console.error('Error fetching user with groups:', error);
-    return null;
-  }
+export async function getUserGroups(): Promise<string[]> {
+  const session = await fetchAuthSession({ forceRefresh: true });
+  const groups = (session.tokens?.accessToken.payload['cognito:groups'] || []) as string[];
+  return groups;
 }
 
 /**
  * Check if current user is an admin
  */
-export async function isAdmin(): Promise<boolean> {
-  const user = await getCurrentUserWithGroups();
-  return user?.groups.includes('ADMINS') || false;
+export async function isAdmin(required: boolean = false): Promise<boolean> {
+  const isAdmin = await isInGroup(AuthGroups.ADMINS);
+  if (required && !isAdmin) {
+    throw new Error('Admin access required');
+  }
+  return isAdmin;
 }
 
 /**
  * Check if current user belongs to a specific group
  */
-export async function isInGroup(groupName: string): Promise<boolean> {
-  const user = await getCurrentUserWithGroups();
-  return user?.groups.includes(groupName) || false;
-}
-
-/**
- * Require admin access - throws error if not admin
- */
-export async function requireAdmin(): Promise<void> {
-  const admin = await isAdmin();
-  if (!admin) {
-    throw new Error('Admin access required');
-  }
+export async function isInGroup(groupName: AuthGroups): Promise<boolean> {
+  const groups = await getUserGroups();
+  return groups.includes(groupName);
 }

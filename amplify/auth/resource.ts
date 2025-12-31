@@ -1,4 +1,5 @@
 import { defineAuth, secret } from '@aws-amplify/backend';
+import { AuthGroups } from '../../lib/auth-groups';
 
 /**
  * Define and configure your auth resource
@@ -25,7 +26,7 @@ export const auth = defineAuth({
     }
   },
   // Ensure a general USERS group exists and avoid automated admin invites.
-  groups: ["USERS", "ADMINS"],
+  groups: [AuthGroups.ADMINS],
   // Remove automatic admin invite messaging to prevent accidental creation of admin accounts.
   // Admin accounts should be created intentionally via the console or an invite process.
 });

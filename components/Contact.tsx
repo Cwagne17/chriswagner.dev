@@ -1,9 +1,13 @@
 "use client";
 
+import { generateClient } from "aws-amplify/data";
 import { Github, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
+import type { Schema } from "../amplify/data/resource";
 import type { ContactFormData, ContactFormErrors } from "../types/contact-form";
+
+const client = generateClient<Schema>();
 
 const Contact = () => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -12,6 +16,8 @@ const Contact = () => {
     message: "",
   });
   const [errors, setErrors] = useState<ContactFormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const validateForm = () => {
     const newErrors: ContactFormErrors = {};
@@ -36,12 +42,26 @@ const Contact = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Form submitted:", formData);
-      alert("Thank you for your message! I'll get back to you soon.");
-      setFormData({ name: "", email: "", message: "" });
+      setIsSubmitting(true);
+      try {
+        await client.models.Contact.create({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          status: "NEW"
+        });
+        setSubmitSuccess(true);
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => setSubmitSuccess(false), 5000); // Hide success message after 5 seconds
+      } catch (error) {
+        console.error("Error submitting contact form:", error);
+        alert("There was an error sending your message. Please try again.");
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -200,11 +220,18 @@ const Contact = () => {
               )}
             </div>
 
+            {submitSuccess && (
+              <div className="p-3 bg-green-500/10 text-green-500 rounded-lg text-sm text-center">
+                Thank you for your message! I'll get back to you soon.
+              </div>
+            )}
+
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 px-6 rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+              disabled={isSubmitting}
+              className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 px-6 rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Send Message
+              {isSubmitting ? "Sending..." : "Send Message"}
               <Send className="w-4 h-4" />
             </button>
           </motion.form>

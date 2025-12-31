@@ -3,6 +3,7 @@
 import AdminLayout from "@/components/admin/AdminLayout";
 import { BarChart3, Eye, Globe, TrendingUp, Users } from "lucide-react";
 import AuthWrapper from "../../../components/AuthWrapper";
+import { AuthGroups } from "../../../lib/auth-groups";
 
 function AnalyticsPage() {
   // Mock analytics data - in real app this would come from your analytics service
@@ -269,7 +270,7 @@ function AnalyticsPage() {
 
 export default function AdminAnalyticsPage() {
   return (
-    <AuthWrapper requiredGroup="ADMINS">
+    <AuthWrapper requiredGroup={AuthGroups.ADMINS}>
       <AnalyticsPage />
     </AuthWrapper>
   );

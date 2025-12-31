@@ -3,6 +3,7 @@
 import AdminLayout from "@/components/admin/AdminLayout";
 import { Edit, Eye, Plus, Trash2 } from "lucide-react";
 import AuthWrapper from "../../../components/AuthWrapper";
+import { AuthGroups } from "../../../lib/auth-groups";
 
 function ProjectsPage() {
   // Mock data - in real app this would come from your data source
@@ -124,7 +125,7 @@ function ProjectsPage() {
 
 export default function AdminProjectsPage() {
   return (
-    <AuthWrapper requiredGroup="ADMINS">
+    <AuthWrapper requiredGroup={AuthGroups.ADMINS}>
       <ProjectsPage />
     </AuthWrapper>
   );

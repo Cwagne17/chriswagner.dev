@@ -54,18 +54,6 @@ const sidebarItems: SidebarItem[] = [
     icon: <Mail className="w-5 h-5" />,
     href: "/admin/requests",
     badge: "3"
-  },
-  {
-    id: "analytics",
-    label: "Analytics",
-    icon: <BarChart3 className="w-5 h-5" />,
-    href: "/admin/analytics"
-  },
-  {
-    id: "settings",
-    label: "Settings",
-    icon: <Settings className="w-5 h-5" />,
-    href: "/admin/settings"
   }
 ];
 

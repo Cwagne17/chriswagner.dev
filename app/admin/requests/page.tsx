@@ -3,6 +3,7 @@
 import AdminLayout from "@/components/admin/AdminLayout";
 import { CheckCircle, Clock, Eye, Mail, User } from "lucide-react";
 import AuthWrapper from "../../../components/AuthWrapper";
+import { AuthGroups } from "../../../lib/auth-groups";
 
 function ServiceRequestsPage() {
   // Mock data - in real app this would come from your data source
@@ -215,7 +216,7 @@ function ServiceRequestsPage() {
 
 export default function AdminServiceRequestsPage() {
   return (
-    <AuthWrapper requiredGroup="ADMINS">
+    <AuthWrapper requiredGroup={AuthGroups.ADMINS}>
       <ServiceRequestsPage />
     </AuthWrapper>
   );

@@ -6,6 +6,7 @@ import {
   resendSignUpCode,
   signIn,
   signInWithRedirect,
+  signOut,
   signUp,
 } from "aws-amplify/auth";
 import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
@@ -13,7 +14,7 @@ import { motion } from "motion/react";
 import { useState } from "react";
 
 interface LoginFormProps {
-  onAuthSuccess: () => void;
+  readonly onAuthSuccess: () => void;
 }
 
 type AuthState = "signin" | "signup" | "confirm";
@@ -45,12 +46,15 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
     setError("");
 
     try {
-      // If there's already a signed-in user, do not call signIn again
-      const existingUser = await getCurrentUser().catch(() => null);
-      if (existingUser && existingUser.userId && existingUser.username) {
+      // If the user is already signed in, skip signIn call
+      const loginId = (await getCurrentUser().catch(() => null))?.signInDetails
+        ?.loginId;
+      if (loginId === formData.email) {
         onAuthSuccess();
         return;
       }
+
+      await signOut();
       await signIn({
         username: formData.email,
         password: formData.password,

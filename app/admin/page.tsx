@@ -1,22 +1,21 @@
 "use client";
 
 import {
-  BarChart3,
   FileText,
   FolderOpen,
   Mail,
   TrendingUp,
-  Users,
 } from "lucide-react";
 import Link from "next/link";
 import AdminLayout from "../../components/admin/AdminLayout";
 import AuthWrapper from "../../components/AuthWrapper";
+import { AuthGroups } from "../../lib/auth-groups";
 
 function AdminDashboard() {
   return (
     <AdminLayout title="Overview" subtitle="Welcome to your admin dashboard">
       {/* Quick Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-card rounded-lg p-6 border border-border">
           <div className="flex items-center justify-between">
             <div>
@@ -59,21 +58,6 @@ function AdminDashboard() {
           </div>
           <p className="text-xs text-muted-foreground mt-2">
             Awaiting response
-          </p>
-        </div>
-
-        <div className="bg-card rounded-lg p-6 border border-border">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-muted-foreground">
-                Site Views
-              </p>
-              <p className="text-2xl font-bold">2.4k</p>
-            </div>
-            <TrendingUp className="w-8 h-8 text-purple-500" />
-          </div>
-          <p className="text-xs text-muted-foreground mt-2">
-            +12% from last week
           </p>
         </div>
       </div>
@@ -124,36 +108,6 @@ function AdminDashboard() {
             </div>
           </div>
         </Link>
-
-        <Link href="/admin/analytics">
-          <div className="bg-card rounded-lg p-6 border border-border hover:border-purple-500/50 transition-all cursor-pointer group">
-            <div className="flex items-center gap-3 mb-4">
-              <BarChart3 className="w-8 h-8 text-purple-500" />
-              <h3 className="font-semibold text-lg">Analytics</h3>
-            </div>
-            <p className="text-muted-foreground text-sm mb-4">
-              View site performance and user insights
-            </p>
-            <div className="text-purple-500 text-sm font-medium group-hover:underline">
-              View Analytics →
-            </div>
-          </div>
-        </Link>
-
-        <Link href="/admin/settings">
-          <div className="bg-card rounded-lg p-6 border border-border hover:border-gray-500/50 transition-all cursor-pointer group">
-            <div className="flex items-center gap-3 mb-4">
-              <Users className="w-8 h-8 text-gray-500" />
-              <h3 className="font-semibold text-lg">Settings</h3>
-            </div>
-            <p className="text-muted-foreground text-sm mb-4">
-              Configure site settings and preferences
-            </p>
-            <div className="text-gray-500 text-sm font-medium group-hover:underline">
-              Manage Settings →
-            </div>
-          </div>
-        </Link>
       </div>
 
       {/* Recent Activity */}
@@ -199,7 +153,7 @@ function AdminDashboard() {
 
 export default function AdminPage() {
   return (
-    <AuthWrapper requiredGroup="ADMINS">
+    <AuthWrapper requiredGroup={AuthGroups.ADMINS}>
       <AdminDashboard />
     </AuthWrapper>
   );
