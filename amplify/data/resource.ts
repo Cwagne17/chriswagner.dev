@@ -22,39 +22,39 @@ const schema = a.schema({
         title: a.string().required(),
         description: a.string().required(),
         technologies: a.string().array().required(),
-        link: a.string().required(),
-        metrics: a.string().required(),
-        gradient: a.string().required(),
+        metrics: a.string(),
         slug: a.string().required(),
-        challengeContent: a.string(),
-        solutionContent: a.string(),
-        processSteps: a.string().array(),
+        // STAR Model fields
+        situation: a.string(),
+        task: a.string(),
+        actions: a.string().array(),
         results: a.string().array(),
-        architectureImage: a.string(),
-        architectureAlt: a.string(),
+        // Assets - stored as JSON string
+        assets: a.json(),
+        // Optional links
         githubUrl: a.string(),
-        downloadTitle: a.string(),
-        downloadUrl: a.string(),
-        downloadDescription: a.string(),
-        demoUrl: a.string(),
+        // Status and timestamp
         status: a.enum([Status.DRAFT, Status.PUBLISHED, Status.ARCHIVED]),
+        updatedAt: a.datetime(),
     }).authorization(allow => [allow.group(AuthGroups.ADMINS)]),
 
     Blog: a.model({
-        date: a.date(),
-        title: a.string(),
-        slug: a.string(),
-        content: a.string(),
+        title: a.string().required(),
+        slug: a.string().required(),
+        content: a.string().required(),
+        tags: a.string().array(),
         status: a.enum([Status.DRAFT, Status.PUBLISHED, Status.ARCHIVED]),
+        updatedAt: a.datetime(),
     }).authorization(allow => [allow.group(AuthGroups.ADMINS)]),
 
     // Contact message from contact form on the home page
     Contact: a.model({
-        name: a.string(),
-        email: a.string(),
-        message: a.string(),
+        name: a.string().required(),
+        email: a.email().required(),
+        message: a.string().required(),
         status: a.enum([Status.NEW, Status.IN_PROGRESS, Status.DONE]),
-    }).authorization(allow => [allow.publicApiKey()]),
+        createdAt: a.datetime(),
+    }).authorization(allow => [allow.publicApiKey(), allow.group(AuthGroups.ADMINS)]),
 });
 
 // Used for code completion / highlighting when making requests from frontend

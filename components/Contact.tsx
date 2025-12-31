@@ -47,11 +47,13 @@ const Contact = () => {
     if (validateForm()) {
       setIsSubmitting(true);
       try {
+        const now = new Date().toISOString();
         await client.models.Contact.create({
           name: formData.name,
           email: formData.email,
           message: formData.message,
-          status: "NEW"
+          status: Status.NEW,
+          createdAt: now,
         });
         setSubmitSuccess(true);
         setFormData({ name: "", email: "", message: "" });
