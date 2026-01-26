@@ -1,6 +1,7 @@
 "use client";
 
 import AdminLayout from "@/components/admin/AdminLayout";
+import { Button, IconButton } from "@/components/ui";
 import { Edit, Eye, Plus, Trash2 } from "lucide-react";
 import AuthWrapper from "../../../components/AuthWrapper";
 import { AuthGroups } from "../../../lib/auth-groups";
@@ -36,10 +37,9 @@ function ProjectsPage() {
 
   const actions = (
     <div className="flex items-center gap-3">
-      <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2">
-        <Plus className="w-4 h-4" />
+      <Button leftIcon={Plus}>
         New Project
-      </button>
+      </Button>
     </div>
   );
 
@@ -102,15 +102,24 @@ function ProjectsPage() {
                   </td>
                   <td className="p-6">
                     <div className="flex items-center gap-2">
-                      <button className="p-2 hover:bg-muted rounded-lg text-muted-foreground hover:text-foreground">
-                        <Eye className="w-4 h-4" />
-                      </button>
-                      <button className="p-2 hover:bg-muted rounded-lg text-muted-foreground hover:text-foreground">
-                        <Edit className="w-4 h-4" />
-                      </button>
-                      <button className="p-2 hover:bg-muted rounded-lg text-muted-foreground hover:text-red-500">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
+                      <IconButton
+                        icon={Eye}
+                        variant="ghost"
+                        size="icon"
+                        aria-label="View Project"
+                      />
+                      <IconButton
+                        icon={Edit}
+                        variant="ghost"
+                        size="icon"
+                        aria-label="Edit Project"
+                      />
+                      <IconButton
+                        icon={Trash2}
+                        variant="danger"
+                        size="icon"
+                        aria-label="Delete Project"
+                      />
                     </div>
                   </td>
                 </tr>
