@@ -1,12 +1,16 @@
-import { Status } from "@/amplify/data/resource";
+// Status enum for blog post publication state
+// Note: This must match the Status enum in amplify/data/resource.ts
+export enum BlogStatus {
+    DRAFT = 'DRAFT',
+    PUBLISHED = 'PUBLISHED',
+    ARCHIVED = 'ARCHIVED',
+}
 
 export const BLOG_STATUS = {
-    DRAFT: Status.DRAFT,
-    PUBLISHED: Status.PUBLISHED,
-    ARCHIVED: Status.ARCHIVED,
+    DRAFT: BlogStatus.DRAFT,
+    PUBLISHED: BlogStatus.PUBLISHED,
+    ARCHIVED: BlogStatus.ARCHIVED,
 } as const;
-
-export type BlogStatus = Status.DRAFT | Status.PUBLISHED | Status.ARCHIVED;
 
 export interface Blog {
     id?: string;
@@ -14,6 +18,6 @@ export interface Blog {
     slug: string;
     content: string;
     tags?: string[];
-    status: BlogStatus;
+    status: BlogStatus.DRAFT | BlogStatus.PUBLISHED | BlogStatus.ARCHIVED;
     updatedAt?: string;
 }

@@ -2,7 +2,7 @@
 
 import type { Schema } from "@/amplify/data/resource";
 import { Status } from "@/amplify/data/resource";
-import { Project } from "@/types/project";
+import { getProjectGradient, Project } from "@/types/project";
 import { generateClient } from "aws-amplify/data";
 import { ArrowLeft, Code2, ExternalLink } from "lucide-react";
 import { motion } from "motion/react";

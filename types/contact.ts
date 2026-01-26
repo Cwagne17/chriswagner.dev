@@ -1,18 +1,22 @@
-import { Status } from "@/amplify/data/resource";
+// Status enum for tracking progress of contact messages
+// Note: This must match the Status enum in amplify/data/resource.ts
+export enum ContactStatus {
+    NEW = 'NEW',
+    IN_PROGRESS = 'IN_PROGRESS',
+    DONE = 'DONE',
+}
 
 export const CONTACT_STATUS = {
-    NEW: Status.NEW,
-    IN_PROGRESS: Status.IN_PROGRESS,
-    DONE: Status.DONE,
+    NEW: ContactStatus.NEW,
+    IN_PROGRESS: ContactStatus.IN_PROGRESS,
+    DONE: ContactStatus.DONE,
 } as const;
-
-export type ContactStatus = Status.NEW | Status.IN_PROGRESS | Status.DONE;
 
 export interface Contact {
     id?: string;
     name: string;
     email: string;
     message: string;
-    status: ContactStatus;
+    status: ContactStatus.NEW | ContactStatus.IN_PROGRESS | ContactStatus.DONE;
     createdAt?: string;
 }
