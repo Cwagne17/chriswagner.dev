@@ -3,7 +3,8 @@
 import { ExternalLink } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
-import { ProjectCard, Button } from "./ui";
+import { Button } from "./ui";
+import { ProjectCarousel } from "./hero/ProjectCarousel";
 import type { Project } from "../types/project";
 
 interface FeaturedProjectsProps {
@@ -30,45 +31,15 @@ const FeaturedProjects = ({ projects }: FeaturedProjectsProps) => {
           <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
         </motion.div>
 
-        {/* Asymmetric Grid: 1 large + 2 smaller */}
-        <div className="grid lg:grid-cols-2 gap-8">
-          {/* Large Featured Project */}
-          {projects[0] && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="lg:row-span-2"
-            >
-              <ProjectCard
-                title={projects[0].title}
-                description={projects[0].description}
-                technologies={projects[0].technologies}
-                impact={projects[0].metrics}
-                href={`/projects/${projects[0].slug}`}
-                index={0}
-                thumbnail
-                featured
-              />
-            </motion.div>
-          )}
-
-          {/* Smaller Projects */}
-          <div className="grid gap-8">
-            {projects.slice(1, 3).map((project, index) => (
-              <ProjectCard
-                key={index + 1}
-                title={project.title}
-                description={project.description}
-                technologies={project.technologies}
-                impact={project.metrics}
-                href={`/projects/${project.slug}`}
-                index={index + 1}
-              />
-            ))}
-          </div>
-        </div>
+        {/* Project Carousel */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <ProjectCarousel projects={projects} />
+        </motion.div>
 
         {/* See All Projects Button */}
         <motion.div
