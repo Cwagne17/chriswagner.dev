@@ -1,14 +1,73 @@
 "use client";
 
-import { motion } from "motion/react";
+import { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { SectionHeader, ProjectCard } from "@/components/ui";
+import { CaseStudyCard } from "@/components/ui";
+import { SearchAndFilters } from "@/components/SearchAndFilters";
+import { FilterChips } from "@/components/FilterChips";
 import { allProjects } from "../../data/projects";
+import {
+  categorizeProject,
+  extractMetrics,
+  getCategoryColor,
+  filterAndSearchProjects,
+  sortProjects,
+  type ProjectCategory,
+  type Technology,
+  type SortOption,
+} from "@/lib/projectUtils";
 
 export default function ProjectsPage() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState<ProjectCategory[]>([]);
+  const [selectedTechnologies, setSelectedTechnologies] = useState<Technology[]>([]);
+  const [sortBy, setSortBy] = useState<SortOption>("recent");
+
+  // Filter, search, and sort projects
+  const filteredProjects = useMemo(() => {
+    let result = filterAndSearchProjects(allProjects, {
+      categories: selectedCategories.length > 0 ? selectedCategories : undefined,
+      technologies: selectedTechnologies.length > 0 ? selectedTechnologies : undefined,
+      searchQuery: searchQuery || undefined,
+    });
+    result = sortProjects(result, sortBy);
+    return result;
+  }, [searchQuery, selectedCategories, selectedTechnologies, sortBy]);
+
+  const handleCategoryToggle = (category: ProjectCategory) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((c) => c !== category)
+        : [...prev, category]
+    );
+  };
+
+  const handleTechnologyToggle = (technology: Technology) => {
+    setSelectedTechnologies((prev) =>
+      prev.includes(technology)
+        ? prev.filter((t) => t !== technology)
+        : [...prev, technology]
+    );
+  };
+
+  const handleRemoveCategory = (category: ProjectCategory) => {
+    setSelectedCategories((prev) => prev.filter((c) => c !== category));
+  };
+
+  const handleRemoveTechnology = (technology: Technology) => {
+    setSelectedTechnologies((prev) => prev.filter((t) => t !== technology));
+  };
+
+  const handleClearAll = () => {
+    setSearchQuery("");
+    setSelectedCategories([]);
+    setSelectedTechnologies([]);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -21,48 +80,122 @@ export default function ProjectsPage() {
             <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
           </div>
 
-          <div className="max-w-6xl mx-auto relative">
+          <div className="max-w-7xl mx-auto relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-16"
             >
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 text-muted-foreground hover:text-blue-500 transition-colors mb-8"
+                className="inline-flex items-center gap-2 text-muted-foreground hover:text-blue-500 transition-colors mb-6"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Back to Home
               </Link>
-              
-              <SectionHeader
-                eyebrow="Portfolio"
-                title="All Projects"
-                subtitle="Explore my complete portfolio of cloud infrastructure projects, DevOps implementations, and enterprise solutions."
-                align="center"
-                index="01"
-              />
+
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+                Case Studies
+              </h1>
             </motion.div>
           </div>
         </section>
 
-        {/* Projects Grid */}
-        <section className="py-20 px-6 bg-secondary/20 relative">
+        {/* Search, Filters & Grid */}
+        <section className="py-16 px-6 relative">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-              {allProjects.map((project, index) => (
-                <ProjectCard
-                  key={index}
-                  title={project.title}
-                  description={project.description}
-                  technologies={project.technologies}
-                  impact={project.metrics}
-                  href={`/projects/${project.slug}`}
-                  index={index}
-                />
-              ))}
-            </div>
+            {/* Search & Filters */}
+            <SearchAndFilters
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+              selectedCategories={selectedCategories}
+              selectedTechnologies={selectedTechnologies}
+              onCategoryToggle={handleCategoryToggle}
+              onTechnologyToggle={handleTechnologyToggle}
+              sortBy={sortBy}
+              onSortChange={setSortBy}
+            />
+
+            {/* Active Filters Chips */}
+            <AnimatePresence>
+              <FilterChips
+                selectedCategories={selectedCategories}
+                selectedTechnologies={selectedTechnologies}
+                onRemoveCategory={handleRemoveCategory}
+                onRemoveTechnology={handleRemoveTechnology}
+                onClearAll={handleClearAll}
+              />
+            </AnimatePresence>
+
+            {/* Results Count */}
+            {(searchQuery || selectedCategories.length > 0 || selectedTechnologies.length > 0) && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-sm text-muted-foreground mb-6"
+              >
+                Found {filteredProjects.length} case {filteredProjects.length === 1 ? "study" : "studies"}
+              </motion.p>
+            )}
+
+            {/* Case Studies Grid */}
+            <AnimatePresence mode="wait">
+              {filteredProjects.length > 0 ? (
+                <motion.div
+                  key="grid"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6"
+                >
+                  {filteredProjects.map((project, index) => {
+                    const categories = categorizeProject(project);
+                    const { primary, statPills } = extractMetrics(project.metrics);
+                    const categoryColor = getCategoryColor(categories[0]);
+                    const primaryTopic = categories[0];
+
+                    // Format metrics for display
+                    const metricsDisplay = statPills.slice(0, 2).map((pill) => ({
+                      label: pill.label,
+                      value: primary.split(" ")[0], // Use number from primary metric
+                    }));
+
+                    return (
+                      <CaseStudyCard
+                        key={project.slug}
+                        title={project.title}
+                        metrics={metricsDisplay.length > 0 ? metricsDisplay : [{ label: primary, value: "" }]}
+                        technologies={project.technologies.slice(0, 10)}
+                        thumbnailImage={project.caseStudy?.architecture?.image}
+                        thumbnailAlt={project.caseStudy?.architecture?.alt}
+                        topicBadge={primaryTopic}
+                        topicColor={categoryColor}
+                        href={`/projects/${project.slug}`}
+                        index={index}
+                      />
+                    );
+                  })}
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="empty"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="py-16 text-center"
+                >
+                  <p className="text-muted-foreground mb-6 text-lg">
+                    No case studies found matching your filters.
+                  </p>
+                  <button
+                    onClick={handleClearAll}
+                    className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors"
+                  >
+                    Clear all filters
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </section>
       </main>
