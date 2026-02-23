@@ -42,15 +42,12 @@ const Certifications = ({ certifications }: CertificationsProps) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group relative bg-card rounded-lg border border-border p-6 hover:border-blue-500/50 transition-all duration-300 overflow-hidden"
+              className="group relative bg-card rounded-lg border border-border p-6 transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-md overflow-hidden"
             >
-              {/* Background gradient on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
               {/* Content */}
               <div className="relative z-10">
                 {/* Badge/Icon Container */}
-                <div className="w-16 h-16 mb-4 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg flex items-center justify-center group-hover:from-blue-500/20 group-hover:to-purple-500/20 transition-all duration-300 overflow-hidden border border-blue-500/20 group-hover:border-blue-500/40">
+                <div className="w-16 h-16 mb-4 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-[1.02] overflow-hidden border border-blue-500/20">
                   {cert.badge ? (
                     <Image
                       src={cert.badge}
@@ -65,7 +62,7 @@ const Certifications = ({ certifications }: CertificationsProps) => {
                 </div>
 
                 {/* Title */}
-                <h3 className="font-semibold text-base text-foreground mb-2 group-hover:text-blue-500 transition-colors duration-300">
+                <h3 className="font-semibold text-base text-foreground mb-2">
                   {cert.title}
                 </h3>
 
@@ -75,14 +72,11 @@ const Certifications = ({ certifications }: CertificationsProps) => {
                 </p>
 
                 {/* External Link Indicator */}
-                <div className="flex items-center gap-2 text-blue-500 group-hover:gap-3 transition-all duration-300 text-sm font-medium">
+                <div className="flex items-center gap-2 text-blue-500 text-sm font-medium">
                   <span>View Credential</span>
-                  <ExternalLink className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                  <ExternalLink className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
               </div>
-
-              {/* Accent corner */}
-              <div className="absolute top-0 right-0 w-12 h-12 bg-gradient-to-br from-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.a>
           ))}
         </div>

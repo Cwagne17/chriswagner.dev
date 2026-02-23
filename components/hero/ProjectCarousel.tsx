@@ -73,17 +73,20 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
             >
               {/* Diagram Area - Largest Element */}
               <div className="flex-1 flex items-center justify-center">
-                <div className="w-full h-full bg-secondary border border-border/50 flex items-center justify-center group-hover:border-border transition-colors">
-                  <div className="text-center">
-                    <div className="text-muted-foreground text-sm mb-2">Architecture Diagram</div>
-                    {currentProject.caseStudy?.architecture?.image && (
+                <div className="relative w-full h-full bg-secondary overflow-hidden">
+                  {currentProject.caseStudy?.architecture?.image ? (
+                    <>
                       <img
                         src={currentProject.caseStudy.architecture.image}
                         alt={currentProject.caseStudy.architecture.alt}
-                        className="max-w-xs max-h-48 mx-auto"
+                        className="w-full h-full object-cover"
                       />
-                    )}
-                  </div>
+                    </>
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-muted-foreground/60">
+                      Architecture Diagram
+                    </div>
+                  )}
                 </div>
               </div>
 

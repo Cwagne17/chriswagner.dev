@@ -15,28 +15,23 @@ import {
   extractMetrics,
   getCategoryColor,
   filterAndSearchProjects,
-  sortProjects,
   type ProjectCategory,
   type Technology,
-  type SortOption,
 } from "@/lib/projectUtils";
 
 export default function ProjectsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<ProjectCategory[]>([]);
   const [selectedTechnologies, setSelectedTechnologies] = useState<Technology[]>([]);
-  const [sortBy, setSortBy] = useState<SortOption>("recent");
 
-  // Filter, search, and sort projects
+  // Filter and search projects (project data order is most recent first)
   const filteredProjects = useMemo(() => {
-    let result = filterAndSearchProjects(allProjects, {
+    return filterAndSearchProjects(allProjects, {
       categories: selectedCategories.length > 0 ? selectedCategories : undefined,
       technologies: selectedTechnologies.length > 0 ? selectedTechnologies : undefined,
       searchQuery: searchQuery || undefined,
     });
-    result = sortProjects(result, sortBy);
-    return result;
-  }, [searchQuery, selectedCategories, selectedTechnologies, sortBy]);
+  }, [searchQuery, selectedCategories, selectedTechnologies]);
 
   const handleCategoryToggle = (category: ProjectCategory) => {
     setSelectedCategories((prev) =>
@@ -112,8 +107,6 @@ export default function ProjectsPage() {
               selectedTechnologies={selectedTechnologies}
               onCategoryToggle={handleCategoryToggle}
               onTechnologyToggle={handleTechnologyToggle}
-              sortBy={sortBy}
-              onSortChange={setSortBy}
             />
 
             {/* Active Filters Chips */}
@@ -153,18 +146,29 @@ export default function ProjectsPage() {
                     const { primary, statPills } = extractMetrics(project.metrics);
                     const categoryColor = getCategoryColor(categories[0]);
                     const primaryTopic = categories[0];
+                    const metricsDisplay = [primary, ...statPills.map((pill) => pill.label)]
+                      .slice(0, 2)
+                      .map((item) => {
+                        const parts = item.trim().split(/\s+/);
 
-                    // Format metrics for display
-                    const metricsDisplay = statPills.slice(0, 2).map((pill) => ({
-                      label: pill.label,
-                      value: primary.split(" ")[0], // Use number from primary metric
-                    }));
+                        if (parts[0] === "<" || parts[0] === ">") {
+                          return {
+                            value: `${parts[0]} ${parts[1] ?? ""}`.trim(),
+                            label: parts.slice(2).join(" "),
+                          };
+                        }
+
+                        return {
+                          value: parts[0] ?? "",
+                          label: parts.slice(1).join(" "),
+                        };
+                      });
 
                     return (
                       <CaseStudyCard
                         key={project.slug}
                         title={project.title}
-                        metrics={metricsDisplay.length > 0 ? metricsDisplay : [{ label: primary, value: "" }]}
+                        metrics={metricsDisplay}
                         technologies={project.technologies.slice(0, 10)}
                         thumbnailImage={project.caseStudy?.architecture?.image}
                         thumbnailAlt={project.caseStudy?.architecture?.alt}

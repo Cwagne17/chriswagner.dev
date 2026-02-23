@@ -4,9 +4,16 @@ const KCNA_BADGE_URL = "https://images.credly.com/size/110x110/images/f28f1d88-4
 const SAFE_PRACTITIONER_BADGE_URL = "https://images.credly.com/size/110x110/images/08703175-4b43-4c72-9075-5c03a9ebe5d0/image.png"
 const SOLUTIONS_ARCHITECT_BADGE_URL = "https://images.credly.com/size/110x110/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png"
 const CLOUD_PRACTITIONER_BADGE_URL = "https://images.credly.com/size/110x110/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png";
-
+const CCSP_BADGE_URL = "https://images.credly.com/size/110x110/images/38b12225-5b48-44e1-8750-20928cc595ea/image.png";
 
 export const certifications: Certification[] = [
+    {
+        title: "Certified Cloud Security Professional (CCSP)",
+        issuer: "ISC2",
+        date: "2026",
+        link: "https://www.credly.com/badges/02e187f1-2b4d-43a6-91c6-7f2a3debf2f8/public_url",
+        badge: CCSP_BADGE_URL
+    },
     {
         title: "Kubernetes and Cloud Native Associate (KCNA)",
         issuer: "The Linux Foundation",

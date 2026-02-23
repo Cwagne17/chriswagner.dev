@@ -46,7 +46,7 @@ const CaseStudyCard = forwardRef<HTMLDivElement, CaseStudyCardProps>(
         <Link href={href} className="block h-full group">
           <div
             className={cn(
-              "relative h-full rounded-lg overflow-hidden transition-all duration-300",
+              "relative h-full min-h-[360px] rounded-lg overflow-hidden transition-all duration-300",
               "bg-card border border-border",
               "hover:border-border hover:shadow-lg hover:shadow-blue-500/5",
               "hover:-translate-y-1",
@@ -54,8 +54,8 @@ const CaseStudyCard = forwardRef<HTMLDivElement, CaseStudyCardProps>(
               className
             )}
           >
-            {/* Top 50%: Image Area */}
-            <div className="relative h-1/2 bg-secondary overflow-hidden">
+            {/* Top area: Image */}
+            <div className="relative h-44 bg-secondary overflow-hidden">
               {thumbnailImage ? (
                 <>
                   <img
@@ -86,33 +86,31 @@ const CaseStudyCard = forwardRef<HTMLDivElement, CaseStudyCardProps>(
               </div>
             </div>
 
-            {/* Bottom 50%: Content Area */}
-            <div className="relative h-1/2 p-4 flex flex-col justify-between bg-card">
+            {/* Bottom area: Content */}
+            <div className="relative flex-1 p-4 flex flex-col bg-card">
               {/* Title */}
-              <h3 className="text-base font-semibold text-foreground line-clamp-2 mb-2">
+              <h3 className="text-base font-semibold text-foreground line-clamp-2 mb-4">
                 {title}
               </h3>
 
-              {/* Metrics Pills */}
+              {/* Metrics */}
               {metrics.length > 0 && (
-                <div className="flex flex-col gap-1.5 mb-3">
-                  {metrics.slice(0, 2).map((metric, i) => (
-                    <div key={i} className="flex items-baseline gap-2">
-                      <span className="text-sm font-bold text-blue-400">
-                        {metric.value}
-                      </span>
-                      <span className="text-xs text-muted-foreground line-clamp-1">
-                        {metric.label}
-                      </span>
-                    </div>
-                  ))}
+                <div className="mb-4">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="text-xl font-bold text-blue-400 leading-none shrink-0">
+                      {metrics[0]?.value}
+                    </span>
+                    <span className="text-sm text-muted-foreground truncate">
+                      {metrics[0]?.label}
+                    </span>
+                  </div>
                 </div>
               )}
 
               {/* Technology Pills */}
               {technologies.length > 0 && (
-                <div className="flex flex-wrap gap-1.5">
-                  {technologies.slice(0, 6).map((tech, i) => (
+                <div className="mt-auto flex flex-wrap gap-1.5">
+                  {technologies.slice(0, 3).map((tech, i) => (
                     <span
                       key={i}
                       className="px-2 py-1 rounded-full text-xs font-medium bg-secondary/60 text-muted-foreground border border-border/50"
@@ -120,9 +118,9 @@ const CaseStudyCard = forwardRef<HTMLDivElement, CaseStudyCardProps>(
                       {tech}
                     </span>
                   ))}
-                  {technologies.length > 6 && (
+                  {technologies.length > 3 && (
                     <span className="px-2 py-1 rounded-full text-xs font-medium bg-secondary/60 text-muted-foreground border border-border/50">
-                      +{technologies.length - 6}
+                      +{technologies.length - 3}
                     </span>
                   )}
                 </div>

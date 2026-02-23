@@ -160,19 +160,12 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   Architecture
                 </h2>
                 <div className="bg-card rounded-lg p-8 border border-border">
-                  <div className="relative w-full h-96 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-lg flex items-center justify-center">
-                    {/* Placeholder for architecture diagram */}
-                    <div className="text-center">
-                      <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg flex items-center justify-center">
-                        <ExternalLink className="w-12 h-12 text-muted-foreground/50" />
-                      </div>
-                      <p className="text-muted-foreground">
-                        {project.caseStudy.architecture.alt}
-                      </p>
-                      <p className="text-sm text-muted-foreground/60 mt-2">
-                        Architecture diagram would be displayed here
-                      </p>
-                    </div>
+                  <div className="relative w-full aspect-[16/9] bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-lg overflow-hidden">
+                    <img
+                      src={project.caseStudy.architecture.image}
+                      alt={project.caseStudy.architecture.alt}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </div>
               </motion.div>
