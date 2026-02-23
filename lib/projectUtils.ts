@@ -1,4 +1,5 @@
 import type { Project } from "@/types/project";
+import { PROJECT_CATEGORY_GRADIENTS } from "@/lib/theme";
 
 export type ProjectCategory = "Security" | "Cloud Infra" | "DevOps" | "Identity" | "VDI" | "Modernization";
 export type Technology = "AWS" | "Kubernetes" | "Terraform" | "Docker" | "CircleCI" | "Ansible" | "TypeScript" | "Python" | "Go" | "GitHub";
@@ -78,16 +79,7 @@ export function extractMetrics(metricsString: string) {
 
 // Get category color gradient
 export function getCategoryColor(category: ProjectCategory): string {
-  const colors: Record<ProjectCategory, string> = {
-    "Security": "from-red-500 to-pink-500",
-    "Cloud Infra": "from-orange-500 to-yellow-500",
-    "DevOps": "from-green-500 to-emerald-500",
-    "Identity": "from-purple-500 to-pink-500",
-    "VDI": "from-cyan-500 to-blue-500",
-    "Modernization": "from-blue-500 to-purple-500",
-  };
-
-  return colors[category] || "from-blue-500 to-cyan-500";
+  return PROJECT_CATEGORY_GRADIENTS[category] || "from-blue-500 to-cyan-500";
 }
 
 // Filter projects by categories

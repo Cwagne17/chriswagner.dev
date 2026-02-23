@@ -4,6 +4,7 @@ import { Search, ChevronDown, Check } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { ProjectCategory, Technology } from "@/lib/projectUtils";
 import { AVAILABLE_TECHNOLOGIES } from "@/lib/projectUtils";
+import { THEME_CLASSES } from "@/lib/theme";
 
 interface SearchAndFiltersProps {
   searchQuery: string;
@@ -80,7 +81,7 @@ export function SearchAndFilters({
                     onClick={() => onCategoryToggle(category)}
                     className={`flex items-center justify-between w-full px-4 py-2 text-left text-sm transition-colors ${
                       isSelected
-                        ? "bg-blue-500/10 text-blue-400"
+                        ? `${THEME_CLASSES.bg.brandSoft} ${THEME_CLASSES.text.brandStrong}`
                         : "text-foreground hover:bg-secondary"
                     }`}
                   >
@@ -115,7 +116,7 @@ export function SearchAndFilters({
                     onClick={() => onTechnologyToggle(tech)}
                     className={`flex items-center justify-between w-full px-4 py-2 text-left text-sm transition-colors ${
                       isSelected
-                        ? "bg-blue-500/10 text-blue-400"
+                        ? `${THEME_CLASSES.bg.brandSoft} ${THEME_CLASSES.text.brandStrong}`
                         : "text-foreground hover:bg-secondary"
                     }`}
                   >

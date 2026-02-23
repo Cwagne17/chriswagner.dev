@@ -4,6 +4,7 @@ import { Certification } from "@/types/certification";
 import { Award, ExternalLink } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
+import { THEME_CLASSES } from "@/lib/theme";
 
 interface CertificationsProps {
   certifications: Certification[];
@@ -24,7 +25,7 @@ const Certifications = ({ certifications }: CertificationsProps) => {
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Certifications & Credentials
           </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
+          <div className={`w-16 h-1 bg-gradient-to-r ${THEME_CLASSES.gradient.brand} rounded-full`} />
           <p className="text-muted-foreground mt-4 max-w-prose">
             Industry-recognized certifications validating expertise in cloud security, compliance, and infrastructure management.
           </p>
@@ -47,7 +48,7 @@ const Certifications = ({ certifications }: CertificationsProps) => {
               {/* Content */}
               <div className="relative z-10">
                 {/* Badge/Icon Container */}
-                <div className="w-16 h-16 mb-4 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-[1.02] overflow-hidden border border-blue-500/20">
+                <div className={`w-16 h-16 mb-4 bg-gradient-to-br ${THEME_CLASSES.gradient.brandSoft} rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-[1.02] overflow-hidden border ${THEME_CLASSES.border.brandSoft}`}>
                   {cert.badge ? (
                     <Image
                       src={cert.badge}
@@ -57,7 +58,7 @@ const Certifications = ({ certifications }: CertificationsProps) => {
                       className="w-full h-full object-contain p-2"
                     />
                   ) : (
-                    <Award className="w-8 h-8 text-blue-500" />
+                    <Award className={`w-8 h-8 ${THEME_CLASSES.text.brand}`} />
                   )}
                 </div>
 
@@ -72,7 +73,7 @@ const Certifications = ({ certifications }: CertificationsProps) => {
                 </p>
 
                 {/* External Link Indicator */}
-                <div className="flex items-center gap-2 text-blue-500 text-sm font-medium">
+                <div className={`flex items-center gap-2 ${THEME_CLASSES.text.brand} text-sm font-medium`}>
                   <span>View Credential</span>
                   <ExternalLink className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>

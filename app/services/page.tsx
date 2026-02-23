@@ -15,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
+import { THEME_CLASSES } from "@/lib/theme";
 
 export default function ServicesPage() {
   const contractOffers = [
@@ -104,7 +105,7 @@ export default function ServicesPage() {
                 transition={{ duration: 0.6 }}
               >
                 <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                  <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+                  <span className={`bg-gradient-to-r ${THEME_CLASSES.gradient.brand} bg-clip-text text-transparent`}>
                     Short-Term Cloud Engineering Contracts
                   </span>
                 </h1>
@@ -116,7 +117,7 @@ export default function ServicesPage() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
                     href="/#contact"
-                    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all"
+                    className={`inline-flex items-center justify-center gap-2 bg-gradient-to-r ${THEME_CLASSES.gradient.brand} text-white px-6 py-3 rounded-lg font-medium hover:opacity-95 transition-all`}
                   >
                     Discuss a Contract
                     <ArrowRight className="w-4 h-4" />
@@ -136,7 +137,7 @@ export default function ServicesPage() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="relative"
               >
-                <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl border border-border overflow-hidden">
+                <div className={`bg-gradient-to-br ${THEME_CLASSES.gradient.brandSoft} rounded-2xl border border-border overflow-hidden`}>
                   <div className="relative w-full aspect-[4/5]">
                     <Image
                       src="/portrait.jpeg"
@@ -195,7 +196,7 @@ export default function ServicesPage() {
                     <div className="space-y-2 text-left">
                       {service.bullets.map((item) => (
                         <div key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <CheckCircle className="w-4 h-4 mt-0.5 text-blue-500 shrink-0" />
+                          <CheckCircle className={`w-4 h-4 mt-0.5 ${THEME_CLASSES.text.brand} shrink-0`} />
                           <span>{item}</span>
                         </div>
                       ))}
@@ -233,13 +234,13 @@ export default function ServicesPage() {
                   viewport={{ once: true }}
                   className="bg-card border border-border rounded-lg p-6"
                 >
-                  <model.icon className="w-7 h-7 text-blue-500 mb-3" />
+                  <model.icon className={`w-7 h-7 ${THEME_CLASSES.text.brand} mb-3`} />
                   <h3 className="text-xl font-semibold mb-2">{model.title}</h3>
                   <p className="text-muted-foreground mb-4">{model.description}</p>
                   <div className="space-y-2">
                     {model.points.map((point) => (
                       <div key={point} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle className="w-4 h-4 mt-0.5 text-blue-500 shrink-0" />
+                        <CheckCircle className={`w-4 h-4 mt-0.5 ${THEME_CLASSES.text.brand} shrink-0`} />
                         <span>{point}</span>
                       </div>
                     ))}
@@ -277,10 +278,10 @@ export default function ServicesPage() {
                   className="bg-card rounded-lg p-6 border border-border h-full"
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-9 h-9 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold flex items-center justify-center">
+                    <div className={`w-9 h-9 rounded-full bg-gradient-to-r ${THEME_CLASSES.gradient.brand} text-white font-semibold flex items-center justify-center`}>
                       {step.step}
                     </div>
-                    <step.icon className="w-5 h-5 text-blue-500" />
+                    <step.icon className={`w-5 h-5 ${THEME_CLASSES.text.brand}`} />
                   </div>
                   <h3 className="font-semibold text-xl mb-2">{step.title}</h3>
                   <p className="text-muted-foreground">{step.description}</p>
@@ -292,7 +293,7 @@ export default function ServicesPage() {
 
         {/* Call to Action */}
         <section className="py-20 px-6 bg-secondary/20 relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5">
+          <div className={`absolute inset-0 bg-gradient-to-br ${THEME_CLASSES.gradient.brandSubtle}`}>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
           </div>
 
