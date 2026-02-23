@@ -8,6 +8,7 @@ import { use } from "react";
 import Footer from "../../../components/Footer";
 import Navbar from "../../../components/Navbar";
 import { allProjects } from "../../../data/projects";
+import { THEME_CLASSES } from "@/lib/theme";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -28,9 +29,9 @@ export default function ProjectPage({ params }: ProjectPageProps) {
       <main className="pt-24">
         {/* Header Section */}
         <section className="py-12 px-6 relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5">
-            <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className={`absolute inset-0 bg-gradient-to-br ${THEME_CLASSES.gradient.brandSubtle}`}>
+            <div className={`absolute top-1/4 left-1/4 w-72 h-72 ${THEME_CLASSES.bg.brandSoft} rounded-full blur-3xl animate-pulse`}></div>
+            <div className={`absolute bottom-1/4 right-1/4 w-96 h-96 ${THEME_CLASSES.bg.brandSoft} rounded-full blur-3xl animate-pulse delay-1000`}></div>
           </div>
 
           <div className="max-w-4xl mx-auto relative">
@@ -72,7 +73,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   {project.caseStudy.resources?.github && (
                     <a
                       href={project.caseStudy.resources.github}
-                      className="flex items-center gap-2 p-4 bg-card rounded-lg border border-border hover:border-blue-500/20 transition-all"
+                      className="flex items-center gap-2 p-4 bg-card rounded-lg border border-border hover:border-[color:var(--accent-border-soft)] transition-all"
                     >
                       <Github className="w-5 h-5 text-muted-foreground" />
                       <span className="font-medium">View Code</span>
@@ -81,7 +82,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   {project.caseStudy.resources?.demo && (
                     <a
                       href={project.caseStudy.resources.demo}
-                      className="flex items-center gap-2 p-4 bg-card rounded-lg border border-border hover:border-blue-500/20 transition-all"
+                      className="flex items-center gap-2 p-4 bg-card rounded-lg border border-border hover:border-[color:var(--accent-border-soft)] transition-all"
                     >
                       <ExternalLink className="w-5 h-5 text-muted-foreground" />
                       <span className="font-medium">Live Demo</span>
@@ -90,7 +91,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   {project.caseStudy.resources?.download && (
                     <a
                       href={project.caseStudy.resources.download.url}
-                      className="flex items-center gap-2 p-4 bg-card rounded-lg border border-border hover:border-blue-500/20 transition-all"
+                      className="flex items-center gap-2 p-4 bg-card rounded-lg border border-border hover:border-[color:var(--accent-border-soft)] transition-all"
                     >
                       <Download className="w-5 h-5 text-muted-foreground" />
                       <span className="font-medium">Download</span>
@@ -160,7 +161,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   Architecture
                 </h2>
                 <div className="bg-card rounded-lg p-8 border border-border">
-                  <div className="relative w-full aspect-[16/9] bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-lg overflow-hidden">
+                  <div className={`relative w-full aspect-[16/9] bg-gradient-to-br ${THEME_CLASSES.gradient.brandSubtle} rounded-lg overflow-hidden`}>
                     <img
                       src={project.caseStudy.architecture.image}
                       alt={project.caseStudy.architecture.alt}
@@ -195,7 +196,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                     viewport={{ once: true }}
                     className="flex items-start gap-4"
                   >
-                    <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                    <div className={`w-8 h-8 bg-gradient-to-br ${THEME_CLASSES.gradient.brand} rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}>
                       {index + 1}
                     </div>
                     <p className="text-muted-foreground leading-relaxed pt-1">
@@ -231,7 +232,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                     className="bg-card rounded-lg p-6 border border-border"
                   >
                     <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div className={`w-2 h-2 bg-gradient-to-r ${THEME_CLASSES.gradient.brand} rounded-full mt-2 flex-shrink-0`}></div>
                       <p className="text-muted-foreground leading-relaxed">
                         {result}
                       </p>
@@ -258,8 +259,8 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 </h2>
                 <div className="bg-card rounded-lg p-8 border border-border">
                   <div className="flex items-start gap-6">
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Download className="w-8 h-8 text-blue-500" />
+                    <div className={`w-16 h-16 bg-gradient-to-br ${THEME_CLASSES.gradient.brandSoft} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                      <Download className={`w-8 h-8 ${THEME_CLASSES.text.brand}`} />
                     </div>
                     <div className="flex-1">
                       <h3 className="font-semibold text-xl mb-2">
@@ -270,7 +271,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                       </p>
                       <a
                         href={project.caseStudy.resources.download.url}
-                        className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all shadow-lg hover:shadow-xl"
+                        className={`inline-flex items-center gap-2 bg-gradient-to-r ${THEME_CLASSES.gradient.brand} text-white px-6 py-3 rounded-lg font-medium hover:brightness-105 transition-all shadow-lg hover:shadow-xl`}
                       >
                         Download PDF
                         <Download className="w-4 h-4" />

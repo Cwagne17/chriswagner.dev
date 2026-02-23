@@ -77,7 +77,7 @@ export function AnimatedArchitectureDiagram() {
             width="200"
             height="220"
             rx="12"
-            className="fill-blue-500/5 stroke-blue-500/30"
+            className="fill-[color:var(--accent-soft)] stroke-[color:var(--accent-border-medium)]"
             strokeWidth="2"
             strokeDasharray="5,5"
           />
@@ -93,7 +93,7 @@ export function AnimatedArchitectureDiagram() {
             <path
               d="M 20 0 L 0 0 0 20"
               fill="none"
-              className="stroke-blue-500/10"
+              className="stroke-[color:var(--accent-soft)]"
               strokeWidth="0.5"
             />
           </pattern>
@@ -108,7 +108,7 @@ export function AnimatedArchitectureDiagram() {
           <text
             x="480"
             y="320"
-            className="fill-blue-500 text-xs font-medium"
+            className="fill-[color:var(--primary)] text-xs font-medium"
             textAnchor="middle"
           >
             EKS Cluster
@@ -149,13 +149,13 @@ export function AnimatedArchitectureDiagram() {
             strokeWidth="2"
           />
           {/* Simple user icon */}
-          <circle cx={nodes.user.x} cy={nodes.user.y - 4} r="6" className="fill-blue-500" />
+          <circle cx={nodes.user.x} cy={nodes.user.y - 4} r="6" className="fill-[color:var(--primary)]" />
           <path
             d={`M ${nodes.user.x - 10} ${nodes.user.y + 12} Q ${nodes.user.x} ${nodes.user.y + 6} ${nodes.user.x + 10} ${nodes.user.y + 12}`}
-            className="fill-blue-500"
+            className="fill-[color:var(--primary)]"
           />
           {!shouldReduceMotion && (
-            <circle cx={nodes.user.x} cy={nodes.user.y} r="24" className="fill-none stroke-blue-500" strokeWidth="2" opacity="0">
+            <circle cx={nodes.user.x} cy={nodes.user.y} r="24" className="fill-none stroke-[color:var(--primary)]" strokeWidth="2" opacity="0">
               <animate attributeName="r" values="24;32;24" dur="2.5s" repeatCount="indefinite" />
               <animate attributeName="opacity" values="0.5;0;0.5" dur="2.5s" repeatCount="indefinite" />
             </circle>
@@ -195,7 +195,7 @@ export function AnimatedArchitectureDiagram() {
               width="48"
               height="48"
               rx="8"
-              className="fill-none stroke-purple-500"
+              className="fill-none stroke-[color:var(--accent-hover)]"
               strokeWidth="2"
               opacity="0"
             >
@@ -244,7 +244,7 @@ export function AnimatedArchitectureDiagram() {
               width="56"
               height="56"
               rx="8"
-              className="fill-none stroke-blue-500"
+              className="fill-none stroke-[color:var(--primary)]"
               strokeWidth="2"
               opacity="0"
             >
@@ -269,13 +269,13 @@ export function AnimatedArchitectureDiagram() {
             width="40"
             height="40"
             rx="6"
-            className="fill-blue-500/10 stroke-blue-500/50"
+            className="fill-[color:var(--accent-soft)] stroke-[color:var(--accent-border-medium)]"
             strokeWidth="1.5"
           />
           <text
             x={nodes.ingress.x}
             y={nodes.ingress.y + 4}
-            className="fill-blue-500 text-[10px] font-medium"
+            className="fill-[color:var(--primary)] text-[10px] font-medium"
             textAnchor="middle"
           >
             Ingress
@@ -290,13 +290,13 @@ export function AnimatedArchitectureDiagram() {
             width="48"
             height="40"
             rx="6"
-            className="fill-blue-500/10 stroke-blue-500/50"
+            className="fill-[color:var(--accent-soft)] stroke-[color:var(--accent-border-medium)]"
             strokeWidth="1.5"
           />
           <text
             x={nodes.service.x}
             y={nodes.service.y + 4}
-            className="fill-blue-500 text-[10px] font-medium"
+            className="fill-[color:var(--primary)] text-[10px] font-medium"
             textAnchor="middle"
           >
             Service
@@ -310,16 +310,16 @@ export function AnimatedArchitectureDiagram() {
               cx={pod.x}
               cy={pod.y}
               r="12"
-              className="fill-purple-500/10 stroke-purple-500/50"
+              className="fill-[color:var(--accent-soft)] stroke-[color:var(--accent-border-medium)]"
               strokeWidth="1.5"
             />
-            <circle cx={pod.x} cy={pod.y} r="4" className="fill-purple-500" />
+            <circle cx={pod.x} cy={pod.y} r="4" className="fill-[color:var(--accent-hover)]" />
             {!shouldReduceMotion && (
               <circle
                 cx={pod.x}
                 cy={pod.y}
                 r="12"
-                className="fill-none stroke-purple-500"
+                className="fill-none stroke-[color:var(--accent-hover)]"
                 strokeWidth="1"
                 opacity="0"
               >
@@ -345,7 +345,7 @@ export function AnimatedArchitectureDiagram() {
         {/* Animated Data Flow Dot (Request) */}
         {!shouldReduceMotion && (
           <g>
-            <circle r="4" className="fill-blue-500" filter="url(#glow)">
+            <circle r="4" className="fill-[color:var(--primary)]" filter="url(#glow)">
               <animateMotion
                 dur="4s"
                 repeatCount="indefinite"
@@ -353,7 +353,7 @@ export function AnimatedArchitectureDiagram() {
               />
             </circle>
             {/* Label following the dot */}
-            <text className="fill-blue-500 text-[9px] font-medium" textAnchor="middle">
+            <text className="fill-[color:var(--primary)] text-[9px] font-medium" textAnchor="middle">
               <animateMotion
                 dur="4s"
                 repeatCount="indefinite"
@@ -366,7 +366,7 @@ export function AnimatedArchitectureDiagram() {
 
         {/* Animated Data Flow Dot (Response - offset timing) */}
         {!shouldReduceMotion && (
-          <circle r="3" className="fill-purple-500" filter="url(#glow)">
+          <circle r="3" className="fill-[color:var(--accent-hover)]" filter="url(#glow)">
             <animateMotion
               dur="4s"
               repeatCount="indefinite"

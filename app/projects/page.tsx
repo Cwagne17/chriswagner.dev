@@ -18,6 +18,7 @@ import {
   type ProjectCategory,
   type Technology,
 } from "@/lib/projectUtils";
+import { THEME_CLASSES } from "@/lib/theme";
 
 export default function ProjectsPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -70,9 +71,9 @@ export default function ProjectsPage() {
       <main className="pt-16">
         {/* Header Section */}
         <section className="py-12 px-6 relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5">
-            <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className={`absolute inset-0 bg-gradient-to-br ${THEME_CLASSES.gradient.brandSubtle}`}>
+            <div className={`absolute top-1/4 left-1/4 w-72 h-72 ${THEME_CLASSES.bg.brandSoft} rounded-full blur-3xl animate-pulse`}></div>
+            <div className={`absolute bottom-1/4 right-1/4 w-96 h-96 ${THEME_CLASSES.bg.brandSoft} rounded-full blur-3xl animate-pulse delay-1000`}></div>
           </div>
 
           <div className="max-w-7xl mx-auto relative">
@@ -83,7 +84,7 @@ export default function ProjectsPage() {
             >
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 text-muted-foreground hover:text-blue-500 transition-colors mb-6"
+                className="inline-flex items-center gap-2 text-muted-foreground hover:text-[color:var(--primary)] transition-colors mb-6"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Back to Home
@@ -193,7 +194,7 @@ export default function ProjectsPage() {
                   </p>
                   <button
                     onClick={handleClearAll}
-                    className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors"
+                    className="px-4 py-2 rounded-lg bg-[color:var(--primary)] hover:bg-[color:var(--accent-hover)] text-white text-sm font-medium transition-colors"
                   >
                     Clear all filters
                   </button>

@@ -67,7 +67,6 @@ export function CommandConsole() {
   const shouldReduceMotion = useReducedMotion();
   const [currentSessionIndex, setCurrentSessionIndex] = useState(0);
   const [displayedLines, setDisplayedLines] = useState<string[]>([]);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Handle session rotation and animation
   useEffect(() => {
@@ -79,7 +78,6 @@ export function CommandConsole() {
 
     // Reset lines for new session
     setDisplayedLines([]);
-    setIsTransitioning(true);
 
     // Animate lines appearing with stagger
     const lines = sessions[currentSessionIndex].lines;
@@ -88,8 +86,6 @@ export function CommandConsole() {
         setDisplayedLines((prev) => [...prev, lines[index]]);
       }, index * 150);
     });
-
-    setIsTransitioning(false);
   }, [currentSessionIndex, shouldReduceMotion]);
 
   // Rotation timer (only if not reduced motion)
@@ -110,7 +106,7 @@ export function CommandConsole() {
       {/* Console Card */}
       <div className="relative bg-slate-900/80 dark:bg-slate-950 rounded-lg border border-slate-700/50 dark:border-slate-800 overflow-hidden shadow-2xl">
         {/* Glow effect background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--accent-soft)] via-[color:var(--accent-soft)] to-transparent pointer-events-none" />
 
         {/* Header */}
         <div className="relative px-4 py-3 bg-gradient-to-r from-slate-800/50 to-slate-900/50 dark:from-slate-900/50 dark:to-slate-950/50 border-b border-slate-700/30 dark:border-slate-800">
@@ -181,7 +177,7 @@ export function CommandConsole() {
               }}
               className={`w-2 h-2 rounded-full transition-all ${
                 index === currentSessionIndex
-                  ? "bg-blue-400 w-6"
+                  ? "bg-[color:var(--accent-hover)] w-6"
                   : "bg-slate-600 hover:bg-slate-500"
               } ${shouldReduceMotion ? "cursor-default" : "cursor-pointer"}`}
               aria-label={`Jump to session ${index + 1}`}
@@ -191,7 +187,7 @@ export function CommandConsole() {
       </div>
 
       {/* Animated border glow */}
-      <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none blur-xl -z-10" />
+      <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-[color:var(--accent-soft)] via-[color:var(--accent-soft)] to-[color:var(--accent-soft)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none blur-xl -z-10" />
     </div>
   );
 }
@@ -212,7 +208,7 @@ function ConsoleLine({ line }: { line: string }) {
 
   // Info and warning indicators
   if (line.includes("✨") || line.includes("🚀")) {
-    return <div className="text-blue-400 dark:text-blue-300">{line}</div>;
+    return <div className="text-[color:var(--accent-hover)] dark:text-[color:var(--accent-hover)]">{line}</div>;
   }
 
   // Default - normal console text

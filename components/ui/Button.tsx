@@ -1,6 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import type { LucideIcon } from "lucide-react";
 import { forwardRef, type ButtonHTMLAttributes } from "react";
+import { THEME_CLASSES } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
 /**
@@ -16,7 +17,7 @@ const buttonVariants = cva(
     "font-medium transition-all duration-200",
     "disabled:opacity-50 disabled:pointer-events-none",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
-    "focus-visible:ring-blue-500 focus-visible:ring-offset-background",
+    "focus-visible:ring-[color:var(--ring)] focus-visible:ring-offset-background",
     "active:scale-[0.98]",
   ],
   {
@@ -24,10 +25,10 @@ const buttonVariants = cva(
       variant: {
         // Primary - accent gradient with glow border
         primary: [
-          "bg-gradient-to-br from-blue-500 to-purple-500",
+          `bg-gradient-to-br ${THEME_CLASSES.gradient.brand}`,
           "text-white shadow-lg",
-          "border border-blue-500/20",
-          "hover:from-blue-600 hover:to-purple-600",
+          `border ${THEME_CLASSES.border.brandSoft}`,
+          "hover:brightness-105",
           "hover:shadow-xl hover:-translate-y-0.5",
         ],
         // Secondary - subtle elevated surface
@@ -41,17 +42,18 @@ const buttonVariants = cva(
         // Ghost - transparent with nice hover
         ghost: [
           "text-foreground hover:bg-secondary/50",
-          "hover:text-blue-500",
+          "hover:text-[color:var(--primary)]",
         ],
         // Outline - bordered
         outline: [
           "border border-border text-foreground",
-          "hover:bg-secondary hover:border-blue-500",
-          "hover:text-blue-500",
+          "hover:bg-secondary hover:border-[color:var(--accent-border-medium)]",
+          "hover:text-[color:var(--primary)]",
         ],
         // Link - text button
         link: [
-          "text-blue-500 hover:text-blue-600",
+          THEME_CLASSES.text.brand,
+          "hover:text-[color:var(--accent-hover)]",
           "hover:underline underline-offset-4",
         ],
         // Danger - for destructive actions

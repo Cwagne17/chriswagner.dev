@@ -2,6 +2,7 @@
 
 import { X } from "lucide-react";
 import { motion } from "motion/react";
+import { THEME_CLASSES } from "@/lib/theme";
 import type { ProjectCategory, Technology } from "@/lib/projectUtils";
 
 interface FilterChipsProps {
@@ -42,7 +43,7 @@ export function FilterChips({
           initial={{ scale: 0.9 }}
           animate={{ scale: 1 }}
           onClick={() => onRemoveCategory(category)}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/40 text-blue-400 hover:bg-blue-500/30 transition-all text-xs font-medium"
+          className={`flex items-center gap-2 px-3 py-1.5 rounded-full ${THEME_CLASSES.bg.brandSoft} border ${THEME_CLASSES.border.brandMedium} ${THEME_CLASSES.text.brandStrong} hover:brightness-110 transition-all text-xs font-medium`}
         >
           {category}
           <X className="h-3 w-3" />
@@ -55,7 +56,7 @@ export function FilterChips({
           initial={{ scale: 0.9 }}
           animate={{ scale: 1 }}
           onClick={() => onRemoveTechnology(tech)}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/20 border border-purple-500/40 text-purple-400 hover:bg-purple-500/30 transition-all text-xs font-medium"
+          className={`flex items-center gap-2 px-3 py-1.5 rounded-full ${THEME_CLASSES.bg.brandSoft} border ${THEME_CLASSES.border.brandMedium} ${THEME_CLASSES.text.brandStrong} hover:brightness-110 transition-all text-xs font-medium`}
         >
           {tech}
           <X className="h-3 w-3" />

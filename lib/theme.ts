@@ -2,29 +2,29 @@ type ProjectCategory = "Security" | "Cloud Infra" | "DevOps" | "Identity" | "VDI
 
 export const THEME_CLASSES = {
   gradient: {
-    brand: "from-blue-500 to-purple-500",
-    brandSoft: "from-blue-500/10 to-purple-500/10",
-    brandSubtle: "from-blue-500/5 to-purple-500/5",
-    blueCyan: "from-blue-500 to-cyan-500",
+    brand: "from-[color:var(--primary)] to-[color:var(--accent-hover)]",
+    brandSoft: "from-[color:var(--accent-soft)] to-[color:var(--accent-soft)]",
+    brandSubtle: "from-[color:var(--accent-soft)] to-transparent",
+    blueCyan: "from-[color:var(--primary)] to-[color:var(--accent-hover)]",
   },
   text: {
-    brand: "text-blue-500",
-    brandStrong: "text-blue-400",
+    brand: "text-[color:var(--primary)]",
+    brandStrong: "text-[color:var(--accent-hover)]",
   },
   border: {
-    brandSoft: "border-blue-500/20",
-    brandMedium: "border-blue-500/50",
+    brandSoft: "border-[color:var(--accent-border-soft)]",
+    brandMedium: "border-[color:var(--accent-border-medium)]",
   },
   bg: {
-    brandSoft: "bg-blue-500/10",
+    brandSoft: "bg-[color:var(--accent-soft)]",
   },
 } as const;
 
 export const PROJECT_CATEGORY_GRADIENTS: Record<ProjectCategory, string> = {
-  Security: "from-red-500 to-pink-500",
-  "Cloud Infra": "from-orange-500 to-yellow-500",
-  DevOps: "from-green-500 to-emerald-500",
-  Identity: "from-purple-500 to-pink-500",
-  VDI: "from-cyan-500 to-blue-500",
-  Modernization: "from-blue-500 to-purple-500",
+  Security: "from-[color:var(--primary)] to-[color:var(--accent-hover)]",
+  "Cloud Infra": "from-[color:var(--primary)] to-[color:var(--accent-hover)]",
+  DevOps: "from-[color:var(--primary)] to-[color:var(--accent-hover)]",
+  Identity: "from-[color:var(--primary)] to-[color:var(--accent-hover)]",
+  VDI: "from-[color:var(--primary)] to-[color:var(--accent-hover)]",
+  Modernization: "from-[color:var(--primary)] to-[color:var(--accent-hover)]",
 };

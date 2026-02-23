@@ -3,6 +3,7 @@
 import { Cloud, Code2, Shield } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
+import { THEME_CLASSES } from "@/lib/theme";
 import { PillarCard } from "./ui/PillarCard";
 
 const About = () => {
@@ -52,7 +53,7 @@ const About = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 About
               </h2>
-              <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mb-6" />
+              <div className={`w-16 h-1 bg-gradient-to-r ${THEME_CLASSES.gradient.brand} rounded-full mb-6`} />
             </div>
 
             {/* Profile Picture - Centered in left column */}
@@ -63,7 +64,7 @@ const About = () => {
               viewport={{ once: true }}
               className="w-32 h-32 relative mx-auto"
             >
-              <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 p-1">
+              <div className={`w-full h-full rounded-full bg-gradient-to-br ${THEME_CLASSES.gradient.brandSoft} p-1`}>
                 <div className="w-full h-full rounded-full overflow-hidden border-2 border-background">
                   <Image
                     src="/portrait.jpeg"
@@ -76,7 +77,7 @@ const About = () => {
                 </div>
               </div>
               {/* Animated ring */}
-              <div className="absolute inset-0 rounded-full border-2 border-blue-500/30 animate-pulse"></div>
+              <div className="absolute inset-0 rounded-full border-2 border-[color:var(--accent-border-medium)] animate-pulse"></div>
             </motion.div>
             
             <div className="space-y-4 text-muted-foreground max-w-prose">

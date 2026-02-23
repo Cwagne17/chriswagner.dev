@@ -79,7 +79,7 @@ export function extractMetrics(metricsString: string) {
 
 // Get category color gradient
 export function getCategoryColor(category: ProjectCategory): string {
-  return PROJECT_CATEGORY_GRADIENTS[category] || "from-blue-500 to-cyan-500";
+  return PROJECT_CATEGORY_GRADIENTS[category] || "from-[color:var(--primary)] to-[color:var(--accent-hover)]";
 }
 
 // Filter projects by categories

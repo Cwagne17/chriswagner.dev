@@ -1,5 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { forwardRef, type HTMLAttributes } from "react";
+import { THEME_CLASSES } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
 /**
@@ -20,8 +21,9 @@ const badgeVariants = cva(
           "border-border",
         ],
         accent: [
-          "bg-blue-500/10 text-blue-500",
-          "border-blue-500/20",
+          THEME_CLASSES.bg.brandSoft,
+          THEME_CLASSES.text.brand,
+          THEME_CLASSES.border.brandSoft,
         ],
         muted: [
           "bg-secondary/50 text-muted-foreground",

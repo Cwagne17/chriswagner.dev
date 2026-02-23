@@ -55,7 +55,7 @@ export function SearchAndFilters({
             placeholder="Search case studies…"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-secondary/50 border border-border focus:border-blue-500/50 focus:outline-none transition-colors text-foreground text-sm"
+            className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-secondary/50 border border-border focus:border-[color:var(--accent-border-medium)] focus:outline-none transition-colors text-foreground text-sm"
           />
         </div>
 
@@ -65,7 +65,7 @@ export function SearchAndFilters({
               setShowTopicFilters(!showTopicFilters);
               setShowTechFilters(false);
             }}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-secondary/50 border border-border hover:border-blue-500/50 transition-colors whitespace-nowrap text-sm font-medium"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-secondary/50 border border-border hover:border-[color:var(--accent-border-medium)] transition-colors whitespace-nowrap text-sm font-medium"
           >
             Topic {selectedCategories.length > 0 ? `(${selectedCategories.length})` : ""}
             <ChevronDown className="h-4 w-4" />
@@ -100,7 +100,7 @@ export function SearchAndFilters({
               setShowTechFilters(!showTechFilters);
               setShowTopicFilters(false);
             }}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-secondary/50 border border-border hover:border-blue-500/50 transition-colors whitespace-nowrap text-sm font-medium"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-secondary/50 border border-border hover:border-[color:var(--accent-border-medium)] transition-colors whitespace-nowrap text-sm font-medium"
           >
             Technologies {selectedTechnologies.length > 0 ? `(${selectedTechnologies.length})` : ""}
             <ChevronDown className="h-4 w-4" />

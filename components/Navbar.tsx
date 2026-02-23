@@ -6,6 +6,7 @@ import { useTheme } from "next-themes";
 import { Moon, Sun, Menu, X, Mail } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { useScrollY } from "@/hooks/useScrollY";
+import { THEME_CLASSES } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
 function Navbar() {
@@ -69,7 +70,7 @@ function Navbar() {
       {/* Skip to content link */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-blue-500 focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-[color:var(--primary)] focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--ring)] focus:ring-offset-2"
       >
         Skip to content
       </a>
@@ -89,7 +90,7 @@ function Navbar() {
           {/* Brand */}
           <Link
             href="/"
-            className="text-xl font-bold hover:text-blue-500 transition-colors z-10"
+            className="text-xl font-bold hover:text-[color:var(--primary)] transition-colors z-10"
           >
             Chris Wagner
           </Link>
@@ -111,7 +112,7 @@ function Navbar() {
                     className="text-muted-foreground hover:text-foreground transition-colors relative group"
                   >
                     {link.label}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+                    <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r ${THEME_CLASSES.gradient.brand} group-hover:w-full transition-all duration-300`}></span>
                   </Link>
                 ))}
               </motion.nav>
@@ -124,7 +125,7 @@ function Navbar() {
             <button
               onClick={scrollToContact}
               className={cn(
-                "hidden md:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg text-sm font-medium hover:from-blue-600 hover:to-purple-600 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all",
+                `hidden md:flex items-center gap-2 px-4 py-2 bg-gradient-to-r ${THEME_CLASSES.gradient.brand} text-white rounded-lg text-sm font-medium hover:brightness-105 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--ring)] focus:ring-offset-2 transition-all`,
                 isScrolled
                   ? "opacity-100 pointer-events-auto"
                   : "opacity-0 pointer-events-none"
@@ -142,21 +143,21 @@ function Navbar() {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors border border-border/50 hover:border-blue-500/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="p-2 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors border border-border/50 hover:border-[color:var(--accent-border-medium)] focus:outline-none focus:ring-2 focus:ring-[color:var(--ring)] focus:ring-offset-2"
               aria-label="Toggle theme"
             >
               {mounted &&
                 (theme === "dark" ? (
-                  <Sun className="h-4 w-4 text-blue-500" />
+                  <Sun className={`h-4 w-4 ${THEME_CLASSES.text.brand}`} />
                 ) : (
-                  <Moon className="h-4 w-4 text-purple-500" />
+                  <Moon className={`h-4 w-4 ${THEME_CLASSES.text.brand}`} />
                 ))}
             </button>
 
             {/* Mobile Menu Button */}
             <button
               onClick={toggleMenu}
-              className="md:hidden p-2 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors border border-border/50 hover:border-blue-500/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="md:hidden p-2 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors border border-border/50 hover:border-[color:var(--accent-border-medium)] focus:outline-none focus:ring-2 focus:ring-[color:var(--ring)] focus:ring-offset-2"
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
             >
@@ -193,7 +194,7 @@ function Navbar() {
                     <Link
                       href={link.href}
                       onClick={handleLinkClick}
-                      className="block text-muted-foreground hover:text-foreground transition-colors py-2 border-l-2 border-transparent hover:border-blue-500 pl-4 focus:outline-none focus:border-blue-500 focus:text-foreground"
+                      className="block text-muted-foreground hover:text-foreground transition-colors py-2 border-l-2 border-transparent hover:border-[color:var(--accent-border-medium)] pl-4 focus:outline-none focus:border-[color:var(--accent-border-medium)] focus:text-foreground"
                     >
                       {link.label}
                     </Link>

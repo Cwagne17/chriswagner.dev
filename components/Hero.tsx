@@ -12,23 +12,16 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-[calc(100vh-140px)] flex items-center overflow-hidden pb-8">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,100,255,0.1),transparent_70%)]"></div>
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
-      </div>
+    <section className="hero-atmosphere relative min-h-[calc(100vh-140px)] flex items-center overflow-hidden pb-8">
 
       {/* Floating elements */}
       <motion.div
-        className="absolute top-20 left-10 w-2 h-2 bg-blue-500/30 rounded-full"
+        className="absolute top-20 left-10 w-2 h-2 bg-[color:var(--accent-border-medium)] rounded-full"
         animate={{ y: [0, -20, 0], opacity: [0.3, 0.8, 0.3] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute top-1/3 right-20 w-1 h-1 bg-purple-500/40 rounded-full"
+        className="absolute top-1/3 right-20 w-1 h-1 bg-[color:var(--accent-border-medium)] rounded-full"
         animate={{ y: [0, -15, 0], opacity: [0.4, 0.9, 0.4] }}
         transition={{
           duration: 3,
@@ -38,7 +31,7 @@ const Hero = () => {
         }}
       />
       <motion.div
-        className="absolute bottom-1/3 left-1/4 w-1.5 h-1.5 bg-cyan-500/35 rounded-full"
+        className="absolute bottom-1/3 left-1/4 w-1.5 h-1.5 bg-[color:var(--accent-border-medium)] rounded-full"
         animate={{ y: [0, -25, 0], opacity: [0.35, 0.7, 0.35] }}
         transition={{
           duration: 5,

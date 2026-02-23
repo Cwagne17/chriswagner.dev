@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import { forwardRef, type HTMLAttributes } from "react";
+import { THEME_CLASSES } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
 export interface CaseStudyCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
@@ -48,7 +49,7 @@ const CaseStudyCard = forwardRef<HTMLDivElement, CaseStudyCardProps>(
             className={cn(
               "relative h-full min-h-[360px] rounded-lg overflow-hidden transition-all duration-300",
               "bg-card border border-border",
-              "hover:border-border hover:shadow-lg hover:shadow-blue-500/5",
+              "hover:border-[color:var(--accent-border-soft)] hover:shadow-lg",
               "hover:-translate-y-1",
               "flex flex-col",
               className
@@ -97,7 +98,7 @@ const CaseStudyCard = forwardRef<HTMLDivElement, CaseStudyCardProps>(
               {metrics.length > 0 && (
                 <div className="mb-4">
                   <div className="flex items-center gap-2 min-w-0">
-                    <span className="text-xl font-bold text-blue-400 leading-none shrink-0">
+                    <span className={`text-xl font-bold ${THEME_CLASSES.text.brandStrong} leading-none shrink-0`}>
                       {metrics[0]?.value}
                     </span>
                     <span className="text-sm text-muted-foreground truncate">
