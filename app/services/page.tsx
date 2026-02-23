@@ -11,70 +11,81 @@ import {
   Settings,
 } from "lucide-react";
 import { motion } from "motion/react";
+import Image from "next/image";
 import Link from "next/link";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 
 export default function ServicesPage() {
-  const services = [
+  const contractOffers = [
     {
-      title: "Cloud Architecture Consulting",
-      description:
-        "Design scalable, secure, and cost-effective cloud solutions tailored to your business needs.",
+      title: "Cloud Platform Buildout",
+      bullets: ["Landing zone and account strategy", "Network and IAM baseline", "Delivery-ready architecture docs"],
       icon: Cloud,
       gradient: "from-blue-500 to-cyan-500",
     },
     {
-      title: "Infrastructure as Code (IaC) Development",
-      description:
-        "Terraform, CDK, and automated deployments for consistent, repeatable infrastructure.",
+      title: "Infrastructure as Code Delivery",
+      bullets: ["Reusable modules and standards", "Promotion across dev/stage/prod", "Drift-resistant deployments"],
       icon: Code,
       gradient: "from-purple-500 to-pink-500",
     },
     {
-      title: "DevOps and CI/CD",
-      description:
-        "Streamline your development workflow with automated testing, deployment, and monitoring.",
+      title: "CI/CD and Release Acceleration",
+      bullets: ["Pipeline templates", "Security and test gates", "Faster release cycles"],
       icon: GitBranch,
       gradient: "from-orange-500 to-red-500",
     },
     {
-      title: "Automation",
-      description:
-        "Implement intelligent automation solutions to reduce manual tasks and improve operational efficiency.",
+      title: "Ops and Compliance Automation",
+      bullets: ["Compliance as code", "Runbook automation", "Operational cost reduction"],
       icon: Settings,
       gradient: "from-cyan-500 to-blue-500",
     },
   ];
 
-  const processSteps = [
+  const engagementModels = [
     {
-      step: 1,
-      title: "Consultation",
+      title: "Project Sprint (2-6 weeks)",
       description:
-        "We start by understanding your requirements, current infrastructure, and business goals.",
-      icon: MessageCircle,
-    },
-    {
-      step: 2,
-      title: "Design & Proposal",
-      description:
-        "I create detailed architecture diagrams and provide comprehensive cost estimates for your project.",
+        "A focused engagement to deliver a concrete outcome: platform baseline, IaC migration, or pipeline rollout.",
+      points: ["Defined scope and milestones", "Weekly demos and handoff docs", "Fast delivery for urgent initiatives"],
       icon: FileText,
     },
     {
-      step: 3,
-      title: "Implementation",
+      title: "Fractional Cloud Lead",
       description:
-        "Build and configure your infrastructure using industry best practices and modern tools.",
+        "Ongoing part-time technical leadership to guide architecture, delivery quality, and engineering execution.",
+      points: ["Architecture and roadmap ownership", "Standards and guardrails", "Mentoring and unblock support"],
+      icon: MessageCircle,
+    },
+    {
+      title: "Stabilize and Transfer",
+      description:
+        "Short engagement to reduce incidents, standardize operations, and leave your team with maintainable systems.",
+      points: ["Operational triage and hardening", "Clear runbooks and ownership model", "Measured transition plan"],
+      icon: CheckCircle,
+    },
+  ];
+
+  const deliveryFlow = [
+    {
+      step: "1",
+      title: "Discovery and Alignment",
+      description: "We define business goals, technical constraints, and success metrics before execution starts.",
+      icon: MessageCircle,
+    },
+    {
+      step: "2",
+      title: "Implementation",
+      description: "I deliver production-grade changes with transparency, checkpoints, and practical documentation.",
       icon: Settings,
     },
     {
-      step: 4,
-      title: "Handover & Documentation",
-      description:
-        "Complete knowledge transfer with training sessions and comprehensive documentation delivery.",
-      icon: CheckCircle,
+      step: "3",
+      title: "Enablement and Handover",
+      description: "Your team receives runbooks, architecture rationale, and transition support to stay autonomous.",
+      icon: FileText,
     },
   ];
 
@@ -83,7 +94,7 @@ export default function ServicesPage() {
       <Navbar />
 
       <main className="pt-16">
-        {/* Services Header - Different Design */}
+        {/* Hero */}
         <section className="py-16 px-6 relative">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -94,15 +105,29 @@ export default function ServicesPage() {
               >
                 <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
                   <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
-                    Professional Services
+                    Short-Term Cloud Engineering Contracts
                   </span>
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-                  I help clients build robust, scalable cloud solutions with
-                  modern automation practices. From architecture design to full
-                  implementation, I deliver professional results that drive
-                  business value.
+                  I help teams execute high-impact AWS and DevOps initiatives fast:
+                  platform modernization, IaC delivery, CI/CD standardization, and operational hardening.
+                  You get a senior engineer who can plan and ship.
                 </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link
+                    href="/#contact"
+                    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all"
+                  >
+                    Discuss a Contract
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link
+                    href="/projects"
+                    className="inline-flex items-center justify-center gap-2 border border-border px-6 py-3 rounded-lg font-medium hover:border-border/70 transition-colors"
+                  >
+                    Review Case Studies
+                  </Link>
+                </div>
               </motion.div>
 
               <motion.div
@@ -111,26 +136,17 @@ export default function ServicesPage() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="relative"
               >
-                <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl p-8 border border-border">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-card rounded-lg p-4 border border-border/50">
-                      <Cloud className="w-8 h-8 text-blue-500 mb-2" />
-                      <p className="text-sm font-medium">Cloud Architecture</p>
-                    </div>
-                    <div className="bg-card rounded-lg p-4 border border-border/50">
-                      <Code className="w-8 h-8 text-purple-500 mb-2" />
-                      <p className="text-sm font-medium">
-                        Infrastructure as Code
-                      </p>
-                    </div>
-                    <div className="bg-card rounded-lg p-4 border border-border/50">
-                      <GitBranch className="w-8 h-8 text-orange-500 mb-2" />
-                      <p className="text-sm font-medium">DevOps & CI/CD</p>
-                    </div>
-                    <div className="bg-card rounded-lg p-4 border border-border/50">
-                      <Settings className="w-8 h-8 text-cyan-500 mb-2" />
-                      <p className="text-sm font-medium">Automation</p>
-                    </div>
+                <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl border border-border overflow-hidden">
+                  <div className="relative w-full aspect-[4/5]">
+                    <Image
+                      src="/portrait.jpeg"
+                      alt="Chris Wagner"
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 1280px) 560px, (min-width: 1024px) 48vw, (min-width: 768px) 70vw, 100vw"
+                      quality={100}
+                      priority
+                    />
                   </div>
                 </div>
               </motion.div>
@@ -138,13 +154,26 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* Services Grid */}
+        {/* Offerings */}
         <section className="py-20 px-6 bg-secondary/20 relative">
           <div className="absolute top-0 left-1/3 w-80 h-80 bg-gradient-to-br from-cyan-500/5 to-transparent rounded-full blur-3xl"></div>
 
           <div className="max-w-6xl mx-auto relative">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="mb-10"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-3">Contract Offerings</h2>
+              <p className="text-muted-foreground max-w-3xl">
+                Pick one focused objective or combine services into a short engagement plan.
+                Every engagement is scoped to concrete deliverables and a measurable outcome.
+              </p>
+            </motion.div>
             <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
-              {services.map((service, index) => (
+              {contractOffers.map((service, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -163,113 +192,100 @@ export default function ServicesPage() {
                     <h3 className="font-semibold text-2xl mb-4">
                       {service.title}
                     </h3>
-                    <p className="text-muted-foreground mb-8 leading-relaxed">
-                      {service.description}
-                    </p>
+                    <div className="space-y-2 text-left">
+                      {service.bullets.map((item) => (
+                        <div key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+                          <CheckCircle className="w-4 h-4 mt-0.5 text-blue-500 shrink-0" />
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-
-                  <Link
-                    href="/#contact"
-                    className="bg-foreground text-background px-4 py-2 rounded font-medium hover:bg-foreground/90 transition-all mt-auto text-center"
-                  >
-                    MORE
-                  </Link>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Process Timeline - Expanded */}
-        <section className="py-32 px-6 relative">
-          <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-gradient-to-tl from-purple-500/5 to-transparent rounded-full blur-3xl"></div>
-
-          <div className="max-w-7xl mx-auto relative">
+        {/* Engagement Models */}
+        <section className="py-20 px-6 relative">
+          <div className="max-w-6xl mx-auto relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="text-center mb-20"
+              className="text-center mb-12"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-8">
-                How We Work Together
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                A proven process that ensures successful project delivery from
-                concept to completion
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Engagement Models</h2>
+              <p className="text-muted-foreground max-w-3xl mx-auto">
+                If you need immediate execution, choose a project sprint. If you need ongoing leadership and delivery support, choose a fractional model.
               </p>
             </motion.div>
 
-            <div className="relative">
-              {/* Process Steps with Interactive Flow */}
-              <div className="space-y-16">
-                {processSteps.map((step, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: index * 0.2 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    className="relative flex items-center gap-12"
-                  >
-                    {/* Content Card */}
-                    <div className="flex-1 max-w-2xl">
-                      <div className="bg-card rounded-lg p-8 border border-border hover:border-blue-500/20 transition-all group">
-                        <div className="flex items-start gap-6">
-                          <div className="w-16 h-16 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full flex items-center justify-center group-hover:from-blue-500/20 group-hover:to-purple-500/20 transition-all flex-shrink-0">
-                            <step.icon className="w-8 h-8 text-blue-500" />
-                          </div>
-
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-2xl mb-4">
-                              {step.title}
-                            </h3>
-                            <p className="text-muted-foreground leading-relaxed text-lg">
-                              {step.description}
-                            </p>
-                          </div>
-                        </div>
+            <div className="grid md:grid-cols-3 gap-6">
+              {engagementModels.map((model, index) => (
+                <motion.div
+                  key={model.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-card border border-border rounded-lg p-6"
+                >
+                  <model.icon className="w-7 h-7 text-blue-500 mb-3" />
+                  <h3 className="text-xl font-semibold mb-2">{model.title}</h3>
+                  <p className="text-muted-foreground mb-4">{model.description}</p>
+                  <div className="space-y-2">
+                    {model.points.map((point) => (
+                      <div key={point} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <CheckCircle className="w-4 h-4 mt-0.5 text-blue-500 shrink-0" />
+                        <span>{point}</span>
                       </div>
-                    </div>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-                    {/* Visual Connector */}
-                    <div className="flex-shrink-0 w-32 h-32 relative">
-                      <div className="w-full h-full bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-full border-2 border-dashed border-blue-500/20 flex items-center justify-center">
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          whileInView={{ scale: 1 }}
-                          transition={{
-                            duration: 0.5,
-                            delay: index * 0.2 + 0.3,
-                          }}
-                          viewport={{ once: true }}
-                          className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xl"
-                        >
-                          {step.step}
-                        </motion.div>
-                      </div>
+        {/* Delivery Process */}
+        <section className="py-20 px-6 bg-secondary/20 relative">
+          <div className="max-w-6xl mx-auto relative">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">How We Work</h2>
+              <p className="text-muted-foreground max-w-3xl mx-auto">
+                Lightweight process, strong communication, and clear ownership from day one.
+              </p>
+            </motion.div>
 
-                      {/* Arrow to next step */}
-                      {index < processSteps.length - 1 && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{
-                            duration: 0.5,
-                            delay: index * 0.2 + 0.6,
-                          }}
-                          viewport={{ once: true }}
-                          className="absolute -bottom-20 left-1/2 transform -translate-x-1/2"
-                        >
-                          <div className="w-0.5 h-16 bg-gradient-to-b from-blue-500/50 to-transparent"></div>
-                          <ArrowRight className="w-6 h-6 text-blue-500/70 transform rotate-90 -mt-2 ml-1" />
-                        </motion.div>
-                      )}
+            <div className="grid md:grid-cols-3 gap-6">
+              {deliveryFlow.map((step, index) => (
+                <motion.div
+                  key={step.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-card rounded-lg p-6 border border-border h-full"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-9 h-9 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold flex items-center justify-center">
+                      {step.step}
                     </div>
-                  </motion.div>
-                ))}
-              </div>
+                    <step.icon className="w-5 h-5 text-blue-500" />
+                  </div>
+                  <h3 className="font-semibold text-xl mb-2">{step.title}</h3>
+                  <p className="text-muted-foreground">{step.description}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
@@ -288,12 +304,11 @@ export default function ServicesPage() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl md:text-5xl font-bold mb-6">
-                Ready to Transform Your Infrastructure?
+                Need Senior Help for a Defined Initiative?
               </h2>
               <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
-                Let&apos;s discuss your project requirements and explore how we
-                can build a scalable, secure solution that drives your business
-                forward.
+                Share the outcome you need. I&apos;ll help you scope the work, define the path,
+                and execute with your team.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
