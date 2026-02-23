@@ -1,15 +1,12 @@
 "use client";
 
 import { 
-  BarChart3, 
   ChevronLeft, 
   ChevronRight, 
   FileText, 
   FolderOpen, 
-  Home, 
   LogOut, 
   Mail, 
-  Settings, 
   Shield 
 } from "lucide-react";
 import { motion } from "motion/react";
@@ -30,12 +27,6 @@ interface AdminSidebarProps {
 }
 
 const sidebarItems: SidebarItem[] = [
-  {
-    id: "overview",
-    label: "Overview",
-    icon: <Home className="w-5 h-5" />,
-    href: "/admin"
-  },
   {
     id: "projects",
     label: "Projects",

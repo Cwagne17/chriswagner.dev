@@ -1,6 +1,7 @@
 "use client";
 
 import AdminLayout from "@/components/admin/AdminLayout";
+import { Button } from "@/components/ui";
 import { CheckCircle, Clock, Eye, Mail, User } from "lucide-react";
 import AuthWrapper from "../../../components/AuthWrapper";
 import { AuthGroups } from "../../../lib/auth-groups";

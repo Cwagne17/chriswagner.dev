@@ -27,10 +27,21 @@ export default function AuthWrapper({
       const currentUser = await getCurrentUser().catch(() => null);
       setUser((currentUser as AuthUser) ?? null);
 
-      if (currentUser && requiredGroup) {
-        setIsAuthorized(await isInGroup(requiredGroup));
-      } else if (!currentUser && requiredGroup) {
+      if (!currentUser && requiredGroup) {
         setIsAuthorized(false);
+        return;
+      }
+
+      if (currentUser && requiredGroup) {
+        try {
+          setIsAuthorized(await isInGroup(requiredGroup));
+        } catch (groupError) {
+          console.error("Group authorization check failed:", groupError);
+          // Keep the user signed in and show unauthorized instead of forcing logout/login.
+          setIsAuthorized(false);
+        }
+      } else {
+        setIsAuthorized(true);
       }
     } catch (error) {
       console.log("User not authenticated:", error);
@@ -59,7 +70,7 @@ export default function AuthWrapper({
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full"
+          className="w-8 h-8 border-2 border-[color:var(--primary)] border-t-transparent rounded-full"
         />
       </div>
     );

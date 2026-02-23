@@ -2,7 +2,7 @@ import { fetchAuthSession } from "aws-amplify/auth";
 import { AuthGroups } from "./auth-groups";
 
 export async function getUserGroups(): Promise<string[]> {
-  const session = await fetchAuthSession({ forceRefresh: true });
+  const session = await fetchAuthSession();
   const groups = (session.tokens?.accessToken.payload['cognito:groups'] || []) as string[];
   return groups;
 }
