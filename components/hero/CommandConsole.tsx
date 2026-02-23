@@ -19,7 +19,7 @@ const sessions: ConsoleSession[] = [
       "🚀 Deploying EksPlatformStack…",
       "✅ Outputs:",
       "- ClusterName: eks-prod",
-      "- IngressURL: https://app.example.com",
+      "- IngressURL: https://argocd.example.com",
     ],
   },
   {
@@ -202,35 +202,19 @@ export function CommandConsole() {
 function ConsoleLine({ line }: { line: string }) {
   // Command lines starting with $
   if (line.startsWith("$")) {
-    return (
-      <div className="text-emerald-300 dark:text-emerald-400">
-        {line}
-      </div>
-    );
+    return <div className="text-emerald-300 dark:text-emerald-400">{line}</div>;
   }
 
   // Check marks and success indicators
   if (line.includes("✔") || line.includes("✅") || line.includes("PASS")) {
-    return (
-      <div className="text-green-500 dark:text-green-400">
-        {line}
-      </div>
-    );
+    return <div className="text-green-500 dark:text-green-400">{line}</div>;
   }
 
   // Info and warning indicators
   if (line.includes("✨") || line.includes("🚀")) {
-    return (
-      <div className="text-blue-400 dark:text-blue-300">
-        {line}
-      </div>
-    );
+    return <div className="text-blue-400 dark:text-blue-300">{line}</div>;
   }
 
   // Default - normal console text
-  return (
-    <div className="text-slate-300 dark:text-slate-300">
-      {line}
-    </div>
-  );
+  return <div className="text-slate-300 dark:text-slate-300">{line}</div>;
 }
