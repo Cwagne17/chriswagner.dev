@@ -76,7 +76,7 @@ export const featuredProjects: Project[] = [
         "Enabled continuous compliance monitoring with zero-touch drift detection and remediation",
       ],
       architecture: {
-        image: "/architecture/stig-cac.png",
+        image: "/diagrams/test.drawio.png",
         alt: "Compliance-as-Code automation applying Kubernetes STIG at scale",
       },
       resources: {
@@ -111,7 +111,7 @@ export const featuredProjects: Project[] = [
         "Enabled elastic workforce scaling with predictable per-user costs and automated resource management",
       ],
       architecture: {
-        image: "/architecture/workspaces-ad.png",
+        image: "/diagrams/test.drawio.png",
         alt: "Cloud VDI architecture with WorkSpaces and Managed Microsoft AD",
       },
       resources: {
@@ -146,7 +146,7 @@ export const featuredProjects: Project[] = [
         "Eliminated monthly maintenance windows through rolling updates and zero-downtime deployment capabilities",
       ],
       architecture: {
-        image: "/architecture/windows-containers-db.png",
+        image: "/diagrams/test.drawio.png",
         alt: "Modernized architecture using containers with a managed database backend",
       },
       resources: {
@@ -185,7 +185,7 @@ export const allProjects: Project[] = [
         "Improved developer productivity with consistent, self-service infrastructure provisioning and pre-configured tooling",
       ],
       architecture: {
-        image: "/architecture/terraform-ephemeral-staging.png",
+        image: "/diagrams/test.drawio.png",
         alt: "Ephemeral staging environment architecture driven by Terraform modules",
       },
       resources: {
@@ -220,7 +220,7 @@ export const allProjects: Project[] = [
         "Accelerated developer onboarding with standardized, well-documented pipeline patterns and best practices",
       ],
       architecture: {
-        image: "/architecture/circleci-orb.png",
+        image: "/diagrams/test.drawio.png",
         alt: "Centralized CI/CD architecture using a shared CircleCI orb",
       },
       resources: {
@@ -255,7 +255,7 @@ export const allProjects: Project[] = [
         "Improved audit compliance with comprehensive access logs and automated compliance reporting capabilities",
       ],
       architecture: {
-        image: "/architecture/saml-sso.png",
+        image: "/diagrams/test.drawio.png",
         alt: "SAML2 SSO federation across SaaS and AWS accounts",
       },
       resources: {
@@ -290,7 +290,7 @@ export const allProjects: Project[] = [
         "Improved processing latency by 70% through asynchronous workflows and parallel execution patterns",
       ],
       architecture: {
-        image: "/architecture/serverless-files.png",
+        image: "/diagrams/test.drawio.png",
         alt: "Event-driven serverless architecture for file management",
       },
       resources: {

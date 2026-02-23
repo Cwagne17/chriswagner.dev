@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test:a11y": "playwright test --config=playwright.a11y.config.ts",
+    "test:a11y:headed": "playwright test --headed --config=playwright.a11y.config.ts",
     "amplify:sandbox": "npx ampx sandbox",
     "amplify:deploy": "npx ampx deploy"
   },
@@ -25,7 +27,9 @@
   "devDependencies": {
     "@aws-amplify/backend": "^1.19.0",
     "@aws-amplify/backend-cli": "^1.8.1",
+    "@axe-core/playwright": "^4.11.1",
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.58.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

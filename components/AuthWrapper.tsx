@@ -1,58 +1,57 @@
 "use client";
 
-import { AuthUser, fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
+import { AuthUser, getCurrentUser } from "aws-amplify/auth";
 import { motion } from "motion/react";
 import { useCallback, useEffect, useState } from "react";
+import AuthGroups from "../lib/auth-groups";
+import { isInGroup } from "../lib/auth-utils";
 import LoginForm from "./LoginForm";
 
 interface AuthWrapperProps {
-  children: React.ReactNode;
-  requiredGroup?: string | null;
+  readonly children: React.ReactNode;
+  readonly requiredGroup?: AuthGroups;
 }
 
 export default function AuthWrapper({
   children,
-  requiredGroup = null,
+  requiredGroup,
 }: AuthWrapperProps) {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
   const [isAuthorized, setIsAuthorized] = useState(true);
+  const [authChecking, setAuthChecking] = useState(false);
 
   const checkAuthState = useCallback(async () => {
     try {
-      console.log("🔍 Checking authentication state...");
+      setAuthChecking(true);
       const currentUser = await getCurrentUser().catch(() => null);
-      console.log("✅ User (if any):", currentUser);
       setUser((currentUser as AuthUser) ?? null);
 
-      // Prefer using fetchAuthSession to reliably read token payloads
-      let session = await fetchAuthSession().catch(() => null);
-      let groups = (session?.tokens?.accessToken?.payload?.["cognito:groups"] ?? []) as string[];
-
-      console.debug("AuthWrapper: session:", session);
-      console.debug("AuthWrapper: initial groups:", groups);
-
-      // If no groups are present, try forcing a refresh (useful after adding a user to a group)
-      if (requiredGroup && (!groups || groups.length === 0)) {
-        console.debug("AuthWrapper: no groups found — attempting forceRefresh to refresh tokens");
-        session = await fetchAuthSession({ forceRefresh: true }).catch(() => null);
-        groups = (session?.tokens?.accessToken?.payload?.["cognito:groups"] ?? []) as string[];
-        console.debug("AuthWrapper: groups after forceRefresh:", groups);
+      if (!currentUser && requiredGroup) {
+        setIsAuthorized(false);
+        return;
       }
 
-      if (requiredGroup) {
-        if (!groups || groups.length === 0) {
+      if (currentUser && requiredGroup) {
+        try {
+          setIsAuthorized(await isInGroup(requiredGroup));
+        } catch (groupError) {
+          console.error("Group authorization check failed:", groupError);
+          // Keep the user signed in and show unauthorized instead of forcing logout/login.
           setIsAuthorized(false);
-        } else {
-          const hasGroup = groups.includes(requiredGroup);
-          setIsAuthorized(hasGroup);
         }
+      } else {
+        setIsAuthorized(true);
       }
     } catch (error) {
-      console.log("🔒 User not authenticated:", error);
+      console.log("User not authenticated:", error);
       setUser(null);
+      if (requiredGroup) {
+        setIsAuthorized(false);
+      }
     } finally {
       setLoading(false);
+      setAuthChecking(false);
     }
   }, [requiredGroup]);
 
@@ -64,13 +63,14 @@ export default function AuthWrapper({
     void checkAuthState();
   }, [checkAuthState]);
 
-  if (loading) {
+  // Show loading during initial load or when checking auth
+  if (loading || authChecking) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full"
+          className="w-8 h-8 border-2 border-[color:var(--primary)] border-t-transparent rounded-full"
         />
       </div>
     );
@@ -80,7 +80,8 @@ export default function AuthWrapper({
     return <LoginForm onAuthSuccess={handleAuthSuccess} />;
   }
 
-  if (!isAuthorized) {
+  // Only show unauthorized after user is authenticated but doesn't have permission
+  if (requiredGroup && !isAuthorized && !authChecking) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="bg-card p-8 rounded shadow">

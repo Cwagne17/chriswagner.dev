@@ -6,26 +6,26 @@ import { useRouter } from "next/navigation";
 import AdminSidebar from "./AdminSidebar";
 
 interface AdminLayoutProps {
-  children: React.ReactNode;
-  title?: string;
-  subtitle?: string;
-  actions?: React.ReactNode;
+  readonly children: React.ReactNode;
+  readonly title?: string;
+  readonly subtitle?: string;
+  readonly actions?: React.ReactNode;
 }
 
-export default function AdminLayout({ 
-  children, 
-  title, 
-  subtitle, 
-  actions 
+export default function AdminLayout({
+  children,
+  title,
+  subtitle,
+  actions,
 }: AdminLayoutProps) {
   const router = useRouter();
 
   const handleSignOut = async () => {
     try {
       await signOut();
-      router.push('/');
+      router.push("/");
     } catch (error) {
-      console.log('Error signing out: ', error);
+      console.log("Error signing out: ", error);
     }
   };
 
@@ -42,16 +42,16 @@ export default function AdminLayout({
             <div className="flex items-center justify-between">
               <div>
                 {title && (
-                  <h1 className="text-2xl font-bold text-foreground">{title}</h1>
+                  <h1 className="text-2xl font-bold text-foreground">
+                    {title}
+                  </h1>
                 )}
                 {subtitle && (
                   <p className="text-muted-foreground mt-1">{subtitle}</p>
                 )}
               </div>
               {actions && (
-                <div className="flex items-center gap-3">
-                  {actions}
-                </div>
+                <div className="flex items-center gap-3">{actions}</div>
               )}
             </div>
           </header>

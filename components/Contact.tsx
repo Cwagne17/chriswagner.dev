@@ -1,9 +1,14 @@
 "use client";
 
+import { generateClient } from "aws-amplify/data";
 import { Github, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
+import { THEME_CLASSES } from "@/lib/theme";
+import type { Schema } from "../amplify/data/resource";
 import type { ContactFormData, ContactFormErrors } from "../types/contact-form";
+
+const client = generateClient<Schema>();
 
 const Contact = () => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -12,6 +17,8 @@ const Contact = () => {
     message: "",
   });
   const [errors, setErrors] = useState<ContactFormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const validateForm = () => {
     const newErrors: ContactFormErrors = {};
@@ -36,12 +43,26 @@ const Contact = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Form submitted:", formData);
-      alert("Thank you for your message! I'll get back to you soon.");
-      setFormData({ name: "", email: "", message: "" });
+      setIsSubmitting(true);
+      try {
+        await client.models.Contact.create({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          status: "NEW"
+        });
+        setSubmitSuccess(true);
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => setSubmitSuccess(false), 5000); // Hide success message after 5 seconds
+      } catch (error) {
+        console.error("Error submitting contact form:", error);
+        alert("There was an error sending your message. Please try again.");
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -58,7 +79,7 @@ const Contact = () => {
   return (
     <section id="contact" className="py-20 px-6 relative">
       {/* Background accent */}
-      <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-gradient-to-tl from-purple-500/5 to-transparent rounded-full blur-3xl"></div>
+      <div className={`absolute bottom-0 right-1/4 w-72 h-72 bg-gradient-to-tl ${THEME_CLASSES.gradient.brandSubtle} rounded-full blur-3xl`}></div>
 
       <div className="max-w-4xl mx-auto relative">
         <motion.div
@@ -87,16 +108,16 @@ const Contact = () => {
                 Contact Information
               </h3>
               <div className="space-y-4">
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-blue-500/5 to-transparent border border-blue-500/10">
-                  <Mail className="w-5 h-5 text-blue-500" />
+                <div className={`flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r ${THEME_CLASSES.gradient.brandSubtle} border ${THEME_CLASSES.border.brandSoft}`}>
+                  <Mail className={`w-5 h-5 ${THEME_CLASSES.text.brand}`} />
                   <span>christopherwagner0700@gmail.com</span>
                 </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-purple-500/5 to-transparent border border-purple-500/10">
-                  <Phone className="w-5 h-5 text-purple-500" />
+                <div className={`flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r ${THEME_CLASSES.gradient.brandSubtle} border ${THEME_CLASSES.border.brandSoft}`}>
+                  <Phone className={`w-5 h-5 ${THEME_CLASSES.text.brand}`} />
                   <span>+1 (443) 204-7483</span>
                 </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-cyan-500/5 to-transparent border border-cyan-500/10">
-                  <MapPin className="w-5 h-5 text-cyan-500" />
+                <div className={`flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r ${THEME_CLASSES.gradient.brandSubtle} border ${THEME_CLASSES.border.brandSoft}`}>
+                  <MapPin className={`w-5 h-5 ${THEME_CLASSES.text.brand}`} />
                   <span>Available for remote work</span>
                 </div>
               </div>
@@ -114,10 +135,10 @@ const Contact = () => {
                 </a>
                 <a
                   href="https://linkedin.com"
-                  className="w-12 h-12 bg-gradient-to-br from-blue-500/10 to-blue-600/10 rounded-lg flex items-center justify-center hover:from-blue-500/20 hover:to-blue-600/20 transition-all border border-blue-500/20 hover:border-blue-500/30"
+                  className={`w-12 h-12 bg-gradient-to-br ${THEME_CLASSES.gradient.brandSoft} rounded-lg flex items-center justify-center transition-all border ${THEME_CLASSES.border.brandSoft} hover:border-[color:var(--accent-border-medium)]`}
                   aria-label="LinkedIn"
                 >
-                  <Linkedin className="w-5 h-5 text-blue-500" />
+                  <Linkedin className={`w-5 h-5 ${THEME_CLASSES.text.brand}`} />
                 </a>
               </div>
             </div>
@@ -144,7 +165,7 @@ const Contact = () => {
                 className={`w-full px-4 py-3 rounded-lg border bg-background transition-colors ${
                   errors.name
                     ? "border-red-500"
-                    : "border-border focus:border-blue-500"
+                    : "border-border focus:border-[color:var(--accent-border-medium)]"
                 } focus:outline-none`}
                 placeholder="Your name"
               />
@@ -166,7 +187,7 @@ const Contact = () => {
                 className={`w-full px-4 py-3 rounded-lg border bg-background transition-colors ${
                   errors.email
                     ? "border-red-500"
-                    : "border-border focus:border-blue-500"
+                    : "border-border focus:border-[color:var(--accent-border-medium)]"
                 } focus:outline-none`}
                 placeholder="your.email@example.com"
               />
@@ -191,7 +212,7 @@ const Contact = () => {
                 className={`w-full px-4 py-3 rounded-lg border bg-background transition-colors resize-none ${
                   errors.message
                     ? "border-red-500"
-                    : "border-border focus:border-blue-500"
+                    : "border-border focus:border-[color:var(--accent-border-medium)]"
                 } focus:outline-none`}
                 placeholder="Tell me about your project or how I can help..."
               />
@@ -200,11 +221,18 @@ const Contact = () => {
               )}
             </div>
 
+            {submitSuccess && (
+              <div className="p-3 bg-green-500/10 text-green-500 rounded-lg text-sm text-center">
+                Thank you for your message! I&apos;ll get back to you soon.
+              </div>
+            )}
+
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 px-6 rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+              disabled={isSubmitting}
+              className={`w-full bg-gradient-to-r ${THEME_CLASSES.gradient.brand} text-white py-3 px-6 rounded-lg font-medium hover:brightness-105 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed`}
             >
-              Send Message
+              {isSubmitting ? "Sending..." : "Send Message"}
               <Send className="w-4 h-4" />
             </button>
           </motion.form>

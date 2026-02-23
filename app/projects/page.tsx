@@ -1,13 +1,69 @@
 "use client";
 
-import { motion } from "motion/react";
-import { Code2, ExternalLink, ArrowLeft } from "lucide-react";
+import { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { CaseStudyCard } from "@/components/ui";
+import { SearchAndFilters } from "@/components/SearchAndFilters";
+import { FilterChips } from "@/components/FilterChips";
 import { allProjects } from "../../data/projects";
+import {
+  categorizeProject,
+  extractMetrics,
+  getCategoryColor,
+  filterAndSearchProjects,
+  type ProjectCategory,
+  type Technology,
+} from "@/lib/projectUtils";
+import { THEME_CLASSES } from "@/lib/theme";
 
 export default function ProjectsPage() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState<ProjectCategory[]>([]);
+  const [selectedTechnologies, setSelectedTechnologies] = useState<Technology[]>([]);
+
+  // Filter and search projects (project data order is most recent first)
+  const filteredProjects = useMemo(() => {
+    return filterAndSearchProjects(allProjects, {
+      categories: selectedCategories.length > 0 ? selectedCategories : undefined,
+      technologies: selectedTechnologies.length > 0 ? selectedTechnologies : undefined,
+      searchQuery: searchQuery || undefined,
+    });
+  }, [searchQuery, selectedCategories, selectedTechnologies]);
+
+  const handleCategoryToggle = (category: ProjectCategory) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((c) => c !== category)
+        : [...prev, category]
+    );
+  };
+
+  const handleTechnologyToggle = (technology: Technology) => {
+    setSelectedTechnologies((prev) =>
+      prev.includes(technology)
+        ? prev.filter((t) => t !== technology)
+        : [...prev, technology]
+    );
+  };
+
+  const handleRemoveCategory = (category: ProjectCategory) => {
+    setSelectedCategories((prev) => prev.filter((c) => c !== category));
+  };
+
+  const handleRemoveTechnology = (technology: Technology) => {
+    setSelectedTechnologies((prev) => prev.filter((t) => t !== technology));
+  };
+
+  const handleClearAll = () => {
+    setSearchQuery("");
+    setSelectedCategories([]);
+    setSelectedTechnologies([]);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -15,89 +71,136 @@ export default function ProjectsPage() {
       <main className="pt-16">
         {/* Header Section */}
         <section className="py-12 px-6 relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5">
-            <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className={`absolute inset-0 bg-gradient-to-br ${THEME_CLASSES.gradient.brandSubtle}`}>
+            <div className={`absolute top-1/4 left-1/4 w-72 h-72 ${THEME_CLASSES.bg.brandSoft} rounded-full blur-3xl animate-pulse`}></div>
+            <div className={`absolute bottom-1/4 right-1/4 w-96 h-96 ${THEME_CLASSES.bg.brandSoft} rounded-full blur-3xl animate-pulse delay-1000`}></div>
           </div>
 
-          <div className="max-w-6xl mx-auto relative">
+          <div className="max-w-7xl mx-auto relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-16"
             >
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8"
+                className="inline-flex items-center gap-2 text-muted-foreground hover:text-[color:var(--primary)] transition-colors mb-6"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Back to Home
               </Link>
-              
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground via-blue-500 to-purple-500 bg-clip-text text-transparent leading-tight pb-2">
-                All Projects
+
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+                Case Studies
               </h1>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Explore my complete portfolio of cloud infrastructure projects, 
-                DevOps implementations, and enterprise solutions.
-              </p>
             </motion.div>
           </div>
         </section>
 
-        {/* Projects Grid */}
-        <section className="py-20 px-6 bg-secondary/20 relative">
+        {/* Search, Filters & Grid */}
+        <section className="py-16 px-6 relative">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-              {allProjects.map((project, index) => (
-                <Link href={`/projects/${project.slug}`} key={index}>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="bg-card rounded-lg p-6 border border-border hover:border-border/60 transition-all hover:shadow-lg group cursor-pointer h-full flex flex-col"
+            {/* Search & Filters */}
+            <SearchAndFilters
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+              selectedCategories={selectedCategories}
+              selectedTechnologies={selectedTechnologies}
+              onCategoryToggle={handleCategoryToggle}
+              onTechnologyToggle={handleTechnologyToggle}
+            />
+
+            {/* Active Filters Chips */}
+            <AnimatePresence>
+              <FilterChips
+                selectedCategories={selectedCategories}
+                selectedTechnologies={selectedTechnologies}
+                onRemoveCategory={handleRemoveCategory}
+                onRemoveTechnology={handleRemoveTechnology}
+                onClearAll={handleClearAll}
+              />
+            </AnimatePresence>
+
+            {/* Results Count */}
+            {(searchQuery || selectedCategories.length > 0 || selectedTechnologies.length > 0) && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-sm text-muted-foreground mb-6"
+              >
+                Found {filteredProjects.length} case {filteredProjects.length === 1 ? "study" : "studies"}
+              </motion.p>
+            )}
+
+            {/* Case Studies Grid */}
+            <AnimatePresence mode="wait">
+              {filteredProjects.length > 0 ? (
+                <motion.div
+                  key="grid"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6"
+                >
+                  {filteredProjects.map((project, index) => {
+                    const categories = categorizeProject(project);
+                    const { primary, statPills } = extractMetrics(project.metrics);
+                    const categoryColor = getCategoryColor(categories[0]);
+                    const primaryTopic = categories[0];
+                    const metricsDisplay = [primary, ...statPills.map((pill) => pill.label)]
+                      .slice(0, 2)
+                      .map((item) => {
+                        const parts = item.trim().split(/\s+/);
+
+                        if (parts[0] === "<" || parts[0] === ">") {
+                          return {
+                            value: `${parts[0]} ${parts[1] ?? ""}`.trim(),
+                            label: parts.slice(2).join(" "),
+                          };
+                        }
+
+                        return {
+                          value: parts[0] ?? "",
+                          label: parts.slice(1).join(" "),
+                        };
+                      });
+
+                    return (
+                      <CaseStudyCard
+                        key={project.slug}
+                        title={project.title}
+                        metrics={metricsDisplay}
+                        technologies={project.technologies.slice(0, 10)}
+                        thumbnailImage={project.caseStudy?.architecture?.image}
+                        thumbnailAlt={project.caseStudy?.architecture?.alt}
+                        topicBadge={primaryTopic}
+                        topicColor={categoryColor}
+                        href={`/projects/${project.slug}`}
+                        index={index}
+                      />
+                    );
+                  })}
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="empty"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="py-16 text-center"
+                >
+                  <p className="text-muted-foreground mb-6 text-lg">
+                    No case studies found matching your filters.
+                  </p>
+                  <button
+                    onClick={handleClearAll}
+                    className="px-4 py-2 rounded-lg bg-[color:var(--primary)] hover:bg-[color:var(--accent-hover)] text-white text-sm font-medium transition-colors"
                   >
-                    <div className="flex items-start justify-between mb-4">
-                      <div
-                        className={`w-12 h-12 bg-gradient-to-br ${project.gradient} rounded-lg flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity`}
-                      >
-                        <Code2 className="w-6 h-6 text-white" />
-                      </div>
-                      <div className="text-muted-foreground group-hover:text-foreground transition-colors">
-                        <ExternalLink className="w-5 h-5" />
-                      </div>
-                    </div>
-
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-xl mb-3">
-                        {project.title}
-                      </h3>
-                      <p className="text-muted-foreground mb-4">
-                        {project.description}
-                      </p>
-
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.technologies.map((tech, techIndex) => (
-                          <span
-                            key={techIndex}
-                            className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded border border-border/50"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <p
-                      className={`text-sm font-medium bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent mt-auto`}
-                    >
-                      {project.metrics}
-                    </p>
-                  </motion.div>
-                </Link>
-              ))}
-            </div>
+                    Clear all filters
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </section>
       </main>

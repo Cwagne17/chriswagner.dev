@@ -2,6 +2,7 @@
 
 import { Briefcase } from "lucide-react";
 import { motion } from "motion/react";
+import { THEME_CLASSES } from "@/lib/theme";
 import type { Experience as ExperienceType } from "../types/experience";
 
 interface ExperienceProps {
@@ -12,7 +13,7 @@ const Experience = ({ experience }: ExperienceProps) => {
   return (
     <section id="experience" className="py-20 px-6 bg-secondary/20 relative">
       {/* Background accent */}
-      <div className="absolute top-0 left-1/4 w-80 h-80 bg-gradient-to-br from-blue-500/5 to-transparent rounded-full blur-3xl"></div>
+      <div className={`absolute top-0 left-1/4 w-80 h-80 bg-gradient-to-br ${THEME_CLASSES.gradient.brandSubtle} rounded-full blur-3xl`}></div>
 
       <div className="max-w-4xl mx-auto relative">
         <motion.div
@@ -36,19 +37,19 @@ const Experience = ({ experience }: ExperienceProps) => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-card rounded-lg p-8 border border-border group hover:border-blue-500/20 transition-all"
+              className="bg-card rounded-lg p-8 border border-border group hover:border-[color:var(--accent-border-soft)] transition-all"
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:from-blue-500/20 group-hover:to-purple-500/20 transition-all">
-                  <Briefcase className="w-6 h-6 text-blue-500" />
+                <div className={`w-12 h-12 bg-gradient-to-br ${THEME_CLASSES.gradient.brandSoft} rounded-lg flex items-center justify-center flex-shrink-0 transition-all`}>
+                  <Briefcase className={`w-6 h-6 ${THEME_CLASSES.text.brand}`} />
                 </div>
                 <div className="flex-1">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                     <div>
                       <h3 className="font-semibold text-xl">{exp.company}</h3>
-                      <p className="text-blue-500 font-medium">{exp.role}</p>
+                      <p className={`${THEME_CLASSES.text.brand} font-medium`}>{exp.role}</p>
                     </div>
-                    <span className="text-muted-foreground font-medium bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-3 py-1 rounded-full text-sm">
+                    <span className={`text-muted-foreground font-medium bg-gradient-to-r ${THEME_CLASSES.gradient.brandSoft} px-3 py-1 rounded-full text-sm`}>
                       {exp.period}
                     </span>
                   </div>
@@ -60,7 +61,7 @@ const Experience = ({ experience }: ExperienceProps) => {
                   <ul className="space-y-2">
                     {exp.achievements.map((achievement, achIndex) => (
                       <li key={achIndex} className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div className={`w-1.5 h-1.5 bg-gradient-to-r ${THEME_CLASSES.gradient.brand} rounded-full mt-2 flex-shrink-0`}></div>
                         <span className="text-muted-foreground">
                           {achievement}
                         </span>

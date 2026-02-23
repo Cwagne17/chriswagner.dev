@@ -6,6 +6,7 @@ import {
   resendSignUpCode,
   signIn,
   signInWithRedirect,
+  signOut,
   signUp,
 } from "aws-amplify/auth";
 import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
@@ -13,7 +14,7 @@ import { motion } from "motion/react";
 import { useState } from "react";
 
 interface LoginFormProps {
-  onAuthSuccess: () => void;
+  readonly onAuthSuccess: () => void;
 }
 
 type AuthState = "signin" | "signup" | "confirm";
@@ -45,12 +46,15 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
     setError("");
 
     try {
-      // If there's already a signed-in user, do not call signIn again
-      const existingUser = await getCurrentUser().catch(() => null);
-      if (existingUser && existingUser.userId && existingUser.username) {
+      // If the user is already signed in, skip signIn call
+      const loginId = (await getCurrentUser().catch(() => null))?.signInDetails
+        ?.loginId;
+      if (loginId === formData.email) {
         onAuthSuccess();
         return;
       }
+
+      await signOut();
       await signIn({
         username: formData.email,
         password: formData.password,
@@ -173,7 +177,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
       >
         <div className="bg-card rounded-lg p-8 border border-border shadow-lg">
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 rounded-lg flex items-center justify-center mx-auto mb-4 bg-[color:var(--primary)]">
               <Lock className="w-8 h-8 text-white" />
             </div>
             <h2 className="text-2xl font-bold">
@@ -206,7 +210,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:border-blue-500 focus:outline-none"
+                    className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:border-[color:var(--primary)] focus:outline-none"
                     placeholder="admin@example.com"
                     required
                   />
@@ -224,7 +228,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    className="w-full pl-10 pr-12 py-3 bg-background border border-border rounded-lg focus:border-blue-500 focus:outline-none"
+                    className="w-full pl-10 pr-12 py-3 bg-background border border-border rounded-lg focus:border-[color:var(--primary)] focus:outline-none"
                     placeholder="••••••••"
                     required
                   />
@@ -245,7 +249,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all disabled:opacity-50"
+                className="w-full bg-[color:var(--primary)] text-white py-3 rounded-lg font-medium hover:brightness-110 transition-all disabled:opacity-50"
               >
                 {loading ? "Signing in..." : "Sign In"}
               </button>
@@ -293,7 +297,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                 <button
                   type="button"
                   onClick={() => setAuthState("signup")}
-                  className="text-blue-500 hover:underline"
+                  className="text-[color:var(--primary)] hover:underline"
                 >
                   Sign up
                 </button>
@@ -315,7 +319,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                       name="givenName"
                       value={formData.givenName}
                       onChange={handleInputChange}
-                      className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:border-blue-500 focus:outline-none"
+                      className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:border-[color:var(--primary)] focus:outline-none"
                       placeholder="John"
                       required
                     />
@@ -330,7 +334,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                     name="familyName"
                     value={formData.familyName}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:border-blue-500 focus:outline-none"
+                    className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:border-[color:var(--primary)] focus:outline-none"
                     placeholder="Doe"
                     required
                   />
@@ -346,7 +350,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:border-blue-500 focus:outline-none"
+                    className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:border-[color:var(--primary)] focus:outline-none"
                     placeholder="admin@example.com"
                     required
                   />
@@ -364,7 +368,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    className="w-full pl-10 pr-12 py-3 bg-background border border-border rounded-lg focus:border-blue-500 focus:outline-none"
+                    className="w-full pl-10 pr-12 py-3 bg-background border border-border rounded-lg focus:border-[color:var(--primary)] focus:outline-none"
                     placeholder="••••••••"
                     required
                     minLength={8}
@@ -394,7 +398,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
-                    className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:border-blue-500 focus:outline-none"
+                    className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:border-[color:var(--primary)] focus:outline-none"
                     placeholder="••••••••"
                     required
                   />
@@ -404,7 +408,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all disabled:opacity-50"
+                className="w-full bg-[color:var(--primary)] text-white py-3 rounded-lg font-medium hover:brightness-110 transition-all disabled:opacity-50"
               >
                 {loading ? "Creating account..." : "Create Account"}
               </button>
@@ -414,7 +418,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                 <button
                   type="button"
                   onClick={() => setAuthState("signin")}
-                  className="text-blue-500 hover:underline"
+                  className="text-[color:var(--primary)] hover:underline"
                 >
                   Sign in
                 </button>
@@ -433,7 +437,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                   name="confirmationCode"
                   value={formData.confirmationCode}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:border-blue-500 focus:outline-none text-center text-2xl tracking-widest"
+                  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:border-[color:var(--primary)] focus:outline-none text-center text-2xl tracking-widest"
                   placeholder="123456"
                   maxLength={6}
                   required
@@ -443,7 +447,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all disabled:opacity-50"
+                className="w-full bg-[color:var(--primary)] text-white py-3 rounded-lg font-medium hover:brightness-110 transition-all disabled:opacity-50"
               >
                 {loading ? "Confirming..." : "Confirm Account"}
               </button>
@@ -453,7 +457,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                 <button
                   type="button"
                   onClick={handleResendCode}
-                  className="text-blue-500 hover:underline"
+                  className="text-[color:var(--primary)] hover:underline"
                 >
                   Resend code
                 </button>
@@ -463,7 +467,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                 <button
                   type="button"
                   onClick={() => setAuthState("signin")}
-                  className="text-blue-500 hover:underline"
+                  className="text-[color:var(--primary)] hover:underline"
                 >
                   Back to sign in
                 </button>

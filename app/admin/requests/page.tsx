@@ -1,8 +1,10 @@
 "use client";
 
 import AdminLayout from "@/components/admin/AdminLayout";
+import { Button } from "@/components/ui";
 import { CheckCircle, Clock, Eye, Mail, User } from "lucide-react";
 import AuthWrapper from "../../../components/AuthWrapper";
+import { AuthGroups } from "../../../lib/auth-groups";
 
 function ServiceRequestsPage() {
   // Mock data - in real app this would come from your data source
@@ -193,15 +195,13 @@ function ServiceRequestsPage() {
                   <span>{formatDate(request.createdAt)}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button className="flex items-center gap-1 px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
-                    <Eye className="w-4 h-4" />
+                  <Button variant="secondary" size="sm" leftIcon={Eye}>
                     View Details
-                  </button>
+                  </Button>
                   {request.status === "New" && (
-                    <button className="flex items-center gap-1 px-3 py-1 text-sm bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
-                      <CheckCircle className="w-4 h-4" />
+                    <Button variant="primary" size="sm" leftIcon={CheckCircle}>
                       Respond
-                    </button>
+                    </Button>
                   )}
                 </div>
               </div>
@@ -215,7 +215,7 @@ function ServiceRequestsPage() {
 
 export default function AdminServiceRequestsPage() {
   return (
-    <AuthWrapper requiredGroup="ADMINS">
+    <AuthWrapper requiredGroup={AuthGroups.ADMINS}>
       <ServiceRequestsPage />
     </AuthWrapper>
   );

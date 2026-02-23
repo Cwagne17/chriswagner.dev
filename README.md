@@ -29,6 +29,25 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Accessibility Testing (Section 508 / WCAG)
+
+Automated accessibility scans are implemented with Playwright + axe-core.
+
+```bash
+# one-time browser install
+npx playwright install chromium
+
+# run automated a11y checks
+npm run test:a11y
+```
+
+Current scan targets:
+- `/`
+- `/projects`
+- `/services`
+
+The suite uses WCAG tags `wcag2a`, `wcag2aa`, `wcag21a`, and `wcag21aa` for Section 508-aligned automated checks.
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.

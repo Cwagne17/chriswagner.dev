@@ -1,80 +1,106 @@
 "use client";
 
+import { Cloud, Code2, Shield } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
+import { THEME_CLASSES } from "@/lib/theme";
+import { PillarCard } from "./ui/PillarCard";
 
 const About = () => {
+  const pillars = [
+    {
+      title: "Cloud Architecture",
+      icon: Cloud,
+      bullets: [
+        "Design scalable, resilient AWS infrastructure",
+        "Optimize for performance and cost efficiency"
+      ],
+      tools: ["AWS", "EKS", "WorkSpaces", "Lambda"]
+    },
+    {
+      title: "Infrastructure as Code",
+      icon: Code2,
+      bullets: [
+        "Automate deployments with Terraform & CDK",
+        "Enable self-service infrastructure provisioning"
+      ],
+      tools: ["Terraform", "AWS CDK", "CloudFormation"]
+    },
+    {
+      title: "Security & Compliance",
+      icon: Shield,
+      bullets: [
+        "Implement STIG controls and compliance automation",
+        "Build Zero Trust architectures"
+      ],
+      tools: ["STIG", "CCSP", "Zero Trust", "IAM"]
+    }
+  ];
+
   return (
-    <section id="about" className="py-20 px-6 relative">
-      {/* Subtle background accent */}
-      <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-bl from-blue-500/5 to-transparent rounded-full blur-3xl"></div>
-
-      <div className="max-w-4xl mx-auto relative">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
-
-          {/* Profile Picture */}
+    <section id="about" className="py-20 px-6 relative border-t border-border/50">
+      <div className="max-w-7xl mx-auto relative">
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Left Column - About Text */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="w-32 h-32 mx-auto mb-8 relative"
+            className="space-y-6"
           >
-            <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 border-2 border-gradient-to-r from-blue-500/30 to-purple-500/30 flex items-center justify-center overflow-hidden">
-              <Image
-                src="/portrait.jpeg"
-                alt="Christopher Wagner"
-                width={128}
-                height={128}
-                className="w-full h-full object-cover rounded-full"
-                priority
-              />
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                About
+              </h2>
+              <div className={`w-16 h-1 bg-gradient-to-r ${THEME_CLASSES.gradient.brand} rounded-full mb-6`} />
             </div>
-            {/* Animated ring */}
-            <div className="absolute inset-0 rounded-full border-2 border-blue-500/30 animate-pulse"></div>
-            <div className="absolute -inset-2 rounded-full border border-purple-500/20 animate-pulse delay-1000"></div>
+
+            {/* Profile Picture - Centered in left column */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="w-32 h-32 relative mx-auto"
+            >
+              <div className={`w-full h-full rounded-full bg-gradient-to-br ${THEME_CLASSES.gradient.brandSoft} p-1`}>
+                <div className="w-full h-full rounded-full overflow-hidden border-2 border-background">
+                  <Image
+                    src="/portrait.jpeg"
+                    alt="Christopher Wagner"
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-cover"
+                    priority
+                  />
+                </div>
+              </div>
+              {/* Animated ring */}
+              <div className="absolute inset-0 rounded-full border-2 border-[color:var(--accent-border-medium)] animate-pulse"></div>
+            </motion.div>
+            
+            <div className="space-y-4 text-muted-foreground max-w-prose">
+              <p className="leading-relaxed">
+                Cloud Engineer and Infrastructure Architect with five years of experience building secure, 
+                scalable AWS platforms. Currently at Naval Supply Systems Command (NAVSUP) and SecurEd Inc., 
+                focusing on compliance automation and Zero Trust architectures.
+              </p>
+              <p className="leading-relaxed">
+                I specialize in Infrastructure as Code, containerized workloads, and DevOps practices. 
+                My approach: automate everything, secure by default, and build systems that scale reliably. 
+                Certified in CCSP, AWS, and Kubernetes.
+              </p>
+            </div>
           </motion.div>
 
-          <div className="prose prose-lg mx-auto text-muted-foreground">
-            <p className="mb-6">
-              I am a passionate Cloud Engineer and Infrastructure Architect with
-              five years of experience designing, deploying, and optimizing
-              systems on Amazon Web Services (AWS). I currently work at the
-              Naval Supply Systems Command (NAVSUP) and with SecurEd Inc., where
-              I focus on building secure, scalable, and cost-effective cloud
-              solutions.
-            </p>
-            <p className="mb-6">
-              My expertise lies in Infrastructure as Code, DevOps practices, and
-              containerized architectures. I help development teams modernize
-              their applications by designing, deploying, and optimizing systems
-              that leverage containers and cloud-native services. Whether
-              re-platforming legacy workloads or implementing new cloud-native
-              solutions, I ensure that the architectures I deliver are
-              efficient, resilient, and aligned with business goals. I also hold
-              multiple certifications, including CCSP, AWS certifications, and
-              Kubernetes certifications.
-            </p>
-            <p>
-              I’m particularly passionate about automation, security, and
-              building architectures that are grounded in performance,
-              standardization, and best practices. I take pride in creating
-              solutions that not only work but work well — reliably,
-              efficiently, and in ways that can be repeated and scaled. Outside
-              of work, I love exploring open-source projects and keeping up with
-              the latest in technology. Beyond tech, I enjoy playing music,
-              challenging myself with CrossFit, and traveling to national parks
-              to recharge and find inspiration.
-            </p>
+          {/* Right Column - Pillars */}
+          <div className="space-y-4">
+            {pillars.map((pillar, index) => (
+              <PillarCard key={index} {...pillar} index={index} />
+            ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

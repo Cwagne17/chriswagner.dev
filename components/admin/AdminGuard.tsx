@@ -1,19 +1,18 @@
 "use client";
 
-import { getCurrentUserWithGroups } from "@/lib/auth-utils";
+import { isAdmin } from "@/lib/auth-utils";
 import { Shield, X } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface AdminGuardProps {
-  children: React.ReactNode;
+  readonly children: React.ReactNode;
 }
 
 export default function AdminGuard({ children }: AdminGuardProps) {
   const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(true);
-  const [userGroups, setUserGroups] = useState<string[]>([]);
 
   useEffect(() => {
     checkAdminAccess();
@@ -21,28 +20,7 @@ export default function AdminGuard({ children }: AdminGuardProps) {
 
   const checkAdminAccess = async () => {
     try {
-      const user = await getCurrentUserWithGroups();
-
-      if (!user) {
-        setIsAuthorized(false);
-        setLoading(false);
-        return;
-      }
-
-      console.log("🔍 Checking admin access for user:", user.username);
-      console.log("👥 User groups:", user.groups);
-
-      setUserGroups(user.groups);
-
-      // Check if user is in ADMINS group
-      const isAdmin = user.groups.includes("ADMINS");
-      setIsAuthorized(isAdmin);
-
-      if (!isAdmin) {
-        console.log("❌ Access denied: User not in ADMINS group");
-      } else {
-        console.log("✅ Access granted: User is admin");
-      }
+      await isAdmin(true);
     } catch (error) {
       console.error("❌ Error checking admin access:", error);
       setIsAuthorized(false);
@@ -80,14 +58,6 @@ export default function AdminGuard({ children }: AdminGuardProps) {
             <h2 className="text-2xl font-bold mb-2">Access Denied</h2>
             <p className="text-muted-foreground mb-6">
               You do not have permission to access the admin panel.
-              {userGroups.length > 0 && (
-                <>
-                  <br />
-                  <span className="text-sm">
-                    Your groups: {userGroups.join(", ")}
-                  </span>
-                </>
-              )}
             </p>
 
             <div className="space-y-3">
