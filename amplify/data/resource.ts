@@ -1,5 +1,5 @@
 import { a, defineData, type ClientSchema } from '@aws-amplify/backend';
-import { AuthGroups } from '../../lib/auth-groups';
+import { AuthGroups } from '../../lib/auth-groups.js';
 
 export enum Status {
     // Status enum for tracking progress of contact messages

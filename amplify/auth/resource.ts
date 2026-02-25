@@ -1,5 +1,5 @@
 import { defineAuth, secret } from '@aws-amplify/backend';
-import { AuthGroups } from '../../lib/auth-groups';
+import { AuthGroups } from '../../lib/auth-groups.js';
 
 /**
  * Define and configure your auth resource
