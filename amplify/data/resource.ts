@@ -37,7 +37,7 @@ const schema = a.schema({
         downloadUrl: a.string(),
         downloadDescription: a.string(),
         demoUrl: a.string(),
-        status: a.enum([Status.DRAFT, Status.PUBLISHED, Status.ARCHIVED]),
+        status: a.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']),
     }).authorization(allow => [allow.group(AuthGroups.ADMINS)]),
 
     Blog: a.model({
@@ -45,7 +45,7 @@ const schema = a.schema({
         title: a.string(),
         slug: a.string(),
         content: a.string(),
-        status: a.enum([Status.DRAFT, Status.PUBLISHED, Status.ARCHIVED]),
+        status: a.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']),
     }).authorization(allow => [allow.group(AuthGroups.ADMINS)]),
 
     // Contact message from contact form on the home page
@@ -53,7 +53,7 @@ const schema = a.schema({
         name: a.string(),
         email: a.string(),
         message: a.string(),
-        status: a.enum([Status.NEW, Status.IN_PROGRESS, Status.DONE]),
+        status: a.enum(['NEW', 'IN_PROGRESS', 'DONE']),
     }).authorization(allow => [allow.publicApiKey()]),
 });
 
