@@ -5,7 +5,6 @@ import {
   getCurrentUser,
   resendSignUpCode,
   signIn,
-  signInWithRedirect,
   signOut,
   signUp,
 } from "aws-amplify/auth";
@@ -153,17 +152,6 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       setError(message || "Failed to resend code");
-    }
-  };
-
-  const handleGoogleSignIn = async () => {
-    try {
-      setLoading(true);
-      await signInWithRedirect({ provider: "Google" });
-    } catch (err) {
-      const message = err instanceof Error ? err.message : String(err);
-      setError(message || "Google sign in failed");
-      setLoading(false);
     }
   };
 

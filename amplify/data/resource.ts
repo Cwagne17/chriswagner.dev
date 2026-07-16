@@ -1,5 +1,4 @@
 import { a, defineData, type ClientSchema } from '@aws-amplify/backend';
-import { AuthGroups } from '../../lib/auth-groups.js';
 
 export enum Status {
     // Status enum for tracking progress of contact messages
@@ -38,7 +37,7 @@ const schema = a.schema({
         downloadDescription: a.string(),
         demoUrl: a.string(),
         status: a.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']),
-    }).authorization(allow => [allow.group(AuthGroups.ADMINS)]),
+    }).authorization(allow => [allow.group('ADMINS')]),
 
     Blog: a.model({
         date: a.date(),
@@ -46,7 +45,7 @@ const schema = a.schema({
         slug: a.string(),
         content: a.string(),
         status: a.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']),
-    }).authorization(allow => [allow.group(AuthGroups.ADMINS)]),
+    }).authorization(allow => [allow.group('ADMINS')]),
 
     // Contact message from contact form on the home page
     Contact: a.model({
