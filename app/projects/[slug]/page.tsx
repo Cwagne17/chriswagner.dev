@@ -271,7 +271,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                       </p>
                       <a
                         href={project.caseStudy.resources.download.url}
-                        className={`inline-flex items-center gap-2 bg-gradient-to-r ${THEME_CLASSES.gradient.brand} text-white px-6 py-3 rounded-lg font-medium hover:brightness-105 transition-all shadow-lg hover:shadow-xl`}
+                        className="inline-flex items-center gap-2 bg-[color:var(--button-primary)] text-white px-6 py-3 rounded-lg font-medium hover:bg-[color:var(--button-primary-hover)] transition-all shadow-lg hover:shadow-xl"
                       >
                         Download PDF
                         <Download className="w-4 h-4" />

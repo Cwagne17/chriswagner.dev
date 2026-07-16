@@ -2,25 +2,18 @@
 
 import React from "react";
 import Link from "next/link";
-import { useTheme } from "next-themes";
-import { Moon, Sun, Menu, X, Mail } from "lucide-react";
+import { Menu, X, Mail } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { useScrollY } from "@/hooks/useScrollY";
 import { THEME_CLASSES } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
 function Navbar() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const scrollY = useScrollY();
   const shouldReduceMotion = useReducedMotion();
 
   const isScrolled = scrollY >= 80;
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Close menu on ESC
   React.useEffect(() => {
@@ -32,10 +25,6 @@ function Navbar() {
     window.addEventListener("keydown", handleEscape);
     return () => window.removeEventListener("keydown", handleEscape);
   }, []);
-
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -70,7 +59,7 @@ function Navbar() {
       {/* Skip to content link */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-[color:var(--primary)] focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--ring)] focus:ring-offset-2"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-[color:var(--button-primary)] focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--ring)] focus:ring-offset-2"
       >
         Skip to content
       </a>
@@ -125,7 +114,7 @@ function Navbar() {
             <button
               onClick={scrollToContact}
               className={cn(
-                `hidden md:flex items-center gap-2 px-4 py-2 bg-gradient-to-r ${THEME_CLASSES.gradient.brand} text-white rounded-lg text-sm font-medium hover:brightness-105 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--ring)] focus:ring-offset-2 transition-all`,
+                "hidden md:flex items-center gap-2 px-4 py-2 bg-[color:var(--button-primary)] text-white rounded-lg text-sm font-medium hover:bg-[color:var(--button-primary-hover)] shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--ring)] focus:ring-offset-2 transition-all",
                 isScrolled
                   ? "opacity-100 pointer-events-auto"
                   : "opacity-0 pointer-events-none"
@@ -138,20 +127,6 @@ function Navbar() {
             >
               <Mail className="w-4 h-4" />
               Contact
-            </button>
-
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors border border-border/50 hover:border-[color:var(--accent-border-medium)] focus:outline-none focus:ring-2 focus:ring-[color:var(--ring)] focus:ring-offset-2"
-              aria-label="Toggle theme"
-            >
-              {mounted &&
-                (theme === "dark" ? (
-                  <Sun className={`h-4 w-4 ${THEME_CLASSES.text.brand}`} />
-                ) : (
-                  <Moon className={`h-4 w-4 ${THEME_CLASSES.text.brand}`} />
-                ))}
             </button>
 
             {/* Mobile Menu Button */}

@@ -263,7 +263,7 @@ function Hero() {
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href="/#contact"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-[color:var(--primary)] px-6 py-3 font-medium text-white hover:brightness-110 hover:shadow-sm transition-all"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-[color:var(--button-primary)] px-6 py-3 font-medium text-white hover:bg-[color:var(--button-primary-hover)] hover:shadow-sm transition-all"
             >
               Discuss a Contract
               <ArrowRight className="w-4 h-4" />
@@ -412,7 +412,7 @@ function FinalCTA() {
         <div className="flex flex-col justify-center gap-4 sm:flex-row">
           <Link
             href="/#contact"
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-[color:var(--primary)] px-7 py-3 font-medium text-white hover:brightness-110 hover:shadow-sm transition-all"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-[color:var(--button-primary)] px-7 py-3 font-medium text-white hover:bg-[color:var(--button-primary-hover)] hover:shadow-sm transition-all"
           >
             Start a Conversation
             <ArrowRight className="h-4 w-4" />

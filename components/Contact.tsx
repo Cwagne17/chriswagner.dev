@@ -131,7 +131,7 @@ const Contact = () => {
                   className="w-12 h-12 bg-gradient-to-br from-gray-500/10 to-gray-600/10 rounded-lg flex items-center justify-center hover:from-gray-500/20 hover:to-gray-600/20 transition-all border border-gray-500/20 hover:border-gray-500/30"
                   aria-label="GitHub"
                 >
-                  <Github className="w-5 h-5 text-gray-500" />
+                  <Github className="w-5 h-5 text-foreground" />
                 </a>
                 <a
                   href="https://linkedin.com"
@@ -230,7 +230,7 @@ const Contact = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full bg-gradient-to-r ${THEME_CLASSES.gradient.brand} text-white py-3 px-6 rounded-lg font-medium hover:brightness-105 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed`}
+              className="w-full bg-[color:var(--button-primary)] text-white py-3 px-6 rounded-lg font-medium hover:bg-[color:var(--button-primary-hover)] transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? "Sending..." : "Send Message"}
               <Send className="w-4 h-4" />

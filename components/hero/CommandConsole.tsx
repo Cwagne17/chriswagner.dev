@@ -119,7 +119,7 @@ export function CommandConsole() {
             </div>
 
             {/* Title */}
-            <div className="text-sm font-mono text-slate-300 dark:text-slate-400">
+            <div className="text-sm font-mono text-white">
               {currentSession.title}
             </div>
 
@@ -132,7 +132,7 @@ export function CommandConsole() {
         <div className="relative px-4 py-4 font-mono text-sm min-h-[280px] max-h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-800">
           {displayedLines.length === 0 && !shouldReduceMotion ? (
             // Placeholder while loading
-            <div className="text-slate-500/50 animate-pulse">⌛</div>
+            <div className="text-white animate-pulse">⌛</div>
           ) : (
             <div className="space-y-1">
               {displayedLines.map((line, index) => (
@@ -157,7 +157,7 @@ export function CommandConsole() {
 
               {/* Blinking cursor */}
               <div className="inline-block">
-                <span className="text-slate-300 dark:text-slate-400 animate-pulse">
+                <span className="text-white animate-pulse">
                   █
                 </span>
               </div>
@@ -212,5 +212,5 @@ function ConsoleLine({ line }: { line: string }) {
   }
 
   // Default - normal console text
-  return <div className="text-slate-300 dark:text-slate-300">{line}</div>;
+  return <div className="text-white">{line}</div>;
 }
