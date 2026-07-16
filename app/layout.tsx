@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import AmplifyProvider from "../components/AmplifyProvider";
-import { ThemeProvider } from "../components/theme-provider";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -20,17 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" style={{ colorScheme: "dark" }}>
       <body className={`${outfit.className} antialiased`}>
         <AmplifyProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
+          {children}
         </AmplifyProvider>
       </body>
     </html>

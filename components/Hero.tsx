@@ -91,7 +91,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.9 }}
-              className="text-xs text-muted-foreground/60"
+              className="text-xs text-foreground"
             >
               Currently: Zero Trust architectures + multi-account AWS platforms
             </motion.p>

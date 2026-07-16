@@ -33,7 +33,6 @@
 
 ### Always Visible (both states):
 - **Brand** (Chris Wagner) → `/`
-- **Theme Toggle** (Sun/Moon icon)
 
 ### Appears After Scroll:
 - **Contact Button** (gradient blue-purple with Mail icon)
@@ -233,7 +232,7 @@ The scroll detection is page-independent and resets when navigating.
 ## 🎯 **User Experience Flow**
 
 ### New Visitor (Top of Page):
-1. Sees minimal navbar (brand + theme toggle)
+1. Sees a minimal navbar with the brand
 2. Focuses on hero content
 3. No visual clutter
 
@@ -244,7 +243,7 @@ The scroll detection is page-independent and resets when navigating.
 4. Background becomes opaque for readability
 
 ### On Mobile:
-1. Always see brand + theme + menu button
+1. Always see the brand and menu button
 2. Tap menu to see all links
 3. Tap link to navigate + close menu
 4. Tap outside or ESC to close
@@ -264,10 +263,10 @@ The scroll detection is page-independent and resets when navigating.
 - User presses ESC
 - User clicks menu button again
 
-### ✅ Theme Toggle:
-- Works in both scroll states
-- Icon changes based on current theme
-- Mounted check prevents hydration mismatch
+### ✅ Dark-Only Theme:
+- Applied before the page renders
+- Consistent across every route
+- No theme-state hydration step required
 
 ### ✅ Reduced Motion:
 - All animations respect `prefers-reduced-motion`

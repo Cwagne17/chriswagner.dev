@@ -23,12 +23,12 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // Primary - accent gradient with glow border
+        // Primary - solid blue for strong text contrast
         primary: [
-          `bg-gradient-to-br ${THEME_CLASSES.gradient.brand}`,
+          "bg-[color:var(--button-primary)]",
           "text-white shadow-lg",
           `border ${THEME_CLASSES.border.brandSoft}`,
-          "hover:brightness-105",
+          "hover:bg-[color:var(--button-primary-hover)]",
           "hover:shadow-xl hover:-translate-y-0.5",
         ],
         // Secondary - subtle elevated surface

@@ -5,8 +5,16 @@ const SAFE_PRACTITIONER_BADGE_URL = "https://images.credly.com/size/110x110/imag
 const SOLUTIONS_ARCHITECT_BADGE_URL = "https://images.credly.com/size/110x110/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png"
 const CLOUD_PRACTITIONER_BADGE_URL = "https://images.credly.com/size/110x110/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png";
 const CCSP_BADGE_URL = "https://images.credly.com/size/110x110/images/38b12225-5b48-44e1-8750-20928cc595ea/image.png";
+const AWS_SECURITY_SPECIALTY_BADGE_URL = "https://images.credly.com/size/340x340/images/53acdae5-d69f-4dda-b650-d02ed7a50dd7/image.png";
 
 export const certifications: Certification[] = [
+    {
+        title: "AWS Certified Security – Specialty",
+        issuer: "Amazon Web Services",
+        date: "2026",
+        link: "https://www.credly.com/badges/5f71cf33-e4d0-41a9-8ceb-3f4de8557909",
+        badge: AWS_SECURITY_SPECIALTY_BADGE_URL,
+    },
     {
         title: "Certified Cloud Security Professional (CCSP)",
         issuer: "ISC2",

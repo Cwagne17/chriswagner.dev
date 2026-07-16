@@ -249,7 +249,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[color:var(--primary)] text-white py-3 rounded-lg font-medium hover:brightness-110 transition-all disabled:opacity-50"
+                className="w-full bg-[color:var(--button-primary)] text-white py-3 rounded-lg font-medium hover:bg-[color:var(--button-primary-hover)] transition-all disabled:opacity-50"
               >
                 {loading ? "Signing in..." : "Sign In"}
               </button>
@@ -269,7 +269,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
                 type="button"
                 onClick={handleGoogleSignIn}
                 disabled={loading}
-                className="w-full bg-white text-gray-700 border border-gray-300 py-3 rounded-lg font-medium hover:bg-gray-50 transition-all disabled:opacity-50 flex items-center justify-center gap-3"
+                className="w-full bg-secondary text-white border border-border py-3 rounded-lg font-medium hover:bg-secondary/80 transition-all disabled:opacity-50 flex items-center justify-center gap-3"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
@@ -408,7 +408,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[color:var(--primary)] text-white py-3 rounded-lg font-medium hover:brightness-110 transition-all disabled:opacity-50"
+                className="w-full bg-[color:var(--button-primary)] text-white py-3 rounded-lg font-medium hover:bg-[color:var(--button-primary-hover)] transition-all disabled:opacity-50"
               >
                 {loading ? "Creating account..." : "Create Account"}
               </button>
@@ -447,7 +447,7 @@ export default function LoginForm({ onAuthSuccess }: LoginFormProps) {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[color:var(--primary)] text-white py-3 rounded-lg font-medium hover:brightness-110 transition-all disabled:opacity-50"
+                className="w-full bg-[color:var(--button-primary)] text-white py-3 rounded-lg font-medium hover:bg-[color:var(--button-primary-hover)] transition-all disabled:opacity-50"
               >
                 {loading ? "Confirming..." : "Confirm Account"}
               </button>

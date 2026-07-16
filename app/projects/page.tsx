@@ -194,7 +194,7 @@ export default function ProjectsPage() {
                   </p>
                   <button
                     onClick={handleClearAll}
-                    className="px-4 py-2 rounded-lg bg-[color:var(--primary)] hover:bg-[color:var(--accent-hover)] text-white text-sm font-medium transition-colors"
+                    className="px-4 py-2 rounded-lg bg-[color:var(--button-primary)] hover:bg-[color:var(--button-primary-hover)] text-white text-sm font-medium transition-colors"
                   >
                     Clear all filters
                   </button>

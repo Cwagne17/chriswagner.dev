@@ -1,9 +1,10 @@
 "use client";
 
-import { Cloud, Code2, Shield } from "lucide-react";
+import { THEME_CLASSES } from "@/lib/theme";
+import { Cloud, Code2, Download, Shield } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
-import { THEME_CLASSES } from "@/lib/theme";
+import { buttonVariants } from "./ui/Button";
 import { PillarCard } from "./ui/PillarCard";
 
 const About = () => {
@@ -13,32 +14,35 @@ const About = () => {
       icon: Cloud,
       bullets: [
         "Design scalable, resilient AWS infrastructure",
-        "Optimize for performance and cost efficiency"
+        "Optimize for performance and cost efficiency",
       ],
-      tools: ["AWS", "EKS", "WorkSpaces", "Lambda"]
+      tools: ["AWS", "EKS", "WorkSpaces", "Lambda"],
     },
     {
       title: "Infrastructure as Code",
       icon: Code2,
       bullets: [
         "Automate deployments with Terraform & CDK",
-        "Enable self-service infrastructure provisioning"
+        "Enable self-service infrastructure provisioning",
       ],
-      tools: ["Terraform", "AWS CDK", "CloudFormation"]
+      tools: ["Terraform", "AWS CDK", "CloudFormation"],
     },
     {
       title: "Security & Compliance",
       icon: Shield,
       bullets: [
         "Implement STIG controls and compliance automation",
-        "Build Zero Trust architectures"
+        "Build Zero Trust architectures",
       ],
-      tools: ["STIG", "CCSP", "Zero Trust", "IAM"]
-    }
+      tools: ["STIG", "CCSP", "Zero Trust", "IAM"],
+    },
   ];
 
   return (
-    <section id="about" className="py-20 px-6 relative border-t border-border/50">
+    <section
+      id="about"
+      className="py-20 px-6 relative border-t border-border/50"
+    >
       <div className="max-w-7xl mx-auto relative">
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Left Column - About Text */}
@@ -53,7 +57,9 @@ const About = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 About
               </h2>
-              <div className={`w-16 h-1 bg-gradient-to-r ${THEME_CLASSES.gradient.brand} rounded-full mb-6`} />
+              <div
+                className={`w-16 h-1 bg-gradient-to-r ${THEME_CLASSES.gradient.brand} rounded-full mb-6`}
+              />
             </div>
 
             {/* Profile Picture - Centered in left column */}
@@ -64,7 +70,9 @@ const About = () => {
               viewport={{ once: true }}
               className="w-32 h-32 relative mx-auto"
             >
-              <div className={`w-full h-full rounded-full bg-gradient-to-br ${THEME_CLASSES.gradient.brandSoft} p-1`}>
+              <div
+                className={`w-full h-full rounded-full bg-gradient-to-br ${THEME_CLASSES.gradient.brandSoft} p-1`}
+              >
                 <div className="w-full h-full rounded-full overflow-hidden border-2 border-background">
                   <Image
                     src="/portrait.jpeg"
@@ -79,19 +87,30 @@ const About = () => {
               {/* Animated ring */}
               <div className="absolute inset-0 rounded-full border-2 border-[color:var(--accent-border-medium)] animate-pulse"></div>
             </motion.div>
-            
+
             <div className="space-y-4 text-muted-foreground max-w-prose">
               <p className="leading-relaxed">
-                Cloud Engineer and Infrastructure Architect with five years of experience building secure, 
-                scalable AWS platforms. Currently at Naval Supply Systems Command (NAVSUP) and SecurEd Inc., 
-                focusing on compliance automation and Zero Trust architectures.
+                Cloud Engineer and Infrastructure Architect with five years of
+                experience building secure, scalable AWS platforms. Currently at
+                Naval Supply Systems Command (NAVSUP) and SecurEd Inc., focusing
+                on compliance automation and Zero Trust architectures.
               </p>
               <p className="leading-relaxed">
-                I specialize in Infrastructure as Code, containerized workloads, and DevOps practices. 
-                My approach: automate everything, secure by default, and build systems that scale reliably. 
-                Certified in CCSP, AWS, and Kubernetes.
+                I specialize in Infrastructure as Code, containerized workloads,
+                and DevOps practices. My approach: automate everything, secure
+                by default, and build systems that scale reliably. Certified in
+                CCSP, AWS, and Kubernetes.
               </p>
             </div>
+
+            <a
+              href="/Wagner_Christopher_Resume.pdf"
+              download="Christopher_Wagner_Resume.pdf"
+              className={buttonVariants({ size: "lg", className: "w-fit" })}
+            >
+              <Download className="h-4 w-4" aria-hidden="true" />
+              Download Resume
+            </a>
           </motion.div>
 
           {/* Right Column - Pillars */}

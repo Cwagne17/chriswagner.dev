@@ -83,7 +83,7 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
                       />
                     </>
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-muted-foreground/60">
+                    <div className="w-full h-full flex items-center justify-center text-foreground">
                       Architecture Diagram
                     </div>
                   )}

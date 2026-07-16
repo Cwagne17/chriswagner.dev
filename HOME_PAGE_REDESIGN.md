@@ -195,7 +195,7 @@ Added to:
 
 - **Components**: All use Tailwind classes (no inline styles)
 - **Animations**: Motion (Framer Motion) for entrance animations
-- **Theme**: Works with next-themes dark mode
+- **Theme**: Uses a permanent dark color scheme
 - **Responsive**: Mobile-first grid breakpoints
 - **Performance**: No layout shift, optimized animations
 

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-/* Enable dark theme support */
+/* Dark-only theme support */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
@@ -54,29 +54,31 @@
   --r-lg: 0.75rem;
   --r-xl: 1rem;
 
-  /* Authoritative palette (light/paper mode) */
-  --bg: oklch(0.959 0.010 81.8);
-  --bg-elev-1: oklch(0.985 0.008 81.5);
-  --bg-elev-2: oklch(0.887 0.030 78.8);
-  --fg: oklch(0.275 0.019 258.4);
-  --muted: oklch(0.635 0.027 77.3);
-  --muted-2: oklch(0.74 0.020 79.0);
-  --border: oklch(0.83 0.020 79.4);
-  --border-strong: oklch(0.73 0.028 78.8);
+  /* Authoritative dark palette */
+  --bg: oklch(0.16 0.022 258.4);
+  --bg-elev-1: oklch(0.22 0.020 259.8);
+  --bg-elev-2: oklch(0.27 0.018 258.8);
+  --fg: oklch(1 0 0);
+  --muted: oklch(1 0 0);
+  --muted-2: oklch(1 0 0);
+  --border: oklch(1 0 0 / 0.10);
+  --border-strong: oklch(1 0 0 / 0.18);
   --sand: oklch(0.863 0.036 79.7);
   --bone: oklch(0.887 0.030 78.8);
 
   /* Accent (10%) */
-  --primary: oklch(0.663 0.116 73.2);
-  --accent-hover: oklch(0.720 0.148 69.3);
-  --accent-soft: rgb(190 135 55 / 0.14);
-  --accent-border-soft: rgb(190 135 55 / 0.20);
-  --accent-border-medium: rgb(190 135 55 / 0.45);
+  --primary: oklch(0.70 0.16 250);
+  --accent-hover: oklch(0.76 0.14 244);
+  --accent-soft: rgb(59 130 246 / 0.16);
+  --accent-border-soft: rgb(59 130 246 / 0.24);
+  --accent-border-medium: rgb(59 130 246 / 0.50);
+  --button-primary: #2563eb;
+  --button-primary-hover: #1d4ed8;
 
   /* Shadows and glow */
-  --shadow: 0 1px 2px oklch(0 0 0 / 0.06), 0 4px 10px oklch(0 0 0 / 0.04);
-  --shadow-lg: 0 8px 20px oklch(0 0 0 / 0.10), 0 2px 6px oklch(0 0 0 / 0.05);
-  --glow: 0 0 0 1px var(--accent-border-soft), 0 0 10px rgb(190 135 55 / 0.16);
+  --shadow: 0 2px 8px oklch(0 0 0 / 0.35), 0 1px 3px oklch(0 0 0 / 0.25);
+  --shadow-lg: 0 14px 24px oklch(0 0 0 / 0.45), 0 6px 12px oklch(0 0 0 / 0.30);
+  --glow: 0 0 0 1px var(--accent-border-soft), 0 0 12px rgb(59 130 246 / 0.22);
 
   /* Hero atmosphere */
   --hero-bg: var(--bg);
@@ -85,63 +87,6 @@
 
   /* shadcn compatibility mapping */
   --radius: 0.625rem;
-  --background: var(--bg);
-  --foreground: var(--fg);
-  --card: var(--bg-elev-1);
-  --card-foreground: var(--fg);
-  --popover: var(--bg-elev-1);
-  --popover-foreground: var(--fg);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: var(--bg-elev-2);
-  --secondary-foreground: var(--fg);
-  --muted-foreground: var(--muted);
-  --accent: var(--accent-soft);
-  --accent-foreground: var(--fg);
-  --destructive: oklch(0.577 0.245 27.325);
-  --input: var(--bg-elev-1);
-  --ring: var(--primary);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: var(--bg-elev-1);
-  --sidebar-foreground: var(--fg);
-  --sidebar-primary: var(--primary);
-  --sidebar-primary-foreground: var(--primary-foreground);
-  --sidebar-accent: var(--accent-soft);
-  --sidebar-accent-foreground: var(--fg);
-  --sidebar-border: var(--border);
-  --sidebar-ring: var(--ring);
-}
-
-.dark {
-  /* Authoritative palette (dark mode) */
-  --bg: oklch(0.275 0.019 258.4);
-  --bg-elev-1: oklch(0.362 0.015 259.8);
-  --bg-elev-2: oklch(0.41 0.014 258.8);
-  --fg: oklch(0.98 0 0);
-  --muted: oklch(0.78 0.01 80.0);
-  --muted-2: oklch(0.64 0.01 79.0);
-  --border: oklch(1 0 0 / 0.10);
-  --border-strong: oklch(1 0 0 / 0.18);
-  --sand: oklch(0.863 0.036 79.7);
-  --bone: oklch(0.887 0.030 78.8);
-  --primary: oklch(0.663 0.116 73.2);
-  --accent-hover: oklch(0.720 0.148 69.3);
-  --accent-soft: rgb(190 135 55 / 0.16);
-  --accent-border-soft: rgb(190 135 55 / 0.24);
-  --accent-border-medium: rgb(190 135 55 / 0.50);
-  --shadow: 0 2px 8px oklch(0 0 0 / 0.35), 0 1px 3px oklch(0 0 0 / 0.25);
-  --shadow-lg: 0 14px 24px oklch(0 0 0 / 0.45), 0 6px 12px oklch(0 0 0 / 0.30);
-  --glow: 0 0 0 1px var(--accent-border-soft), 0 0 12px rgb(190 135 55 / 0.22);
-
-  /* Hero atmosphere */
-  --hero-bg: var(--bg);
-  --hero-glow-accent: color-mix(in oklch, var(--primary) 25%, var(--bg));
-  --hero-glow-neutral: color-mix(in oklch, var(--sand) 18%, var(--bg));
-
-  /* shadcn compatibility mapping */
   --background: var(--bg);
   --foreground: var(--fg);
   --card: var(--bg-elev-1);
@@ -178,6 +123,10 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  ::placeholder {
+    color: var(--fg);
+    opacity: 1;
   }
 }
 
