@@ -11,36 +11,26 @@ import { SearchAndFilters } from "@/components/SearchAndFilters";
 import { FilterChips } from "@/components/FilterChips";
 import { allProjects } from "../../data/projects";
 import {
-  categorizeProject,
-  extractMetrics,
-  getCategoryColor,
   filterAndSearchProjects,
-  type ProjectCategory,
   type Technology,
 } from "@/lib/projectUtils";
 import { THEME_CLASSES } from "@/lib/theme";
 
+const AVAILABLE_TECHNOLOGIES = Array.from(
+  new Set(allProjects.flatMap((project) => project.technologies)),
+).sort((a, b) => a.localeCompare(b));
+
 export default function ProjectsPage() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategories, setSelectedCategories] = useState<ProjectCategory[]>([]);
   const [selectedTechnologies, setSelectedTechnologies] = useState<Technology[]>([]);
 
   // Filter and search projects (project data order is most recent first)
   const filteredProjects = useMemo(() => {
     return filterAndSearchProjects(allProjects, {
-      categories: selectedCategories.length > 0 ? selectedCategories : undefined,
       technologies: selectedTechnologies.length > 0 ? selectedTechnologies : undefined,
       searchQuery: searchQuery || undefined,
     });
-  }, [searchQuery, selectedCategories, selectedTechnologies]);
-
-  const handleCategoryToggle = (category: ProjectCategory) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category)
-        ? prev.filter((c) => c !== category)
-        : [...prev, category]
-    );
-  };
+  }, [searchQuery, selectedTechnologies]);
 
   const handleTechnologyToggle = (technology: Technology) => {
     setSelectedTechnologies((prev) =>
@@ -50,17 +40,12 @@ export default function ProjectsPage() {
     );
   };
 
-  const handleRemoveCategory = (category: ProjectCategory) => {
-    setSelectedCategories((prev) => prev.filter((c) => c !== category));
-  };
-
   const handleRemoveTechnology = (technology: Technology) => {
     setSelectedTechnologies((prev) => prev.filter((t) => t !== technology));
   };
 
   const handleClearAll = () => {
     setSearchQuery("");
-    setSelectedCategories([]);
     setSelectedTechnologies([]);
   };
 
@@ -104,25 +89,22 @@ export default function ProjectsPage() {
             <SearchAndFilters
               searchQuery={searchQuery}
               onSearchChange={setSearchQuery}
-              selectedCategories={selectedCategories}
+              availableTechnologies={AVAILABLE_TECHNOLOGIES}
               selectedTechnologies={selectedTechnologies}
-              onCategoryToggle={handleCategoryToggle}
               onTechnologyToggle={handleTechnologyToggle}
             />
 
             {/* Active Filters Chips */}
             <AnimatePresence>
               <FilterChips
-                selectedCategories={selectedCategories}
                 selectedTechnologies={selectedTechnologies}
-                onRemoveCategory={handleRemoveCategory}
                 onRemoveTechnology={handleRemoveTechnology}
                 onClearAll={handleClearAll}
               />
             </AnimatePresence>
 
             {/* Results Count */}
-            {(searchQuery || selectedCategories.length > 0 || selectedTechnologies.length > 0) && (
+            {(searchQuery || selectedTechnologies.length > 0) && (
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -142,44 +124,18 @@ export default function ProjectsPage() {
                   exit={{ opacity: 0 }}
                   className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6"
                 >
-                  {filteredProjects.map((project, index) => {
-                    const categories = categorizeProject(project);
-                    const { primary, statPills } = extractMetrics(project.metrics);
-                    const categoryColor = getCategoryColor(categories[0]);
-                    const primaryTopic = categories[0];
-                    const metricsDisplay = [primary, ...statPills.map((pill) => pill.label)]
-                      .slice(0, 2)
-                      .map((item) => {
-                        const parts = item.trim().split(/\s+/);
-
-                        if (parts[0] === "<" || parts[0] === ">") {
-                          return {
-                            value: `${parts[0]} ${parts[1] ?? ""}`.trim(),
-                            label: parts.slice(2).join(" "),
-                          };
-                        }
-
-                        return {
-                          value: parts[0] ?? "",
-                          label: parts.slice(1).join(" "),
-                        };
-                      });
-
-                    return (
+                  {filteredProjects.map((project, index) => (
                       <CaseStudyCard
                         key={project.slug}
                         title={project.title}
-                        metrics={metricsDisplay}
+                        description={project.description}
                         technologies={project.technologies.slice(0, 10)}
                         thumbnailImage={project.caseStudy?.architecture?.image}
                         thumbnailAlt={project.caseStudy?.architecture?.alt}
-                        topicBadge={primaryTopic}
-                        topicColor={categoryColor}
                         href={`/projects/${project.slug}`}
                         index={index}
                       />
-                    );
-                  })}
+                  ))}
                 </motion.div>
               ) : (
                 <motion.div

@@ -23,7 +23,7 @@ const Certifications = ({ certifications }: CertificationsProps) => {
           className="mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Certifications & Credentials
+            Certifications
           </h2>
           <div className={`w-16 h-1 bg-gradient-to-r ${THEME_CLASSES.gradient.brand} rounded-full`} />
           <p className="text-muted-foreground mt-4 max-w-prose">
@@ -48,7 +48,7 @@ const Certifications = ({ certifications }: CertificationsProps) => {
               {/* Content */}
               <div className="relative z-10">
                 {/* Badge/Icon Container */}
-                <div className={`w-16 h-16 mb-4 bg-gradient-to-br ${THEME_CLASSES.gradient.brandSoft} rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-[1.02] overflow-hidden border ${THEME_CLASSES.border.brandSoft}`}>
+                <div className="w-16 h-16 mb-4 bg-white rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-[1.02] overflow-hidden border border-white/80 shadow-sm">
                   {cert.badge ? (
                     <Image
                       src={cert.badge}

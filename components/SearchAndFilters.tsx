@@ -2,37 +2,30 @@
 
 import { Search, ChevronDown, Check } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import type { ProjectCategory, Technology } from "@/lib/projectUtils";
-import { AVAILABLE_TECHNOLOGIES } from "@/lib/projectUtils";
+import type { Technology } from "@/lib/projectUtils";
 import { THEME_CLASSES } from "@/lib/theme";
 
 interface SearchAndFiltersProps {
   searchQuery: string;
   onSearchChange: (query: string) => void;
-  selectedCategories: ProjectCategory[];
+  availableTechnologies: Technology[];
   selectedTechnologies: Technology[];
-  onCategoryToggle: (category: ProjectCategory) => void;
   onTechnologyToggle: (technology: Technology) => void;
 }
-
-const CATEGORIES: ProjectCategory[] = ["Security", "Cloud Infra", "DevOps", "Identity", "VDI", "Modernization"];
 
 export function SearchAndFilters({
   searchQuery,
   onSearchChange,
-  selectedCategories,
+  availableTechnologies,
   selectedTechnologies,
-  onCategoryToggle,
   onTechnologyToggle,
 }: SearchAndFiltersProps) {
-  const [showTopicFilters, setShowTopicFilters] = useState(false);
   const [showTechFilters, setShowTechFilters] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (!containerRef.current?.contains(event.target as Node)) {
-        setShowTopicFilters(false);
         setShowTechFilters(false);
       }
     };
@@ -61,45 +54,7 @@ export function SearchAndFilters({
 
         <div className="relative">
           <button
-            onClick={() => {
-              setShowTopicFilters(!showTopicFilters);
-              setShowTechFilters(false);
-            }}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-secondary/50 border border-border hover:border-[color:var(--accent-border-medium)] transition-colors whitespace-nowrap text-sm font-medium"
-          >
-            Topic {selectedCategories.length > 0 ? `(${selectedCategories.length})` : ""}
-            <ChevronDown className="h-4 w-4" />
-          </button>
-
-          {showTopicFilters && (
-            <div className="absolute right-0 top-full mt-2 min-w-[220px] bg-card border border-border rounded-lg shadow-lg z-20 overflow-hidden">
-              {CATEGORIES.map((category) => {
-                const isSelected = selectedCategories.includes(category);
-                return (
-                  <button
-                    key={category}
-                    onClick={() => onCategoryToggle(category)}
-                    className={`flex items-center justify-between w-full px-4 py-2 text-left text-sm transition-colors ${
-                      isSelected
-                        ? `${THEME_CLASSES.bg.brandSoft} ${THEME_CLASSES.text.brandStrong}`
-                        : "text-foreground hover:bg-secondary"
-                    }`}
-                  >
-                    <span>{category}</span>
-                    {isSelected && <Check className="h-4 w-4" />}
-                  </button>
-                );
-              })}
-            </div>
-          )}
-        </div>
-
-        <div className="relative">
-          <button
-            onClick={() => {
-              setShowTechFilters(!showTechFilters);
-              setShowTopicFilters(false);
-            }}
+            onClick={() => setShowTechFilters(!showTechFilters)}
             className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-secondary/50 border border-border hover:border-[color:var(--accent-border-medium)] transition-colors whitespace-nowrap text-sm font-medium"
           >
             Technologies {selectedTechnologies.length > 0 ? `(${selectedTechnologies.length})` : ""}
@@ -108,7 +63,7 @@ export function SearchAndFilters({
 
           {showTechFilters && (
             <div className="absolute right-0 top-full mt-2 min-w-[220px] max-h-72 overflow-auto bg-card border border-border rounded-lg shadow-lg z-20">
-              {AVAILABLE_TECHNOLOGIES.map((tech) => {
+              {availableTechnologies.map((tech) => {
                 const isSelected = selectedTechnologies.includes(tech);
                 return (
                   <button

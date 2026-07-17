@@ -3,17 +3,14 @@
 import Link from "next/link";
 import { motion, type HTMLMotionProps } from "motion/react";
 import { forwardRef } from "react";
-import { THEME_CLASSES } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
 export interface CaseStudyCardProps extends Omit<HTMLMotionProps<"div">, "title"> {
   title: string;
-  metrics: Array<{ label: string; value: string }>;
+  description: string;
   technologies: string[];
   thumbnailImage?: string;
   thumbnailAlt?: string;
-  topicBadge: string;
-  topicColor: string; // Tailwind gradient class
   href: string;
   index?: number;
 }
@@ -22,12 +19,10 @@ const CaseStudyCard = forwardRef<HTMLDivElement, CaseStudyCardProps>(
   (
     {
       title,
-      metrics,
+      description,
       technologies,
       thumbnailImage,
       thumbnailAlt,
-      topicBadge,
-      topicColor,
       href,
       index = 0,
       className,
@@ -75,38 +70,19 @@ const CaseStudyCard = forwardRef<HTMLDivElement, CaseStudyCardProps>(
                 </div>
               )}
 
-              {/* Topic Badge (top-left overlay) */}
-              <div className="absolute top-3 left-3 z-10">
-                <span className={cn(
-                  "inline-block px-2.5 py-1 rounded text-xs font-semibold",
-                  "bg-gradient-to-r text-white",
-                  topicColor
-                )}>
-                  {topicBadge}
-                </span>
-              </div>
             </div>
 
             {/* Bottom area: Content */}
             <div className="relative flex-1 p-4 flex flex-col bg-card">
               {/* Title */}
-              <h3 className="text-base font-semibold text-foreground line-clamp-2 mb-4">
+              <h3 className="text-base font-semibold text-foreground line-clamp-2 mb-2">
                 {title}
               </h3>
 
-              {/* Metrics */}
-              {metrics.length > 0 && (
-                <div className="mb-4">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <span className={`text-xl font-bold ${THEME_CLASSES.text.brandStrong} leading-none shrink-0`}>
-                      {metrics[0]?.value}
-                    </span>
-                    <span className="text-sm text-muted-foreground truncate">
-                      {metrics[0]?.label}
-                    </span>
-                  </div>
-                </div>
-              )}
+              {/* Description */}
+              <p className="text-sm leading-relaxed text-muted-foreground line-clamp-3 mb-4">
+                {description}
+              </p>
 
               {/* Technology Pills */}
               {technologies.length > 0 && (

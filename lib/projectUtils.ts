@@ -1,55 +1,7 @@
 import type { Project } from "@/types/project";
-import { PROJECT_CATEGORY_GRADIENTS } from "@/lib/theme";
 
-export type ProjectCategory = "Security" | "Cloud Infra" | "DevOps" | "Identity" | "VDI" | "Modernization";
-export type Technology = "AWS" | "Kubernetes" | "Terraform" | "Docker" | "CircleCI" | "Ansible" | "TypeScript" | "Python" | "Go" | "GitHub";
+export type Technology = string;
 export type SortOption = "impact" | "recent";
-
-// Available technologies for filtering
-export const AVAILABLE_TECHNOLOGIES: Technology[] = [
-  "AWS",
-  "Kubernetes",
-  "Terraform",
-  "Docker",
-  "CircleCI",
-  "Ansible",
-  "TypeScript",
-  "Python",
-  "Go",
-  "GitHub",
-];
-
-// Categorize projects based on keywords in title and technologies
-export function categorizeProject(project: Project): ProjectCategory[] {
-  const titleLower = project.title.toLowerCase();
-  const techLower = project.technologies.join(" ").toLowerCase();
-  const contentLower = titleLower + " " + techLower;
-
-  const categories: ProjectCategory[] = [];
-
-  if (contentLower.includes("stig") || contentLower.includes("compliance") || contentLower.includes("security") || contentLower.includes("scanning")) {
-    categories.push("Security");
-  }
-  if (contentLower.includes("terraform") || contentLower.includes("iac") || contentLower.includes("infrastructure") || contentLower.includes("aws")) {
-    categories.push("Cloud Infra");
-  }
-  if (contentLower.includes("devops") || contentLower.includes("ci/cd") || contentLower.includes("circleci") || contentLower.includes("automation")) {
-    categories.push("DevOps");
-  }
-  if (contentLower.includes("saml") || contentLower.includes("sso") || contentLower.includes("identity") || contentLower.includes("federation")) {
-    categories.push("Identity");
-  }
-  if (contentLower.includes("workspaces") || contentLower.includes("vdi") || contentLower.includes("desktop")) {
-    categories.push("VDI");
-  }
-  if (contentLower.includes("moderniz") || contentLower.includes("container") || contentLower.includes("kubernetes") || contentLower.includes("windows")) {
-    categories.push("Modernization");
-  }
-
-  // Return unique categories, with default if none found
-  const unique = Array.from(new Set(categories));
-  return unique.length > 0 ? unique : ["Cloud Infra"];
-}
 
 // Extract primary metric and stat pills from metrics string
 export function extractMetrics(metricsString: string) {
@@ -75,26 +27,6 @@ export function extractMetrics(metricsString: string) {
     primary,
     statPills,
   };
-}
-
-// Get category color gradient
-export function getCategoryColor(category: ProjectCategory): string {
-  return PROJECT_CATEGORY_GRADIENTS[category] || "from-[color:var(--primary)] to-[color:var(--accent-hover)]";
-}
-
-// Filter projects by categories
-export function filterProjects(
-  projects: Project[],
-  selectedCategories: ProjectCategory[]
-): Project[] {
-  if (selectedCategories.length === 0) {
-    return projects;
-  }
-
-  return projects.filter((project) => {
-    const projectCategories = categorizeProject(project);
-    return selectedCategories.some((cat) => projectCategories.includes(cat));
-  });
 }
 
 // Sort projects
@@ -148,7 +80,7 @@ export function filterProjectsByTechnology(
   });
 }
 
-// Search projects by title, metrics, technologies, and categories
+// Search projects by title, description, metrics, and technologies
 export function searchProjects(
   projects: Project[],
   query: string
@@ -161,15 +93,12 @@ export function searchProjects(
 
   return projects.filter((project) => {
     const titleMatch = project.title.toLowerCase().includes(lowerQuery);
+    const descriptionMatch = project.description.toLowerCase().includes(lowerQuery);
     const metricsMatch = project.metrics.toLowerCase().includes(lowerQuery);
     const technologiesMatch = project.technologies.some((tech) =>
       tech.toLowerCase().includes(lowerQuery)
     );
-    const categoriesMatch = categorizeProject(project).some((cat) =>
-      cat.toLowerCase().includes(lowerQuery)
-    );
-
-    return titleMatch || metricsMatch || technologiesMatch || categoriesMatch;
+    return titleMatch || descriptionMatch || metricsMatch || technologiesMatch;
   });
 }
 
@@ -177,16 +106,11 @@ export function searchProjects(
 export function filterAndSearchProjects(
   projects: Project[],
   options: {
-    categories?: ProjectCategory[];
     technologies?: Technology[];
     searchQuery?: string;
   }
 ): Project[] {
   let result = projects;
-
-  if (options.categories && options.categories.length > 0) {
-    result = filterProjects(result, options.categories);
-  }
 
   if (options.technologies && options.technologies.length > 0) {
     result = filterProjectsByTechnology(result, options.technologies);

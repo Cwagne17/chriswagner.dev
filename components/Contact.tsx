@@ -1,12 +1,13 @@
 "use client";
 
+import * as Sentry from "@sentry/nextjs";
 import { Github, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { THEME_CLASSES } from "@/lib/theme";
 import type { ContactFormData, ContactFormErrors } from "../types/contact-form";
 
-const CONTACT_EMAIL = "christopherwagner0700@gmail.com";
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
 const Contact = () => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -15,6 +16,10 @@ const Contact = () => {
     message: "",
   });
   const [errors, setErrors] = useState<ContactFormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
 
   const validateForm = () => {
     const newErrors: ContactFormErrors = {};
@@ -39,15 +44,56 @@ const Contact = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
-      const subject = encodeURIComponent(`Portfolio inquiry from ${formData.name}`);
-      const body = encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`,
-      );
+    setSubmitStatus("idle");
 
-      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    if (!validateForm()) {
+      return;
+    }
+
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setSubmitStatus("error");
+      Sentry.captureMessage("Contact form access key is not configured", {
+        level: "error",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(WEB3FORMS_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `Portfolio inquiry from ${formData.name.trim()}`,
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          message: formData.message.trim(),
+          botcheck: "",
+        }),
+      });
+      const result = (await response.json()) as { success?: boolean };
+
+      if (!response.ok || !result.success) {
+        throw new Error(`Contact form request failed with status ${response.status}`);
+      }
+
+      setFormData({ name: "", email: "", message: "" });
+      setSubmitStatus("success");
+    } catch (error) {
+      setSubmitStatus("error");
+      Sentry.captureException(error, {
+        tags: { feature: "contact-form" },
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -56,6 +102,7 @@ const Contact = () => {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    setSubmitStatus("idle");
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
@@ -208,11 +255,25 @@ const Contact = () => {
 
             <button
               type="submit"
-              className="w-full bg-[color:var(--button-primary)] text-white py-3 px-6 rounded-lg font-medium hover:bg-[color:var(--button-primary-hover)] transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+              disabled={isSubmitting}
+              className="w-full bg-[color:var(--button-primary)] text-white py-3 px-6 rounded-lg font-medium hover:bg-[color:var(--button-primary-hover)] transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Open Email App
+              {isSubmitting ? "Sending..." : "Send Message"}
               <Send className="w-4 h-4" />
             </button>
+
+            <div aria-live="polite" className="min-h-6 text-center text-sm">
+              {submitStatus === "success" && (
+                <p className="text-green-500">
+                  Thanks! Your message has been sent.
+                </p>
+              )}
+              {submitStatus === "error" && (
+                <p className="text-red-500">
+                  Your message could not be sent. Please try again shortly.
+                </p>
+              )}
+            </div>
           </motion.form>
         </div>
       </div>

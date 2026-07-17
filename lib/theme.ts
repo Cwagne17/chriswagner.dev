@@ -1,5 +1,3 @@
-type ProjectCategory = "Security" | "Cloud Infra" | "DevOps" | "Identity" | "VDI" | "Modernization";
-
 export const THEME_CLASSES = {
   gradient: {
     brand: "from-[color:var(--primary)] to-[color:var(--accent-hover)]",
@@ -19,12 +17,3 @@ export const THEME_CLASSES = {
     brandSoft: "bg-[color:var(--accent-soft)]",
   },
 } as const;
-
-export const PROJECT_CATEGORY_GRADIENTS: Record<ProjectCategory, string> = {
-  Security: "from-[color:var(--primary)] to-[color:var(--accent-hover)]",
-  "Cloud Infra": "from-[color:var(--primary)] to-[color:var(--accent-hover)]",
-  DevOps: "from-[color:var(--primary)] to-[color:var(--accent-hover)]",
-  Identity: "from-[color:var(--primary)] to-[color:var(--accent-hover)]",
-  VDI: "from-[color:var(--primary)] to-[color:var(--accent-hover)]",
-  Modernization: "from-[color:var(--primary)] to-[color:var(--accent-hover)]",
-};

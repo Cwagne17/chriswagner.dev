@@ -1,7 +1,5 @@
 import { Project } from "@/types/project";
 
-const GITHUB_PROFILE = "https://github.com/Cwagne17";
-
 export const featuredProjects: Project[] = [
   {
     title: "EKS DevSecOps Platform",
@@ -41,7 +39,7 @@ export const featuredProjects: Project[] = [
     description:
       "Designed a GitHub Actions-first supply-chain pipeline that mirrors upstream container images to GHCR, scans them, and attaches standards-based compliance evidence to immutable digests.",
     technologies: ["GitHub Actions", "GHCR", "Containers", "SBOM", "VEX", "SLSA", "Attestations"],
-    link: GITHUB_PROFILE,
+    link: "https://github.com/Cwagne17/oss-image-compliance",
     metrics: "6 evidence types • Digest-bound attestations • Automated image intake",
     gradient: "from-violet-500 to-fuchsia-500",
     slug: "oss-image-compliance-pipeline",
@@ -66,7 +64,7 @@ export const featuredProjects: Project[] = [
         image: "/diagrams/oss-image-compliance-pipeline.png",
         alt: "Container compliance pipeline from upstream registry through GitHub Actions scanning to GHCR with digest-bound attestations",
       },
-      resources: {},
+      resources: { github: "https://github.com/Cwagne17/oss-image-compliance" },
     },
   },
   {
@@ -111,7 +109,7 @@ export const allProjects: Project[] = [
     description:
       "Built a TypeScript Kubernetes offensive-security framework for controlled simulation of adversarial behavior using modular techniques mapped to MITRE ATT&CK.",
     technologies: ["TypeScript", "Kubernetes", "MITRE ATT&CK", "Red Team", "Container Security"],
-    link: GITHUB_PROFILE,
+    link: "https://github.com/Cwagne17/kube-raid",
     metrics: "ATT&CK-aligned • Modular techniques • Controlled simulation",
     gradient: "from-red-500 to-orange-500",
     slug: "kube-raid",
@@ -136,7 +134,7 @@ export const allProjects: Project[] = [
         image: "/diagrams/kube-raid.png",
         alt: "kube-raid architecture showing a TypeScript CLI selecting ATT&CK-aligned modules and executing controlled Kubernetes simulations",
       },
-      resources: {},
+      resources: { github: "https://github.com/Cwagne17/kube-raid" },
     },
   },
 ];
