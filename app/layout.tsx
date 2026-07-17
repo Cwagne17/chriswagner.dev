@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
-import AmplifyProvider from "../components/AmplifyProvider";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -21,9 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" style={{ colorScheme: "dark" }}>
       <body className={`${outfit.className} antialiased`}>
-        <AmplifyProvider>
-          {children}
-        </AmplifyProvider>
+        {children}
       </body>
     </html>
   );

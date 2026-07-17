@@ -1,28 +1,15 @@
 version: 1
 env:
   variables:
-    NEXT_PUBLIC_SENTRY_DSN: "https://a42bd9224dabda0e83fe15bf650d52b1@o4511747069575168.ingest.us.sentry.io/4511747071672320"
-    SENTRY_DSN: "https://a42bd9224dabda0e83fe15bf650d52b1@o4511747069575168.ingest.us.sentry.io/4511747071672320"
     SENTRY_ORG: "cwagne17"
     SENTRY_PROJECT: "chriswagnerdev"
-backend:
-  phases:
-    build:
-      commands:
-        - npm ci --cache .npm --prefer-offline
-        - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
 frontend:
   phases:
     preBuild:
       commands:
         - "npm ci --cache .npm --prefer-offline"
-        # Configure SENTRY_AUTH_TOKEN in Amplify's environment settings. Never commit it.
-        - "node -e 'if (!process.env.SENTRY_AUTH_TOKEN) { console.error(\"Missing SENTRY_AUTH_TOKEN in the Amplify build environment\"); process.exit(1); }'"
     build:
       commands:
-        # Amplify SSR only receives explicitly persisted runtime variables.
-        # Persist public DSNs, but never the Sentry auth token.
-        - "env | grep -E '^(NEXT_PUBLIC_SENTRY_DSN|SENTRY_DSN)=' >> .env.production"
         - "npm run build"
   artifacts:
     baseDirectory: .next

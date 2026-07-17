@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "motion/react";
-import { forwardRef, type HTMLAttributes } from "react";
+import { motion, type HTMLMotionProps } from "motion/react";
+import { forwardRef } from "react";
 import { THEME_CLASSES } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
-export interface CaseStudyCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+export interface CaseStudyCardProps extends Omit<HTMLMotionProps<"div">, "title"> {
   title: string;
   metrics: Array<{ label: string; value: string }>;
   technologies: string[];
